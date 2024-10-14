@@ -1,0 +1,28 @@
+{
+  "name": "ps_seo_pack",
+  "version": "1.0.0",
+  "description": "Playful Sparkle - SEO Pack (module) for OpenCart 4",
+  "main": "index.js",
+  "scripts": {
+    "compress": "node compress.js"
+  },
+  "keywords": [
+    "opencart",
+    "oc",
+    "playfulsparkle",
+    "seo",
+    "structured data",
+    "opengraph",
+    "twitter card"
+  ],
+  "author": "zsoltoroszlany82 <zsolt.oroszlany@playfulsparkle.com>",
+  "license": "GPL",
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "fs": "^0.0.1-security"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/playfulsparkle/oc4_structured_data_markup.git"
+  }
+}

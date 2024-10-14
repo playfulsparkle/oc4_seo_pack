@@ -1,0 +1,1026 @@
+{{ header }}
+{{ column_left }}
+<div id="content">
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="float-end">
+				<div class="input-group">
+					<div class="input-group-text">{{ entry_active_store }}</div>
+					<select name="store" id="input-store" class="form-select">
+						{% for store in stores %}
+						<option value="{{ store.href }}" {% if store.store_id == store_id %} selected{% endif %}>{{ store.name }}</option>
+						{% endfor %}
+					</select>&nbsp;
+					<button type="submit" form="form-module" data-bs-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa-solid fa-save"></i></button>&nbsp;
+					<a href="{{ back }}" data-bs-toggle="tooltip" title="{{ button_back }}" class="btn btn-light"><i class="fa-solid fa-reply"></i></a>
+				</div>
+			</div>
+			<h1>{{ heading_title }}</h1>
+			<ol class="breadcrumb">
+				{% for breadcrumb in breadcrumbs %}
+				<li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+				{% endfor %}
+			</ol>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="card">
+			<div class="card-header"><i class="fa-solid fa-pencil"></i> {{ text_edit }}</div>
+			<div class="card-body">
+				<form id="form-module" action="{{ action }}" method="post" data-oc-toggle="ajax">
+
+					<ul class="nav nav-tabs">
+						<li class="nav-item"><a href="#tab-store" data-bs-toggle="tab" class="nav-link active">{{ tab_store }}</a></li>
+						<li class="nav-item"><a href="#tab-structured-data-markup" data-bs-toggle="tab" class="nav-link">{{ tab_structured_data_markup }}</a></li>
+						<li class="nav-item"><a href="#tab-dublin-core" data-bs-toggle="tab" class="nav-link">{{ tab_dublin_core }}</a></li>
+						<li class="nav-item"><a href="#tab-open-graph" data-bs-toggle="tab" class="nav-link">{{ tab_open_graph }}</a></li>
+						<li class="nav-item"><a href="#tab-twitter" data-bs-toggle="tab" class="nav-link">{{ tab_twitter }}</a></li>
+					</ul>
+
+					<div class="tab-content">
+						<div id="tab-store" class="tab-pane active">
+
+							<div class="row mb-3 required">
+								<label class="col-sm-2 col-form-label">{{ entry_store_name }}</label>
+								<div class="col-sm-10">
+									{% for language in languages %}
+									<div class="input-group">
+										<div class="input-group-text"><img src="{{ language.image }}" title="{{ language.name }}" /></div>
+										<input type="text" name="module_ps_seo_pack_store_name[{{ language.language_id }}]" value="{{ module_ps_seo_pack_store_name[language.language_id] | default(config_name) }}" placeholder="{{ entry_store_name }}" id="input-store-name-{{ language.language_id }}" class="form-control" />
+									</div>
+									<div id="error-input-store-name-{{ language.language_id }}" class="invalid-feedback"></div>
+									{% endfor %}
+								</div>
+							</div>
+
+							<div class="row mb-3 required">
+								<label class="col-sm-2 col-form-label">{{ entry_store_owner }}</label>
+								<div class="col-sm-10">
+									{% for language in languages %}
+									<div class="input-group">
+										<div class="input-group-text"><img src="{{ language.image }}" title="{{ language.name }}" /></div>
+										<input type="text" name="module_ps_seo_pack_store_owner[{{ language.language_id }}]" value="{{ module_ps_seo_pack_store_owner[language.language_id] | default(config_owner) }}" placeholder="{{ entry_store_owner }}" id="input-store-owner-{{ language.language_id }}" class="form-control" />
+									</div>
+									<div id="error-input-store-owner-{{ language.language_id }}" class="invalid-feedback"></div>
+									{% endfor %}
+								</div>
+							</div>
+
+							<div class="row mb-3 required">
+								<label class="col-sm-2 col-form-label">{{ entry_store_description }}</label>
+								<div class="col-sm-10">
+									{% for language in languages %}
+									<div class="input-group">
+										<div class="input-group-text"><img src="{{ language.image }}" title="{{ language.name }}" /></div>
+										<textarea name="module_ps_seo_pack_store_description[{{ language.language_id }}]" placeholder="{{ entry_store_description }}" id="input-store-owner-{{ language.language_id | default(config_meta_description) }}" id="input-store-description-{{ language.language_id }}" class="form-control" rows="5">{{ module_ps_seo_pack_store_description[language.language_id] }}</textarea>
+									</div>
+									<div id="error-input-store-description-{{ language.language_id }}" class="invalid-feedback"></div>
+									{% endfor %}
+								</div>
+							</div>
+
+							<div class="row mb-3 required">
+								<label class="col-sm-2 col-form-label">{{ entry_store_language_code }}</label>
+								<div class="col-sm-10">
+									<select name="module_ps_seo_pack_store_language_code" class="form-select">
+										{% for language in languages %}
+										<option value="{{ language.code }}" {% if language.code==module_ps_seo_pack_store_language_code %} selected{% endif %}>{{ language.name }}</option>
+										{% endfor %}
+									</select>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label for="input-image" class="col-sm-2 col-form-label">{{ entry_image }}</label>
+								<div class="col-sm-10">
+									<div class="card image">
+										<img src="{{ module_ps_seo_pack_image.thumb | default(placeholder) }}" alt="" title="" id="thumb-image" data-oc-placeholder="{{ placeholder }}" class="card-img-top" />
+										<input type="hidden" name="module_ps_seo_pack_image" value="{{ module_ps_seo_pack_image.image | default('') }}" id="input-image" />
+										<div class="card-body">
+											<button type="button" data-oc-toggle="image" data-oc-target="#input-image" data-oc-thumb="#thumb-image" class="btn btn-primary btn-sm btn-block"><i class="fa-solid fa-pencil"></i> {{ button_edit }}</button>
+											<button type="button" data-oc-toggle="clear" data-oc-target="#input-image" data-oc-thumb="#thumb-image" class="btn btn-warning btn-sm btn-block"><i class="fa-regular fa-trash-can"></i> {{ button_clear }}</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div id="tab-structured-data-markup" class="tab-pane">
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label" for="input-structured-data-markup">{{ entry_sdm }}</label>
+								<div class="col-sm-10">
+									<div class="form-check form-switch form-switch-lg">
+										<input type="hidden" name="module_ps_seo_pack_sdm" value="0" />
+										<input type="checkbox" name="module_ps_seo_pack_sdm" value="1" class="form-check-input" {% if module_ps_seo_pack_sdm %} checked{% endif %} id="input-structured-data-markup" />
+									</div>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<ul class="nav nav-tabs">
+									{% for language in languages %}
+									<li class="nav-item"><a href="#language-{{ language.language_id }}" data-bs-toggle="tab" class="nav-link{% if loop.first %} active{% endif %}"><img src="{{ language.image }}" title="{{ language.name }}" /> {{ language.name }}</a></li>
+									{% endfor %}
+								</ul>
+								<div class="tab-content" style="background-color: rgba(var(--bs-emphasis-color-rgb), 0.075);">
+									{% for language in languages %}
+									<div id="language-{{ language.language_id }}" class="tab-pane{% if loop.first %} active{% endif %}">
+
+										<div class="row mb-3">
+											<fieldset class="col-sm-5" id="input-group-postal-address-{{ language.language_id }}">
+												<legend>{{ text_postal_address }}</legend>
+
+												<div class="row mb-3 required">
+													<label class="col-sm-2 col-form-label" for="input-postal-address-country-code-{{ language.language_id }}">{{ entry_country_code }}</label>
+													<div class="col-sm-10">
+														<input type="text" name="module_ps_seo_pack_postal_address[{{ language.language_id }}][country_code]" value="{{ module_ps_seo_pack_postal_address[language.language_id].country_code | default('') }}" maxlength="2" id="input-postal-address-country-code-{{ language.language_id }}" data-target-input="input-location-address-country-code-{{ language.language_id }}" placeholder="{{ entry_country_code }}" class="form-control" />
+														<div id="error-input-postal-address-country-code-{{ language.language_id }}" class="invalid-feedback"></div>
+													</div>
+												</div>
+												<div class="row mb-3 required">
+													<label class="col-sm-2 col-form-label" for="input-postal-address-state-{{ language.language_id }}">{{ entry_state }}</label>
+													<div class="col-sm-10">
+														<input type="text" name="module_ps_seo_pack_postal_address[{{ language.language_id }}][state]" value="{{ module_ps_seo_pack_postal_address[language.language_id].state | default('') }}" id="input-postal-address-state-{{ language.language_id }}" data-target-input="input-location-address-state-{{ language.language_id }}" placeholder="{{ entry_state }}" class="form-control" />
+														<div id="error-input-postal-address-state-{{ language.language_id }}" class="invalid-feedback"></div>
+													</div>
+												</div>
+												<div class="row mb-3 required">
+													<label class="col-sm-2 col-form-label" for="input-postal-address-city-{{ language.language_id }}">{{ entry_city }}</label>
+													<div class="col-sm-10">
+														<input type="text" name="module_ps_seo_pack_postal_address[{{ language.language_id }}][city]" value="{{ module_ps_seo_pack_postal_address[language.language_id].city | default('') }}" id="input-postal-address-city-{{ language.language_id }}" data-target-input="input-location-address-city-{{ language.language_id }}" placeholder="{{ entry_city }}" class="form-control" />
+														<div id="error-input-postal-address-city-{{ language.language_id }}" class="invalid-feedback"></div>
+													</div>
+												</div>
+												<div class="row mb-3 required">
+													<label class="col-sm-2 col-form-label" for="input-postal-address-postal-code-{{ language.language_id }}">{{ entry_postal_code }}</label>
+													<div class="col-sm-10">
+														<input type="text" name="module_ps_seo_pack_postal_address[{{ language.language_id }}][postal_code]" value="{{ module_ps_seo_pack_postal_address[language.language_id].postal_code | default('') }}" id="input-postal-address-postal-code-{{ language.language_id }}" data-target-input="input-location-address-postal-code-{{ language.language_id }}" placeholder="{{ entry_postal_code }}" class="form-control" />
+														<div id="error-input-postal-address-postal-code-{{ language.language_id }}" class="invalid-feedback"></div>
+													</div>
+												</div>
+												<div class="row mb-3 required">
+													<label class="col-sm-2 col-form-label" for="input-postal-address-address-{{ language.language_id }}">{{ entry_address }}</label>
+													<div class="col-sm-10">
+														<input type="text" name="module_ps_seo_pack_postal_address[{{ language.language_id }}][address]" value="{{ module_ps_seo_pack_postal_address[language.language_id].address | default(config_address) }}" id="input-postal-address-address-{{ language.language_id }}" data-target-input="input-location-address-address-{{ language.language_id }}" placeholder="{{ entry_address }}" class="form-control" />
+														<div id="error-input-postal-address-address-{{ language.language_id }}" class="invalid-feedback"></div>
+													</div>
+												</div>
+
+											</fieldset>
+											<div class="col-sm-2" style="align-self: center; text-align: center;">
+												<button type="button" data-bs-toggle="tooltip" title="{{ button_copy_from_location_address }}" data-copy-input-group="input-group-location-address-{{ language.language_id }}" class="btn btn-success"><i class="fa-solid fa-arrow-left"></i></button>
+												<button type="button" data-bs-toggle="tooltip" title="{{ button_copy_from_postal_address }}" data-copy-input-group="input-group-postal-address-{{ language.language_id }}" class="btn btn-success"><i class="fa-solid fa-arrow-right"></i></button>
+											</div>
+											<fieldset class="col-sm-5" id="input-group-location-address-{{ language.language_id }}">
+												<legend>{{ text_location_address }}</legend>
+
+												<div class="row mb-3 required">
+													<label class="col-sm-2 col-form-label" for="input-location-address-country-code-{{ language.language_id }}">{{ entry_country_code }}</label>
+													<div class="col-sm-10">
+														<input type="text" name="module_ps_seo_pack_location_address[{{ language.language_id }}][country_code]" value="{{ module_ps_seo_pack_location_address[language.language_id].country_code | default('') }}" maxlength="2" id="input-location-address-country-code-{{ language.language_id }}" data-target-input="input-postal-address-country-code-{{ language.language_id }}" placeholder="{{ entry_country_code }}" class="form-control" />
+														<div id="error-input-location-address-country-code-{{ language.language_id }}" class="invalid-feedback"></div>
+													</div>
+												</div>
+												<div class="row mb-3 required">
+													<label class="col-sm-2 col-form-label" for="input-location-address-state-{{ language.language_id }}">{{ entry_state }}</label>
+													<div class="col-sm-10">
+														<input type="text" name="module_ps_seo_pack_location_address[{{ language.language_id }}][state]" value="{{ module_ps_seo_pack_location_address[language.language_id].state | default('') }}" id="input-location-address-state-{{ language.language_id }}" data-target-input="input-postal-address-state-{{ language.language_id }}" placeholder="{{ entry_state }}" class="form-control" />
+														<div id="error-input-location-address-state-{{ language.language_id }}" class="invalid-feedback"></div>
+													</div>
+												</div>
+												<div class="row mb-3 required">
+													<label class="col-sm-2 col-form-label" for="input-location-address-city-{{ language.language_id }}">{{ entry_city }}</label>
+													<div class="col-sm-10">
+														<input type="text" name="module_ps_seo_pack_location_address[{{ language.language_id }}][city]" value="{{ module_ps_seo_pack_location_address[language.language_id].city | default('') }}" id="input-location-address-city-{{ language.language_id }}" data-target-input="input-postal-address-city-{{ language.language_id }}" placeholder="{{ entry_city }}" class="form-control" />
+														<div id="error-input-location-address-city-{{ language.language_id }}" class="invalid-feedback"></div>
+													</div>
+												</div>
+												<div class="row mb-3 required">
+													<label class="col-sm-2 col-form-label" for="input-location-address-postal-code-{{ language.language_id }}">{{ entry_postal_code }}</label>
+													<div class="col-sm-10">
+														<input type="text" name="module_ps_seo_pack_location_address[{{ language.language_id }}][postal_code]" value="{{ module_ps_seo_pack_location_address[language.language_id].postal_code | default('') }}" id="input-location-address-postal-code-{{ language.language_id }}" data-target-input="input-postal-address-postal-code-{{ language.language_id }}" placeholder="{{ entry_postal_code }}" class="form-control" />
+														<div id="error-input-location-address-postal-code-{{ language.language_id }}" class="invalid-feedback"></div>
+													</div>
+												</div>
+												<div class="row mb-3 required">
+													<label class="col-sm-2 col-form-label" for="input-location-address-address-{{ language.language_id }}">{{ entry_address }}</label>
+													<div class="col-sm-10">
+														<input type="text" name="module_ps_seo_pack_location_address[{{ language.language_id }}][address]" value="{{ module_ps_seo_pack_location_address[language.language_id].address | default(config_address) }}" id="input-location-address-address-{{ language.language_id }}" data-target-input="input-postal-address-address-{{ language.language_id }}" placeholder="{{ entry_address }}" class="form-control" />
+														<div id="error-input-location-address-address-{{ language.language_id }}" class="invalid-feedback"></div>
+													</div>
+												</div>
+
+											</fieldset>
+										</div>
+
+										<div class="row mb-3">
+											<fieldset class="col-sm-12">
+												<legend>{{ text_store_info }}</legend>
+
+												<div class="row mb-3">
+													<label class="col-sm-2 col-form-label" for="input-alternate-store-name-{{ language.language_id }}">{{ entry_alternate_store_name }}</label>
+													<div class="col-sm-10">
+														<input type="text" name="alternate_store_name[{{ language.language_id }}]" value="" placeholder="{{ entry_alternate_store_name }}" id="input-alternate-store-name-{{ language.language_id }}" data-language-id="{{ language.language_id }}" class="form-control" />
+														<div class="input-group">
+															<div class="form-control p-0" style="height: 150px; overflow: auto;">
+																<table id="alternate-store-name-list-{{ language.language_id }}" class="table m-0">
+																	<tbody>
+																		{% for alternate_store_name in module_ps_seo_pack_alternate_store_name[language.language_id] %}
+																		<tr id="alternate-store-name-{{ language.language_id }}-{{ loop.index0 }}">
+																			<td>{{ alternate_store_name }}<input type="hidden" name="module_ps_seo_pack_alternate_store_name[{{ language.language_id }}][]" value="{{ alternate_store_name }}" /></td>
+																			<td class="text-end"><button type="button" class="btn btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>
+																		</tr>
+																		{% endfor %}
+																	</tbody>
+																</table>
+															</div>
+														</div>
+													</div>
+												</div>
+
+											</fieldset>
+										</div>
+
+									</div>
+									{% endfor %}
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label for="input-price-range" class="col-sm-2 col-form-label">{{ entry_price_range }}</label>
+								<div class="col-sm-10">
+									<div class="input-group">
+										<select name="module_ps_seo_pack_price_range" id="input-price-range" class="form-select">
+											{% for key, value in price_range_options %}
+											<option value="{{ key }}" {% if key == module_ps_seo_pack_price_range %} selected{% endif %}>{{ value }}</option>
+											{% endfor %}
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">{{ entry_geo_coordinates }}</label>
+								<label class="col-sm-2 col-form-label" for="input-latitude">{{ entry_latitude }}</label>
+								<div class="col-sm-3">
+									<input type="text" minlength="2" maxlength="15" name="module_ps_seo_pack_geo_coordinates[latitude]" value="{{ module_ps_seo_pack_geo_coordinates.latitude | default('') }}" id="input-latitude" placeholder="{{ entry_latitude }}" class="form-control" />
+									<div class="form-text">{{ help_geo_coordinates }}</div>
+								</div>
+								<label class="col-sm-2 col-form-label" for="input-longtitude">{{ entry_longtitude }}</label>
+								<div class="col-sm-3">
+									<input type="text" minlength="2" maxlength="15" name="module_ps_seo_pack_geo_coordinates[longtitude]" value="{{ module_ps_seo_pack_geo_coordinates.longtitude | default('') }}" id="input-longtitude" placeholder="{{ entry_longtitude }}" class="form-control" />
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label">{{ entry_opening_hours }}</label>
+								<div class="col-sm-10">
+									<div class="row mb-3">
+										<label class="col-sm-2 col-form-label">{{ entry_monday }}</label>
+										<div class="col-sm-4">
+											<input type="time" name="module_ps_seo_pack_opening_hour[monday][am]" value="{{ module_ps_seo_pack_opening_hour.monday.am | default('') }}" placeholder="{{ entry_am }}" class="form-control" />
+										</div>
+										<div class="col-sm-4">
+											<input type="time" name="module_ps_seo_pack_opening_hour[monday][pm]" value="{{ module_ps_seo_pack_opening_hour.monday.pm | default('') }}" placeholder="{{ entry_pm }}" class="form-control" />
+										</div>
+									</div>
+									<div class="row mb-3">
+										<label class="col-sm-2 col-form-label">{{ entry_tuesday }}</label>
+										<div class="col-sm-4">
+											<input type="time" name="module_ps_seo_pack_opening_hour[tuesday][am]" value="{{ module_ps_seo_pack_opening_hour.tuesday.am | default('') }}" placeholder="{{ entry_am }}" class="form-control" />
+										</div>
+										<div class="col-sm-4">
+											<input type="time" name="module_ps_seo_pack_opening_hour[tuesday][pm]" value="{{ module_ps_seo_pack_opening_hour.tuesday.pm | default('') }}" placeholder="{{ entry_pm }}" class="form-control" />
+										</div>
+									</div>
+									<div class="row mb-3">
+										<label class="col-sm-2 col-form-label">{{ entry_wednesday }}</label>
+										<div class="col-sm-4">
+											<input type="time" name="module_ps_seo_pack_opening_hour[wednesday][am]" value="{{ module_ps_seo_pack_opening_hour.wednesday.am | default('') }}" placeholder="{{ entry_am }}" class="form-control" />
+										</div>
+										<div class="col-sm-4">
+											<input type="time" name="module_ps_seo_pack_opening_hour[wednesday][pm]" value="{{ module_ps_seo_pack_opening_hour.wednesday.pm | default('') }}" placeholder="{{ entry_pm }}" class="form-control" />
+										</div>
+									</div>
+									<div class="row mb-3">
+										<label class="col-sm-2 col-form-label">{{ entry_thursday }}</label>
+										<div class="col-sm-4">
+											<input type="time" name="module_ps_seo_pack_opening_hour[thursday][am]" value="{{ module_ps_seo_pack_opening_hour.thursday.am | default('') }}" placeholder="{{ entry_am }}" class="form-control" />
+										</div>
+										<div class="col-sm-4">
+											<input type="time" name="module_ps_seo_pack_opening_hour[thursday][pm]" value="{{ module_ps_seo_pack_opening_hour.thursday.pm | default('') }}" placeholder="{{ entry_pm }}" class="form-control" />
+										</div>
+									</div>
+									<div class="row mb-3">
+										<label class="col-sm-2 col-form-label">{{ entry_friday }}</label>
+										<div class="col-sm-4">
+											<input type="time" name="module_ps_seo_pack_opening_hour[friday][am]" value="{{ module_ps_seo_pack_opening_hour.friday.am | default('') }}" placeholder="{{ entry_am }}" class="form-control" />
+										</div>
+										<div class="col-sm-4">
+											<input type="time" name="module_ps_seo_pack_opening_hour[friday][pm]" value="{{ module_ps_seo_pack_opening_hour.friday.pm | default('') }}" placeholder="{{ entry_pm }}" class="form-control" />
+										</div>
+									</div>
+									<div class="row mb-3">
+										<label class="col-sm-2 col-form-label">{{ entry_saturday }}</label>
+										<div class="col-sm-4">
+											<input type="time" name="module_ps_seo_pack_opening_hour[saturday][am]" value="{{ module_ps_seo_pack_opening_hour.saturday.am | default('') }}" placeholder="{{ entry_am }}" class="form-control" />
+										</div>
+										<div class="col-sm-4">
+											<input type="time" name="module_ps_seo_pack_opening_hour[saturday][pm]" value="{{ module_ps_seo_pack_opening_hour.saturday.pm | default('') }}" placeholder="{{ entry_pm }}" class="form-control" />
+										</div>
+									</div>
+									<div class="row mb-3">
+										<label class="col-sm-2 col-form-label">{{ entry_sunday }}</label>
+										<div class="col-sm-4">
+											<input type="time" name="module_ps_seo_pack_opening_hour[sunday][am]" value="{{ module_ps_seo_pack_opening_hour.sunday.am | default('') }}" placeholder="{{ entry_am }}" class="form-control" />
+										</div>
+										<div class="col-sm-4">
+											<input type="time" name="module_ps_seo_pack_opening_hour[sunday][pm]" value="{{ module_ps_seo_pack_opening_hour.sunday.pm | default('') }}" placeholder="{{ entry_pm }}" class="form-control" />
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label" for="input-same-as">{{ entry_same_as }}</label>
+								<div class="col-sm-10">
+									<input type="text" name="same_as" value="" placeholder="{{ entry_same_as }}" id="input-same-as" class="form-control" />
+									<div class="input-group">
+										<div class="form-control p-0" style="height: 150px; overflow: auto;">
+											<table id="same-as-list" class="table m-0">
+												<tbody>
+													{% for same_as in module_ps_seo_pack_same_as %}
+													<tr id="same-as">
+														<td>{{ same_as }}<input type="hidden" name="module_ps_seo_pack_same_as[]" value="{{ same_as }}" /></td>
+														<td class="text-end"><button type="button" class="btn btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>
+													</tr>
+													{% endfor %}
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row mb-3 required">
+								<label class="col-sm-2 col-form-label">{{ entry_contact_point }}</label>
+								<div class="col-sm-10">
+
+									<div class="table-responsive">
+										<table id="contact-point-table" class="table table-bordered table-hover">
+											<thead>
+												<tr>
+													<td class="text-start">{{ entry_telephone }}</td>
+													<td class="text-start">{{ entry_contact_type }}</td>
+													<td></td>
+												</tr>
+											</thead>
+											<tbody>
+												{% for contact_point in module_ps_seo_pack_contact_point %}
+												<tr id="contact-point-row-{{ loop.index0 }}">
+													<td class="text-start">
+														<input type="text" name="module_ps_seo_pack_contact_point[{{ loop.index0 }}][telephone]" value="{{ contact_point.telephone }}" id="input-contact-point-telephone-{{ loop.index0 }}" placeholder="{{ entry_telephone }}" class="form-control"/>
+														<div id="error-input-contact-point-telephone-{{ loop.index0 }}" class="invalid-feedback"></div>
+													</td>
+													<td class="text-start">
+														<input type="text" name="module_ps_seo_pack_contact_point[{{ loop.index0 }}][contact_type]" value="{{ contact_point.contact_type }}" id="input-contact-point-contact-type-{{ loop.index0 }}" placeholder="{{ entry_contact_type }}" class="form-control"/>
+														<div id="error-input-contact-point-contact-type-{{ loop.index0 }}" class="invalid-feedback"></div>
+													</td>
+													<td class="text-end"><button type="button" onclick="$('#contact-point-row-{{ loop.index0 }}').remove();" data-bs-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>
+												</tr>
+												{% endfor %}
+											</tbody>
+											<tfoot>
+												<tr>
+													<td colspan="3" class="text-end"><button type="button" id="button-contact-point" data-bs-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa-solid fa-plus-circle"></i></button></td>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+
+									<div id="error-input-contact-point" class="invalid-feedback"></div>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label for="input-sdm-stock-status" class="col-sm-2 col-form-label">{{ entry_stock_status }}</label>
+								<div class="col-sm-10">
+									<div class="input-group">
+										<select name="module_ps_seo_pack_sdm_stock_status" id="input-sdm-stock-status" data-controls="sdm-stock-status-assoc-group" class="form-select">
+											{% for key, value in stock_status_options %}
+											<option value="{{ key }}" {% if key == module_ps_seo_pack_sdm_stock_status %} selected{% endif %}>{{ value }}</option>
+											{% endfor %}
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<div class="row mb-3" id="sdm-stock-status-assoc-group"{% if module_ps_seo_pack_sdm_stock_status == 0 %} style="display: none;"{% endif %}>
+								<label class="col-sm-2 col-form-label">{{ entry_stock_status_assoc }}</label>
+								<div class="col-sm-10">
+
+									<div class="table-responsive">
+										<table id="sdm-stock-status-assoc-table" class="table table-bordered table-hover">
+											<thead>
+												<tr>
+													<td class="text-start">{{ entry_stock_status_assoc_your_store }}</td>
+													<td class="text-start">{{ entry_stock_status_assoc_schema_org }}</td>
+												</tr>
+											</thead>
+											<tbody>
+												{% for stock_status in stock_statuses %}
+												<tr>
+													<td class="text-start">
+														<input type="hidden" name="module_ps_seo_pack_sdm_stock_status_assoc[{{ stock_status.stock_status_id }}][stock_status_id]" value="{{ stock_status.stock_status_id }}" />
+														{{ stock_status.name }}
+													</td>
+													<td class="text-start">
+														<select name="module_ps_seo_pack_sdm_stock_status_assoc[{{ stock_status.stock_status_id }}][schema_org_id]" class="form-select">
+															{% for key, value in schema_org_options %}
+															<option value="{{ key }}" {% if key == module_ps_seo_pack_sdm_stock_status_assoc[stock_status.stock_status_id].schema_org_id %} selected{% endif %}>{{ value }}</option>
+															{% endfor %}
+														</select>
+													</td>
+												</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+
+									<div class="form-text">{{ help_sdm_stock_status }}</div>
+
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label for="input-item-condition" class="col-sm-2 col-form-label">{{ entry_item_condition }}</label>
+								<div class="col-sm-10">
+									<div class="input-group">
+										<select name="module_ps_seo_pack_item_condition" id="input-item-condition" data-controls="item-condition-group" class="form-select">
+											{% for key, value in item_condition_options %}
+											<option value="{{ key }}" {% if key == module_ps_seo_pack_item_condition %} selected{% endif %}>{{ value }}</option>
+											{% endfor %}
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<div class="row mb-3" id="item-condition-group"{% if module_ps_seo_pack_item_condition == 0 %} style="display: none;"{% endif %}>
+								<label class="col-sm-2 col-form-label">{{ entry_item_condition_assoc }}</label>
+								<div class="col-sm-10">
+
+									<div class="table-responsive">
+										<table id="item-condition-assoc-table" class="table table-bordered table-hover">
+											<thead>
+												<tr>
+													<td class="text-start">{{ entry_item_condition_assoc_1 }}</td>
+													<td class="text-start">{{ entry_item_condition_assoc_2 }}</td>
+												</tr>
+											</thead>
+											<tbody>
+												{% for key, value in item_conditions %}
+												<tr>
+													<td class="text-start">
+														<input type="hidden" name="module_ps_seo_pack_item_condition_assoc[{{ loop.index0 }}][item_condition]" value="{{ key }}" />
+														{{ value }}
+													</td>
+													<td class="text-start">
+														<input type="text" name="module_ps_seo_pack_item_condition_assoc[{{ loop.index0 }}][col_value]" value="{{ module_ps_seo_pack_item_condition_assoc[loop.index0].col_value | default('') }}" placeholder="{{ entry_item_condition_assoc_2 }}" class="form-control" />
+													</td>
+												</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+
+									<div class="form-text">{{ help_item_condition }}</div>
+
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label" for="input-shipping-rate">{{ entry_shipping_method_status }}</label>
+								<div class="col-sm-10">
+									<div class="form-check form-switch form-switch-lg">
+										<input type="hidden" name="module_ps_seo_pack_shipping_rate" value="0" />
+										<input type="checkbox" name="module_ps_seo_pack_shipping_rate" value="1" class="form-check-input" {% if module_ps_seo_pack_shipping_rate %} checked{% endif %} id="input-shipping-rate" data-controls="shipping-rate-group" />
+									</div>
+								</div>
+							</div>
+
+							<fieldset class="row mb-3" id="shipping-rate-group"{% if module_ps_seo_pack_shipping_rate == 0 %} style="display: none;"{% endif %}>
+								<legend>{{ text_shipping_rate_deffinitions }}</legend>
+
+								<div class="table-responsive">
+									<table id="shipping-rate-table" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<td class="text-start">{{ entry_shipping_rate }}</td>
+												<td class="text-start">{{ entry_shipping_destination }}</td>
+												<td class="text-start">{{ entry_shipping_handling_time }}</td>
+												<td class="text-start">{{ entry_shipping_transit_time }}</td>
+												<td></td>
+											</tr>
+										</thead>
+										<tbody>
+											{% for shipping_rate in module_ps_seo_pack_shipping_rates %}
+											<tr id="shipping-rate-row-{{ loop.index0 }}">
+												<td class="text-start">
+													<div class="input-group">
+														<input type="number" min="0" name="module_ps_seo_pack_shipping_rates[{{ loop.index0 }}][rate]" value="{{ shipping_rate.rate }}" id="input-shipping-rate-rate-{{ loop.index0 }}" placeholder="{{ entry_shipping_rate }}" class="form-control" />
+														<select name="module_ps_seo_pack_shipping_rates[{{ loop.index0 }}][currency]" id="input-shipping-rate-currency-{{ loop.index0 }}" class="form-select">
+															{% for currency_option in currency_options %}
+															<option value="{{ currency_option.code }}" {% if currency_option.code == shipping_rate.currency %} selected{% endif %}>{{ currency_option.title }}</option>
+															{% endfor %}
+														</select>
+													</div>
+													<div id="error-input-shipping-rate-rate-{{ loop.index0 }}" class="invalid-feedback"></div>
+												</td>
+												<td class="text-start">
+													<input type="text" name="module_ps_seo_pack_shipping_rates[{{ loop.index0 }}][destination]" value="{{ shipping_rate.destination }}" placeholder="{{ entry_shipping_destination }}" data-oc-target="autocomplete-shipping-rate-destination-{{ loop.index0 }}" id="input-shipping-rate-destination-{{ loop.index0 }}" class="form-control" autocomplete="off" />
+													<input type="hidden" name="module_ps_seo_pack_shipping_rates[{{ loop.index0 }}][destination_id]" value="{{ shipping_rate.destination_id }}" id="input-shipping-rate-destination-id-{{ loop.index0 }}" class="form-control" />
+													<ul id="autocomplete-shipping-rate-destination-{{ loop.index0 }}" class="dropdown-menu"></ul>
+													<div id="error-input-shipping-rate-destination-{{ loop.index0 }}" class="invalid-feedback"></div>
+												</td>
+												<td class="text-start">
+													<div class="input-group">
+														<input type="number" min="1" max="10" name="module_ps_seo_pack_shipping_rates[{{ loop.index0 }}][handling_time_min]" value="{{ shipping_rate.handling_time_min }}" id="input-shipping-rate-handling-time-min-{{ loop.index0 }}" class="form-control" />
+														<div class="input-group-text">-</div>
+														<input type="number" min="1" max="10" name="module_ps_seo_pack_shipping_rates[{{ loop.index0 }}][handling_time_max]" value="{{ shipping_rate.handling_time_max }}" id="input-shipping-rate-handling-time-max-{{ loop.index0 }}" class="form-control" />
+														<div class="input-group-text">{{ text_days }}</div>
+													</div>
+													<div id="error-input-shipping-rate-handling-time-min-{{ loop.index0 }}" class="invalid-feedback"></div>
+													<div id="error-input-shipping-rate-handling-time-max-{{ loop.index0 }}" class="invalid-feedback"></div>
+												</td>
+												<td class="text-start">
+													<div class="input-group">
+														<input type="number" min="1" max="10" name="module_ps_seo_pack_shipping_rates[{{ loop.index0 }}][transit_time_min]" value="{{ shipping_rate.transit_time_min }}" id="input-shipping-rate-transit-time-min-{{ loop.index0 }}" class="form-control" />
+														<div class="input-group-text">-</div>
+														<input type="number" min="1" max="10" name="module_ps_seo_pack_shipping_rates[{{ loop.index0 }}][transit_time_max]" value="{{ shipping_rate.transit_time_max }}" id="input-shipping-rate-transit-time-max-{{ loop.index0 }}" class="form-control" />
+														<div class="input-group-text">{{ text_days }}</div>
+													</div>
+													<div id="error-input-shipping-rate-transit-time-min-{{ loop.index0 }}" class="invalid-feedback"></div>
+													<div id="error-input-shipping-rate-transit-time-max-{{ loop.index0 }}" class="invalid-feedback"></div>
+												</td>
+												<td class="text-end"><button type="button" onclick="$('#shipping-rate-row-{{ loop.index0 }}').remove();" data-bs-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>
+											</tr>
+											{% endfor %}
+										</tbody>
+										<tfoot>
+											<tr>
+												<td colspan="5" class="text-end"><button type="button" id="button-shipping-rate" data-bs-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa-solid fa-plus-circle"></i></button></td>
+											</tr>
+									</table>
+								</div>
+
+							</fieldset>
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label" for="input-return-policy">{{ entry_return_policy_status }}</label>
+								<div class="col-sm-10">
+									<div class="form-check form-switch form-switch-lg">
+										<input type="hidden" name="module_ps_seo_pack_return_policy" value="0" />
+										<input type="checkbox" name="module_ps_seo_pack_return_policy" value="1" class="form-check-input" {% if module_ps_seo_pack_return_policy %} checked{% endif %} id="input-return-policy" data-controls="return-policy-group" />
+									</div>
+								</div>
+							</div>
+
+							<fieldset class="row mb-3" id="return-policy-group"{% if module_ps_seo_pack_return_policy == 0 %} style="display: none;"{% endif %}>
+								<legend>{{ text_return_policy_deffinitions }}</legend>
+
+								<div class="table-responsive">
+									<table id="return-policy-table" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<td class="text-start">{{ entry_country }} </td>
+												<td class="text-start">{{ entry_return_policy_category }} </td>
+												<td class="text-start">{{ entry_return_method }} </td>
+												<td class="text-start">{{ entry_return_days }} </td>
+												<td class="text-start">{{ entry_return_fee }} </td>
+												<td></td>
+											</tr>
+										</thead>
+										<tbody>
+											{% for return_policy in module_ps_seo_pack_return_policies %}
+											<tr id="return-policy-row-{{ loop.index0 }}">
+												<td class="text-start">
+													<input type="text" name="module_ps_seo_pack_return_policies[{{ loop.index0 }}][country]" value="{{ return_policy.country }}" placeholder="{{ entry_country }}" data-oc-target="autocomplete-return-policy-country-{{ loop.index0 }}" id="input-return-policy-country-{{ loop.index0 }}" class="form-control" autocomplete="off" />
+													<input type="hidden" name="module_ps_seo_pack_return_policies[{{ loop.index0 }}][country_id]" value="{{ return_policy.country_id }}" id="input-return-policy-country-id-{{ loop.index0 }}" class="form-control" />
+													<ul id="autocomplete-return-policy-country-{{ loop.index0 }}" class="dropdown-menu"></ul>
+													<div id="error-input-return-policy-country-{{ loop.index0 }}" class="invalid-feedback"></div>
+												</td>
+												<td class="text-start">
+													<select name="module_ps_seo_pack_return_policies[{{ loop.index0 }}][return_policy_category]" id="input-return-policy-return-policy-category-{{ loop.index0 }}" class="form-select">
+														{% for key, value in return_policy_category_options %}
+														<option value="{{ key }}" {% if key == return_policy.return_policy_category %} selected{% endif %}>{{ value }}</option>
+														{% endfor %}
+													</select>
+												</td>
+												<td class="text-start">
+													<select name="module_ps_seo_pack_return_policies[{{ loop.index0 }}][return_method]" id="input-return-policy-return-method-{{ loop.index0 }}" class="form-select">
+														{% for key, value in return_method_options %}
+														<option value="{{ key }}" {% if key == return_policy.return_method %} selected{% endif %}>{{ value }}</option>
+														{% endfor %}
+													</select>
+													<div id="error-input-return-policy-return-method-{{ loop.index0 }}" class="invalid-feedback"></div>
+												</td>
+												<td class="text-start">
+													<input type="number" min="0" max="31" name="module_ps_seo_pack_return_policies[{{ loop.index0 }}][return_days]" value="{{ return_policy.return_days }}" placeholder="{{ entry_return_days }}" class="form-control" />
+													<div id="error-input-return-policy-return-days-{{ loop.index0 }}" class="invalid-feedback"></div>
+												</td>
+												<td class="text-start">
+													<select name="module_ps_seo_pack_return_policies[{{ loop.index0 }}][return_fee]" id="input-return-policy-return-fee-{{ loop.index0 }}" class="form-select">
+														{% for key, value in return_fee_options %}
+														<option value="{{ key }}" {% if key == return_policy.return_fee %} selected{% endif %}>{{ value }}</option>
+														{% endfor %}
+													</select>
+													<div id="error-input-return-policy-return-fee-{{ loop.index0 }}" class="invalid-feedback"></div>
+												</td>
+												<td class="text-end"><button type="button" onclick="$('#return-policy-row-{{ loop.index0 }}').remove();" data-bs-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>
+											</tr>
+											{% endfor %}
+										</tbody>
+										<tfoot>
+											<tr>
+												<td colspan="6" class="text-end"><button type="button" id="button-return-policy" data-bs-toggle="tooltip" title="{{ button_add }}" class="btn btn-primary"><i class="fa-solid fa-plus-circle"></i></button></td>
+											</tr>
+									</table>
+								</div>
+
+								<div class="form-text">{{ help_return_policy }}</div>
+
+							</fieldset>
+
+						</div>
+						<div id="tab-dublin-core" class="tab-pane">
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label" for="input-dublin-core">{{ entry_dublin_core }}</label>
+								<div class="col-sm-10">
+									<div class="form-check form-switch form-switch-lg">
+										<input type="hidden" name="module_ps_seo_pack_dublin_core" value="0" />
+										<input type="checkbox" name="module_ps_seo_pack_dublin_core" value="1" class="form-check-input" {% if module_ps_seo_pack_dublin_core %} checked{% endif %} id="input-dublin-core" />
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div id="tab-open-graph" class="tab-pane">
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label" for="input-open-graph">{{ entry_open_graph }}</label>
+								<div class="col-sm-10">
+									<div class="form-check form-switch form-switch-lg">
+										<input type="hidden" name="module_ps_seo_pack_open_graph" value="0" />
+										<input type="checkbox" name="module_ps_seo_pack_open_graph" value="1" class="form-check-input" {% if module_ps_seo_pack_open_graph %} checked{% endif %} id="input-open-graph" />
+									</div>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label for="input-open-graph-stock-status" class="col-sm-2 col-form-label">{{ entry_stock_status }}</label>
+								<div class="col-sm-10">
+									<div class="input-group">
+										<select name="module_ps_seo_pack_open_graph_stock_status" id="input-open-graph-stock-status" data-controls="open-graph-stock-status-assoc-group" class="form-select">
+											{% for key, value in stock_status_options %}
+											<option value="{{ key }}" {% if key == module_ps_seo_pack_open_graph_stock_status %} selected{% endif %}>{{ value }}</option>
+											{% endfor %}
+										</select>
+									</div>
+								</div>
+							</div>
+
+							<div class="row mb-3" id="open-graph-stock-status-assoc-group"{% if module_ps_seo_pack_open_graph_stock_status == 0 %} style="display: none;"{% endif %}>
+								<label class="col-sm-2 col-form-label">{{ entry_stock_status_assoc }}</label>
+								<div class="col-sm-10">
+
+									<div class="table-responsive">
+										<table id="open-graph-stock-status-assoc-table" class="table table-bordered table-hover">
+											<thead>
+												<tr>
+													<td class="text-start">{{ entry_stock_status_assoc_your_store }}</td>
+													<td class="text-start">{{ entry_stock_status_assoc_open_graph }}</td>
+												</tr>
+											</thead>
+											<tbody>
+												{% for stock_status in stock_statuses %}
+												<tr>
+													<td class="text-start">
+														<input type="hidden" name="module_ps_seo_pack_open_graph_stock_status_assoc[{{ stock_status.stock_status_id }}][stock_status_id]" value="{{ stock_status.stock_status_id }}" />
+														{{ stock_status.name }}
+													</td>
+													<td class="text-start">
+														<select name="module_ps_seo_pack_open_graph_stock_status_assoc[{{ stock_status.stock_status_id }}][open_graph_id]" class="form-select">
+															{% for key, value in open_graph_options %}
+															<option value="{{ key }}" {% if key == module_ps_seo_pack_open_graph_stock_status_assoc[stock_status.stock_status_id].open_graph_id %} selected{% endif %}>{{ value }}</option>
+															{% endfor %}
+														</select>
+													</td>
+												</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+
+									<div class="form-text">{{ help_open_graph_stock_status }}</div>
+
+								</div>
+							</div>
+
+							<div class="row mb-3 required">
+								<label for="input-facebook-app-id" class="col-sm-2 col-form-label">{{ entry_facebook_app_id }}</label>
+								<div class="col-sm-10">
+									<div class="input-group">
+										<input type="text" name="module_ps_seo_pack_facebook_app_id" value="{{ module_ps_seo_pack_facebook_app_id | default('') }}" placeholder="{{ entry_facebook_app_id }}" id="input-facebook-app-id" class="form-control"/>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div id="tab-twitter" class="tab-pane">
+
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label" for="input-twitter">{{ entry_twitter }}</label>
+								<div class="col-sm-10">
+									<div class="form-check form-switch form-switch-lg">
+										<input type="hidden" name="module_ps_seo_pack_twitter" value="0" />
+										<input type="checkbox" name="module_ps_seo_pack_twitter" value="1" class="form-check-input" {% if module_ps_seo_pack_twitter %} checked{% endif %} id="input-twitter" />
+									</div>
+								</div>
+							</div>
+							<div class="row mb-3 required">
+								<label for="input-twitter-at" class="col-sm-2 col-form-label">{{ entry_twitter_handle }}</label>
+								<div class="col-sm-10">
+									<div class="input-group">
+										<input type="text" name="module_ps_seo_pack_twitter_handle" value="{{ module_ps_seo_pack_twitter_handle | default('') }}" placeholder="{{ entry_twitter_handle }}" id="input-twitter-at" class="form-control"/>
+									</div>
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="input-twitter-card-type" class="col-sm-2 col-form-label">{{ entry_twitter_card_type }}</label>
+								<div class="col-sm-10">
+									<div class="input-group">
+										<select name="module_ps_seo_pack_twitter_card_type" id="input-twitter-card-type" class="form-select">
+											{% for key, value in twitter_card_type_options %}
+											<option value="{{ key }}" {% if key == module_ps_seo_pack_twitter_card_type %} selected{% endif %}>{{ value }}</option>
+											{% endfor %}
+										</select>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+
+					<input type="hidden" name="store_id" value="{{ store_id }}">
+					<input type="hidden" name="module_ps_seo_pack_status" value="1">
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+function countryAutocomplete(input, input_id)
+{
+	input.autocomplete({
+		'source': function (request, response) {
+			$.ajax({
+				url: 'index.php?route=extension/ps_seo_pack/module/ps_seo_pack.shippingdestination&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
+				dataType: 'json',
+				success: function (json) {
+					response($.map(json, function (item) {
+						return {
+							label: item['name'],
+							value: item['iso_code_2']
+						}
+					}));
+				}
+			});
+		},
+		'select': function (item) {
+				input.val(item['label']);
+				input_id.val(item['value']);
+		}
+	});
+}
+
+$(document).on('focus', 'input[id^="input-return-policy-country"]', function () {
+	var $this = $(this);
+	var $this_id = $(this).next('input[id^="input-return-policy-country-id"]');
+
+	countryAutocomplete($this, $this_id);
+});
+
+$(document).on('focus', 'input[id^="input-shipping-rate-destination"]', function () {
+	var $this = $(this);
+	var $this_id = $(this).next('input[id^="input-shipping-rate-destination-id"]');
+
+	countryAutocomplete($this, $this_id);
+});
+
+function contactPoimtRowTpl(row_id)
+{
+	var html = '<tr id="contact-point-row-' + row_id + '">';
+		html += '  <td class="text-start">';
+		html += '  		<input type="text" name="module_ps_seo_pack_contact_point[' + row_id + '][telephone]" value="" id="input-contact-point-telephone-' + row_id + '" placeholder="{{ entry_telephone }}" class="form-control"/>';
+		html += '     <div id="error-input-contact-point-telephone-' + row_id + '" class="invalid-feedback"></div>';
+		html += '  </td>';
+		html += '  <td class="text-start">';
+		html += '  		<input type="text" name="module_ps_seo_pack_contact_point[' + row_id + '][contact_type]" value="" id="input-contact-point-contact-type-' + row_id + '" placeholder="{{ entry_contact_type }}" class="form-control"/>';
+		html += '     <div id="error-input-contact-point-contact-type-' + row_id + '" class="invalid-feedback"></div>';
+		html += '  </td>';
+		html += '  <td class="text-end"><button type="button" onclick="$(\'#contact-point-row-' + row_id + '\').remove();" data-bs-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>';
+		html += '</tr>';
+
+		return html;
+}
+
+function shippingRateRowTpl(row_id)
+{
+	var html = '<tr id="shipping-rate-row-' + row_id + '">';
+		html += '	<td class="text-start">';
+		html += '		<div class="input-group">';
+		html += '			<input type="number" min="0" name="module_ps_seo_pack_shipping_rates[' + row_id + '][rate]" value="" id="input-shipping-rate-rate-' + row_id + '" placeholder="{{ entry_shipping_rate }}" class="form-control" />';
+		html += '			<select name="module_ps_seo_pack_shipping_rates[' + row_id + '][currency]" id="input-shipping-rate-currency-' + row_id + '" class="form-select">';
+		html += '				{% for currency_option in currency_options %}<option value="{{ currency_option.code }}">{{ currency_option.title }}</option>{% endfor %}';
+		html += '			</select>';
+		html += '		</div>';
+		html += '		<div id="error-input-shipping-rate-rate-' + row_id + '" class="invalid-feedback"></div>';
+		html += '	</td>';
+		html += '	<td class="text-start">';
+		html += '		<input type="text" name="module_ps_seo_pack_shipping_rates[' + row_id + '][destination]" value="" placeholder="{{ entry_shipping_destination }}" data-oc-target="autocomplete-shipping-rate-destination-' + row_id + '" id="input-shipping-rate-destination-' + row_id + '" class="form-control" autocomplete="off" />';
+		html += '		<input type="hidden" name="module_ps_seo_pack_shipping_rates[' + row_id + '][destination_id]" value="" placeholder="{{ entry_shipping_destination }}" id="input-shipping-rate-destination-id-' + row_id + '" class="form-control" />';
+		html += '		<ul id="autocomplete-shipping-rate-destination-' + row_id + '" class="dropdown-menu"></ul>';
+		html += '		<div id="error-input-shipping-rate-destination-' + row_id + '" class="invalid-feedback"></div>';
+		html += '	</td>';
+		html += '	<td class="text-start">';
+		html += '		<div class="input-group">';
+		html += '			<input type="number" min="1" max="10" name="module_ps_seo_pack_shipping_rates[' + row_id + '][handling_time_min]" value="" id="input-shipping-rate-handling-time-min-' + row_id + '" class="form-control" />';
+		html += '			<div class="input-group-text">-</div>';
+		html += '			<input type="number" min="1" max="10" name="module_ps_seo_pack_shipping_rates[' + row_id + '][handling_time_max]" value="" id="input-shipping-rate-handling-time-max-' + row_id + '" class="form-control" />';
+		html += '			<div class="input-group-text">{{ text_days }}</div>';
+		html += '		</div>';
+		html += '		<div id="error-input-shipping-rate-handling-time-min-' + row_id + '" class="invalid-feedback"></div>';
+		html += '		<div id="error-input-shipping-rate-handling-time-max-' + row_id + '" class="invalid-feedback"></div>';
+		html += '	</td>';
+		html += '	<td class="text-start">';
+		html += '		<div class="input-group">';
+		html += '			<input type="number" min="1" max="10" name="module_ps_seo_pack_shipping_rates[' + row_id + '][transit_time_min]" value="" id="input-shipping-rate-transit-time-min-' + row_id + '" class="form-control" />';
+		html += '			<div class="input-group-text">-</div>';
+		html += '			<input type="number" min="1" max="10" name="module_ps_seo_pack_shipping_rates[' + row_id + '][transit_time_max]" value="" id="input-shipping-rate-transit-time-max-' + row_id + '" class="form-control" />';
+		html += '			<div class="input-group-text">{{ text_days }}</div>';
+		html += '		</div>';
+		html += '		<div id="error-input-shipping-rate-transit-time-min-' + row_id + '" class="invalid-feedback"></div>';
+		html += '		<div id="error-input-shipping-rate-transit-time-max-' + row_id + '" class="invalid-feedback"></div>';
+		html += '	</td>';
+		html += '	<td class="text-end"><button type="button" onclick="$(\'#shipping-rate-row-' + row_id + '\').remove();" data-bs-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>';
+		html += '</tr>';
+
+		return html;
+}
+
+function returnPolicyRowTpl(row_id)
+{
+	var html = '<tr id="return-policy-row-' + row_id + '">';
+	html += '	<td class="text-start">';
+	html += '		<input type="text" name="module_ps_seo_pack_return_policies[' + row_id + '][country]" value="" placeholder="{{ entry_country }}" data-oc-target="autocomplete-return-policy-country-' + row_id + '" id="input-return-policy-country-' + row_id + '" class="form-control" autocomplete="off" />';
+	html += '		<input type="hidden" name="module_ps_seo_pack_return_policies[' + row_id + '][country_id]" value="" id="input-return-policy-country-id-' + row_id + '" class="form-control" />';
+	html += '		<ul id="autocomplete-return-policy-country-' + row_id + '" class="dropdown-menu"></ul>';
+	html += '		<div id="error-input-return-policy-country-' + row_id + '" class="invalid-feedback"></div>';
+	html += '	</td>';
+	html += '	<td class="text-start">';
+	html += '		<select name="module_ps_seo_pack_return_policies[' + row_id + '][return_policy_category]" id="input-return-policy-return-policy-category-' + row_id + '" class="form-select">';
+	html += '			{% for key, value in return_policy_category_options %}<option value="{{ key }}">{{ value }}</option>{% endfor %}';
+	html += '		</select>';
+	html += '	</td>';
+	html += '	<td class="text-start">';
+	html += '		<select name="module_ps_seo_pack_return_policies[' + row_id + '][return_method]" id="input-return-policy-return-method-' + row_id + '" class="form-select">';
+	html += '			{% for key, value in return_method_options %}<option value="{{ key }}">{{ value }}</option>{% endfor %}';
+	html += '		</select>';
+	html += '		<div id="error-input-return-policy-return-method-' + row_id + '" class="invalid-feedback"></div>';
+	html += '	</td>';
+	html += '	<td class="text-start">';
+	html += '		<input type="number" min="0" max="31" name="module_ps_seo_pack_return_policies[' + row_id + '][return_days]" value="" id="input-return-policy-return-days-' + row_id + '" placeholder="{{ entry_return_days }}" class="form-control" />';
+	html += '		<div id="error-input-return-policy-return-days-' + row_id + '" class="invalid-feedback"></div>';
+	html += '	</td>';
+	html += '	<td class="text-start">';
+	html += '		<select name="module_ps_seo_pack_return_policies[' + row_id + '][return_fee]" id="input-return-policy-return-fee-' + row_id + '" class="form-select">';
+	html += '			{% for key, value in return_fee_options %}<option value="{{ key }}">{{ value }}</option>{% endfor %}';
+	html += '		</select>';
+	html += '		<div id="error-input-return-policy-return-fee-' + row_id + '" class="invalid-feedback"></div>';
+	html += '	</td>';
+	html += '	<td class="text-end"><button type="button" onclick="$(\'#return-policy-row-' + row_id + '\').remove();" data-bs-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>';
+	html += '</tr>';
+
+	return html;
+}
+
+var contact_point_row = {{ module_ps_seo_pack_contact_point|length }};
+
+$('#button-contact-point').on('click', function () {
+	var html = contactPoimtRowTpl(contact_point_row);
+
+	$('#contact-point-table tbody').append(html);
+
+	contact_point_row++;
+});
+
+
+var shipping_rate_row = {{ module_ps_seo_pack_shipping_rates|length }};
+
+$('#button-shipping-rate').on('click', function () {
+	var html = shippingRateRowTpl(shipping_rate_row);
+
+	$('#shipping-rate-table tbody').append(html);
+
+	shipping_rate_row++;
+});
+
+
+var return_policy_row = {{ module_ps_seo_pack_return_policies|length }};
+
+$('#button-return-policy').on('click', function () {
+	var html = returnPolicyRowTpl(return_policy_row);
+
+	$('#return-policy-table tbody').append(html);
+
+	return_policy_row++;
+});
+
+
+	$('input[id^="input-alternate-store-name"]').on('keypress', function (e) {
+		if (e.which === 13) {
+			e.preventDefault();
+
+			var languageId = $(this).data('language-id');
+			var inputValue = $(this).val();
+			var html = '<tr id="alternate-store-name-' + languageId + '">';
+			html += '  <td>' + inputValue + '<input type="hidden" name="module_ps_seo_pack_alternate_store_name[' + languageId + '][]" value="' + inputValue + '"/></td>';
+			html += '  <td class="text-end"><button type="button" class="btn btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>';
+			html += '</tr>';
+
+			$(`#alternate-store-name-list-${languageId} tbody`).append(html);
+			$(this).val('');
+		}
+	});
+
+	$('table[id^="alternate-store-name-list"]').on('click', '.btn', function () {
+		$(this).parent().parent().remove();
+	});
+
+	$('input[id^="input-same-as"]').on('keypress', function (e) {
+		if (e.which === 13) {
+			e.preventDefault();
+
+			var inputValue = $(this).val();
+			var html = '<tr id="same-as">';
+			html += '  <td>' + inputValue + '<input type="hidden" name="module_ps_seo_pack_same_as[]" value="' + inputValue + '"/></td>';
+			html += '  <td class="text-end"><button type="button" class="btn btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>';
+			html += '</tr>';
+
+			$(`#same-as-list tbody`).append(html);
+			$(this).val('');
+		}
+	});
+
+	$('table[id^="same-as-list"]').on('click', '.btn', function () {
+		$(this).parent().parent().remove();
+	});
+
+	$('select[id^="input-sdm-stock-status"], select[id^="input-open-graph-stock-status"], select[id^="input-item-condition"]').on('change', function () {
+		var dataControls = $(this).attr('data-controls');
+
+		if (parseInt($(this).val()) === 0) {
+			$('#' + dataControls).fadeOut();
+		} else {
+			$('#' + dataControls).fadeIn();
+		}
+	});
+
+	$('input[id^="input-shipping-rate"], input[id^="input-return-policy"]').on('change', function () {
+		var dataControls = $(this).attr('data-controls');
+
+		if ($(this).prop('checked')) {
+			$('#' + dataControls).fadeIn();
+		} else {
+			$('#' + dataControls).fadeOut();
+		}
+	});
+
+	$('#input-store').on('change', function () {
+		window.location = $(this).val();
+	});
+
+	$('button[data-copy-input-group]').on('click', function() {
+    var inputs = $('#' + $(this).data('copy-input-group') + ' input[type="text"]');
+
+    inputs.each(function() {
+        var targetInput = $('#' + $(this).data('target-input'));
+
+        targetInput.val($(this).val());
+    });
+});
+</script>
+{{ footer }}

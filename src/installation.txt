@@ -1,0 +1,43 @@
+Playful Sparkle - SEO Pack Extension for OpenCart 4
+
+The Playful Sparkle - SEO Pack enhances the SEO of your OpenCart webshop by adding essential structured data and metadata. With support for multiple stores and languages, this extension helps improve search engine visibility and optimize content for social media engagement.
+
+Demo frontend - https://demo.playfulsparkle.com/opencart4/
+Demo backend - https://demo.playfulsparkle.com/opencart4/admin/
+
+Key Features
+
+- Structured Markup Data (LD+JSON): Provides rich snippets for prices, reviews, ratings, can display both regular and discount price and more.
+- Dublin Core: Adds Dublin Core metadata to improve content discoverability.
+- Open Graph: Helps control how your content appears when shared on social media.
+- Twitter Cards: Configures metadata to control how content appears in Twitter feeds.
+- Multi-store and multi-language support: Ensures seamless integration across different stores and languages.
+- Customizable Settings: Store name, owner, description, logo, and stock status can all be adjusted.
+
+Installation Guide
+
+1. Download the "Playful Sparkle - SEO Pack" Extension Package.
+2. Download the latest version of the Playful Sparkle - SEO Pack extension from the link provided on this page.
+3. Upload the Extension Files:
+    1. Log in to your OpenCart admin panel.
+    2. Navigate to Extensions > Installer.
+    3. Click the "Upload" button and upload the file ps_seo_pack.ocmod.zip.
+4. Install the Extension:
+    1. After uploading, click the green "Install" button.
+    2. Go to Extensions and select Modules from the dropdown menu.
+    3. Locate the "Playful Sparkle - SEO Pack" extension in the list.
+    4. Click the green "Install" button to activate it.
+5. Configure the Extension:
+    1. Stay on the Extensions page with Modules selected.
+    2. Click the "Edit" button next to the installed Playful Sparkle - SEO Pack extension.
+    3. Configure the extension as desired, enabling or disabling Structured Markup Data, Dublin Core, Open Graph, and Twitter.
+    4. Save your configuration.
+
+Troubleshooting
+
+- Structured Data not displaying: Ensure Structured Markup Data is enabled in the settings and that your product data is correctly filled out.
+- Metadata tags not appearing: Verify that the corresponding Dublin Core, Open Graph, or Twitter options are enabled in the settings.
+
+Support & Feedback
+
+After your purchase, you will receive free updates for the OpenCart 4 version. If future updates are released for the 4.x series, they will be available free of charge. If you encounter any problems or need assistance, you can request support via email at support@playfulsparkle.com.
