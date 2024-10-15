@@ -185,10 +185,10 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                 $current_url = $first_url['href'];
             }
 
-            if (!empty($result['meta_description'])) {
+            if (oc_strlen(trim($result['meta_description'])) > 0) {
                 $short_description = oc_substr($result['meta_description'], 0, 150);
                 $long_description = oc_substr($result['meta_description'], 0, 1000);
-            } else if (!empty($result['description'])) {
+            } else if (oc_strlen(trim($result['description'])) > 0) {
                 $short_description = oc_substr($result['description'], 0, 150);
                 $long_description = oc_substr($result['description'], 0, 1000);
             } else {
@@ -524,7 +524,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                 if ($ps_seo_pack_route === 'product/product' && !$result['error']) {
                     $json_item_condition = 'NewCondition';
 
-                    if ($item_condition_enabled && !empty($result['location'])) {
+                    if ($item_condition_enabled && oc_strlen(trim($result['location'])) > 0) {
                         foreach ($item_condition_assocs as $item_condition_assoc) {
                             if ($item_condition_assoc['col_value'] === $result['location']) {
                                 $json_item_condition = $item_condition_assoc['item_condition'];
@@ -703,10 +703,10 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
                         $all_rating_values = array_column($result['reviews'], 'rating');
 
-                        if (!empty($all_rating_values)) {
+                        if (count($all_rating_values) > 0) {
                             $average_rating = array_sum($all_rating_values) / count($all_rating_values);
                         } else {
-                            $average_rating = 0; // Handle case with no ratings
+                            $average_rating = 0;
                         }
 
                         $richSnippet['Product']['review'] = $json_reviews;
@@ -774,13 +774,17 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                 }
             }
 
-            $args['ps_seo_pack_html_prefix'] = implode(' ', $html_prefix);
+            if ($html_prefix) {
+                $args['ps_seo_pack_html_prefix'] = implode(' ', $html_prefix);
+            }
 
-            $args['title'] = $result['title'] . ' | ' . $store_owner;
+            if (oc_strlen(trim($store_owner)) > 0) {
+                $args['title'] = $result['title'] . ' | ' . $store_owner;
+            }
 
-            if ($short_description) {
+            if (oc_strlen(trim($short_description)) > 0) {
                 $args['description'] = $short_description;
-            } else if ($long_description) {
+            } else if (oc_strlen(trim($long_description)) > 0) {
                 $args['description'] = oc_substr($long_description, 0, 150);
             }
         }
@@ -1848,11 +1852,11 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                 $sub_category_info = $this->model_catalog_category->getCategory($path_id);
 
                 if ($sub_category_info) {
-                    if (empty($result['description'])) {
+                    if (oc_strlen(trim($result['description'])) === 0) {
                         $result['description'] = $this->normalizeDescription($sub_category_info['description']);
                     }
 
-                    if (empty($result['images'])) {
+                    if ($result['images']) {
                         $images = [];
 
                         if (is_file(DIR_IMAGE . $sub_category_info['image'])) {
@@ -1970,7 +1974,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $current_pm = $hours['pm'];
 
             // Skip days without set hours
-            if (empty($current_am) && empty($current_pm)) {
+            if (oc_strlen(trim($current_am)) === 0 && oc_strlen(trim($current_pm)) === 0) {
                 if ($range_start !== '') {
                     $result[] = $this->formatRange($range_start, $last_day, $prev_am, $prev_pm);
                 }

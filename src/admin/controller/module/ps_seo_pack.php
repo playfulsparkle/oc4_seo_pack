@@ -95,16 +95,16 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         $image = isset($config['module_ps_seo_pack_image']) ? $config['module_ps_seo_pack_image'] : '';
 
-        if (empty($image)) {
+        if (oc_strlen(trim($image)) === 0) {
             $data['module_ps_seo_pack_image'] = [
                 'image' => '',
                 'thumb' => $data['placeholder'],
             ];
         } else {
-            if (is_file(DIR_IMAGE . html_entity_decode($image, ENT_QUOTES, 'UTF-8'))) {
+            if (is_file(DIR_IMAGE . $image)) {
                 $data['module_ps_seo_pack_image'] = [
-                    'image' => html_entity_decode($image, ENT_QUOTES, 'UTF-8'),
-                    'thumb' => $this->model_tool_image->resize(html_entity_decode($image, ENT_QUOTES, 'UTF-8'), 100, 100),
+                    'image' => $image,
+                    'thumb' => $this->model_tool_image->resize($image, 100, 100),
                 ];
             } else {
                 $data['module_ps_seo_pack_image'] = [
@@ -253,7 +253,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         $json = [];
 
         if (isset($this->request->get['filter_name'])) {
-            $filter_name = $this->request->get['filter_name'];
+            $filter_name = trim($this->request->get['filter_name']);
         } else {
             $filter_name = '';
         }
@@ -325,19 +325,19 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         if (!$json) {
             foreach ($this->request->post['module_ps_seo_pack_store_name'] as $language_id => $value) {
-                if (empty($value)) {
+                if (oc_strlen(trim(($value))) === 0) {
                     $json['error']['input-store-name-' . $language_id] = $this->language->get('error_store_name');
                 }
             }
 
             foreach ($this->request->post['module_ps_seo_pack_store_owner'] as $language_id => $value) {
-                if (empty($value)) {
+                if (oc_strlen(trim(($value))) === 0) {
                     $json['error']['input-store-owner-' . $language_id] = $this->language->get('error_store_owner');
                 }
             }
 
             foreach ($this->request->post['module_ps_seo_pack_store_description'] as $language_id => $value) {
-                if (empty($value)) {
+                if (oc_strlen(trim(($value))) === 0) {
                     $json['error']['input-store-description-' . $language_id] = $this->language->get('error_store_description');
                 }
             }
@@ -345,7 +345,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             if ((bool) $this->request->post['module_ps_seo_pack_sdm']) {
                 foreach ($this->request->post['module_ps_seo_pack_postal_address'] as $language_id => $input_fields) {
                     foreach ($input_fields as $key => $value) {
-                        if (empty($value)) {
+                        if (oc_strlen(trim(($value))) === 0) {
                             $json['error']['input-postal-address-' . strtr($key, '_', '-') . '-' . $language_id] = $this->language->get('error_postal_address_' . $key);
                         }
                     }
@@ -353,7 +353,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
                 foreach ($this->request->post['module_ps_seo_pack_location_address'] as $language_id => $input_fields) {
                     foreach ($input_fields as $key => $value) {
-                        if (empty($value)) {
+                        if (oc_strlen(trim($value)) === 0) {
                             $json['error']['input-location-address-' . strtr($key, '_', '-') . '-' . $language_id] = $this->language->get('error_location_address_' . $key);
                         }
                     }
@@ -362,7 +362,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                 if (isset($this->request->post['module_ps_seo_pack_contact_point'])) {
                     foreach ($this->request->post['module_ps_seo_pack_contact_point'] as $row_id => $input_fields) {
                         foreach ($input_fields as $field_name => $field_value) {
-                            if (empty($field_value)) {
+                            if (oc_strlen(trim($field_value)) === 0) {
                                 $json['error']['input-contact-point-' . strtr($field_name, '_', '-') . '-' . $row_id] = $this->language->get('error_contact_point_' . $field_name);
                             }
                         }
@@ -372,13 +372,25 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                 }
             }
 
+            if ((bool) $this->request->post['module_ps_seo_pack_open_graph']) {
+                if (oc_strlen(trim($this->request->post['module_ps_seo_pack_facebook_app_id'])) === 0) {
+                    $json['error']['input-facebook-app-id'] = $this->language->get('error_facebook_app_id');
+                }
+            }
+
+            if ((bool) $this->request->post['module_ps_seo_pack_twitter']) {
+                if (oc_strlen(trim($this->request->post['module_ps_seo_pack_twitter_handle'])) === 0) {
+                    $json['error']['input-twitter-handle'] = $this->language->get('error_twitter_handle');
+                }
+            }
+
             if (isset($this->request->post['module_ps_seo_pack_shipping_rates'])) {
                 foreach ($this->request->post['module_ps_seo_pack_shipping_rates'] as $row_id => $data) {
                     if ($data['rate'] <= 0) {
                         $json['error']['input-shipping-rate-rate-' . $row_id] = $this->language->get('error_shipping_rate_rate');
                     }
 
-                    if (empty($data['destination']) || empty($data['destination_id'])) {
+                    if (oc_strlen(trim($data['destination'])) === 0 || oc_strlen(trim($data['destination_id'])) === 0) {
                         $json['error']['input-shipping-rate-destination-' . $row_id] = $this->language->get('error_shipping_rate_destination');
                     }
 
@@ -426,7 +438,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                     $return_days = isset($data['return_days']) ? (int) $data['return_days'] : 0;
                     $return_fee = isset($data['return_fee']) ? $data['return_fee'] : '';
 
-                    if (empty($data['country']) || empty($data['country_id'])) {
+                    if (oc_strlen(trim($data['country'])) === 0 || oc_strlen(trim($data['country_id'])) === 0) {
                         $json['error']['input-return-policy-country-' . $row_id] = $this->language->get('error_return_country');
                     }
 

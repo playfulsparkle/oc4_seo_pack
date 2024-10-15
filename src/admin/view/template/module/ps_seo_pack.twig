@@ -746,6 +746,7 @@
 								<div class="col-sm-10">
 									<div class="input-group">
 										<input type="text" name="module_ps_seo_pack_facebook_app_id" value="{{ module_ps_seo_pack_facebook_app_id | default('') }}" placeholder="{{ entry_facebook_app_id }}" id="input-facebook-app-id" class="form-control"/>
+										<div id="error-input-facebook-app-id" class="invalid-feedback"></div>
 									</div>
 								</div>
 							</div>
@@ -763,10 +764,11 @@
 								</div>
 							</div>
 							<div class="row mb-3 required">
-								<label for="input-twitter-at" class="col-sm-2 col-form-label">{{ entry_twitter_handle }}</label>
+								<label for="input-twitter-handle" class="col-sm-2 col-form-label">{{ entry_twitter_handle }}</label>
 								<div class="col-sm-10">
 									<div class="input-group">
-										<input type="text" name="module_ps_seo_pack_twitter_handle" value="{{ module_ps_seo_pack_twitter_handle | default('') }}" placeholder="{{ entry_twitter_handle }}" id="input-twitter-at" class="form-control"/>
+										<input type="text" name="module_ps_seo_pack_twitter_handle" value="{{ module_ps_seo_pack_twitter_handle | default('') }}" placeholder="{{ entry_twitter_handle }}" id="input-twitter-handle" class="form-control"/>
+										<div id="error-input-twitter-handle" class="invalid-feedback"></div>
 									</div>
 								</div>
 							</div>
