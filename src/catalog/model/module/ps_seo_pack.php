@@ -1,9 +1,18 @@
 <?php
 namespace Opencart\Catalog\Model\Extension\PsSeoPack\Module;
-
+/**
+ * Class PsSeoPack
+ *
+ * @package Opencart\Catalog\Model\Extension\PsSeoPack\Module
+ */
 class PsSeoPack extends \Opencart\System\Engine\Model
 {
-    public function replaceHeaderViews($data)
+    /**
+     * @param array $args
+     *
+     * @return array
+     */
+    public function replaceHeaderViews(array $args): array
     {
         $views = [];
 

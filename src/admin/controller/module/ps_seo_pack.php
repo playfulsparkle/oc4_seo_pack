@@ -1,13 +1,33 @@
 <?php
 namespace Opencart\Admin\Controller\Extension\PsSeoPack\Module;
-
+/**
+ * Class PsSeoPack
+ *
+ * @package Opencart\Admin\Controller\Extension\PsSeoPack\Module
+ */
 class PsSeoPack extends \Opencart\System\Engine\Controller
 {
+    /**
+     * @return void
+     */
     public function index(): void
     {
-        $separator = version_compare(VERSION, '4.0.2.0', '>=') ? '.' : '|';
-
         $this->load->language('extension/ps_seo_pack/module/ps_seo_pack');
+
+        $this->load->model('localisation/language');
+        $this->load->model('localisation/currency');
+        $this->load->model('localisation/stock_status');
+        $this->load->model('setting/store');
+        $this->load->model('setting/setting');
+        $this->load->model('tool/image');
+
+
+        if (isset($this->request->get['store_id'])) {
+            $store_id = (int) $this->request->get['store_id'];
+        } else {
+            $store_id = 0;
+        }
+
 
         $this->document->setTitle($this->language->get('heading_title'));
 
@@ -28,55 +48,47 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             'href' => $this->url->link('extension/module/ps_seo_pack', 'user_token=' . $this->session->data['user_token'], true),
         ];
 
-        $data['action'] = $this->url->link('extension/ps_seo_pack/module/ps_seo_pack' . $separator . 'save', 'user_token=' . $this->session->data['user_token']);
-        $data['back'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module');
 
-        $data['user_token'] = $this->session->data['user_token'];
+        // Store defaults
+        $data['config_name'] = $this->config->get('config_name');
+        $data['config_owner'] = $this->config->get('config_owner');
+        $data['config_address'] = $this->config->get('config_address');
+        $data['config_meta_description'] = $this->config->get('config_meta_description');
+        $data['config_geocode'] = explode(',', $this->config->get('config_geocode'));
 
-        $this->load->model('localisation/stock_status');
-
-        $data['stock_statuses'] = $this->model_localisation_stock_status->getStockStatuses();
-
-        $this->load->model('setting/store');
-
-        $stores = $this->model_setting_store->getStores();
-
-        $this->load->model('localisation/language');
-
-        $languages = $this->model_localisation_language->getLanguages();
-
-        $data['languages'] = $languages;
-
-        $data['stores'] = [];
-
-        $data['stores'][] = [
-            'store_id' => 0,
-            'name' => $this->config->get('config_name') . '&nbsp;' . $this->language->get('text_default'),
-            'href' => $this->url->link('extension/ps_seo_pack/module/ps_seo_pack', 'user_token=' . $this->session->data['user_token'] . '&store_id=0'),
-        ];
-
-        foreach ($stores as $store) {
-            $data['stores'][] = [
-                'store_id' => $store['store_id'],
-                'name' => $store['name'],
-                'href' => $this->url->link('extension/ps_seo_pack/module/ps_seo_pack', 'user_token=' . $this->session->data['user_token'] . '&store_id=' . $store['store_id']),
-            ];
-        }
-
-        if (isset($this->request->get['store_id'])) {
-            $store_id = (int) $this->request->get['store_id'];
-        } else {
-            $store_id = 0;
-        }
-
-        $data['store_id'] = $store_id;
-
-
-        $this->load->model('setting/setting');
 
         $config = $this->model_setting_setting->getSetting('module_ps_seo_pack', $store_id);
 
-        $this->load->model('tool/image');
+        $data['module_ps_seo_pack_store_name'] = isset($config['module_ps_seo_pack_store_name']) ? $config['module_ps_seo_pack_store_name'] : [];
+        $data['module_ps_seo_pack_store_owner'] = isset($config['module_ps_seo_pack_store_owner']) ? $config['module_ps_seo_pack_store_owner'] : [];
+        $data['module_ps_seo_pack_store_description'] = isset($config['module_ps_seo_pack_store_description']) ? $config['module_ps_seo_pack_store_description'] : [];
+        $data['module_ps_seo_pack_postal_address'] = isset($config['module_ps_seo_pack_postal_address']) ? $config['module_ps_seo_pack_postal_address'] : [];
+        $data['module_ps_seo_pack_location_address'] = isset($config['module_ps_seo_pack_location_address']) ? $config['module_ps_seo_pack_location_address'] : [];
+        $data['module_ps_seo_pack_alternate_store_name'] = isset($config['module_ps_seo_pack_alternate_store_name']) ? $config['module_ps_seo_pack_alternate_store_name'] : [];
+        $data['module_ps_seo_pack_same_as'] = isset($config['module_ps_seo_pack_same_as']) ? $config['module_ps_seo_pack_same_as'] : [];
+        $data['module_ps_seo_pack_price_range'] = isset($config['module_ps_seo_pack_price_range']) ? $config['module_ps_seo_pack_price_range'] : '';
+        $data['module_ps_seo_pack_geo_coordinates'] = isset($config['module_ps_seo_pack_geo_coordinates']) ? $config['module_ps_seo_pack_geo_coordinates'] : [];
+        $data['module_ps_seo_pack_opening_hour'] = isset($config['module_ps_seo_pack_opening_hour']) ? $config['module_ps_seo_pack_opening_hour'] : [];
+        $data['module_ps_seo_pack_contact_point'] = isset($config['module_ps_seo_pack_contact_point']) ? $config['module_ps_seo_pack_contact_point'] : [];
+        $data['module_ps_seo_pack_return_policy'] = isset($config['module_ps_seo_pack_return_policy']) ? $config['module_ps_seo_pack_return_policy'] : 0;
+        $data['module_ps_seo_pack_return_policies'] = isset($config['module_ps_seo_pack_return_policies']) ? $config['module_ps_seo_pack_return_policies'] : [];
+        $data['module_ps_seo_pack_sdm_stock_status'] = isset($config['module_ps_seo_pack_sdm_stock_status']) ? $config['module_ps_seo_pack_sdm_stock_status'] : 0;
+        $data['module_ps_seo_pack_sdm_stock_status_assoc'] = isset($config['module_ps_seo_pack_sdm_stock_status_assoc']) ? $config['module_ps_seo_pack_sdm_stock_status_assoc'] : [];
+        $data['module_ps_seo_pack_shipping_rate'] = isset($config['module_ps_seo_pack_shipping_rate']) ? $config['module_ps_seo_pack_shipping_rate'] : 0;
+        $data['module_ps_seo_pack_shipping_rates'] = isset($config['module_ps_seo_pack_shipping_rates']) ? $config['module_ps_seo_pack_shipping_rates'] : [];
+        $data['module_ps_seo_pack_sdm'] = isset($config['module_ps_seo_pack_sdm']) ? $config['module_ps_seo_pack_sdm'] : 0;
+        $data['module_ps_seo_pack_dublin_core'] = isset($config['module_ps_seo_pack_dublin_core']) ? $config['module_ps_seo_pack_dublin_core'] : 0;
+        $data['module_ps_seo_pack_open_graph'] = isset($config['module_ps_seo_pack_open_graph']) ? $config['module_ps_seo_pack_open_graph'] : 0;
+        $data['module_ps_seo_pack_twitter'] = isset($config['module_ps_seo_pack_twitter']) ? $config['module_ps_seo_pack_twitter'] : 0;
+        $data['module_ps_seo_pack_store_language_code'] = isset($config['module_ps_seo_pack_store_language_code']) ? $config['module_ps_seo_pack_store_language_code'] : $this->config->get('config_language');
+        $data['module_ps_seo_pack_facebook_app_id'] = isset($config['module_ps_seo_pack_facebook_app_id']) ? $config['module_ps_seo_pack_facebook_app_id'] : '';
+        $data['module_ps_seo_pack_twitter_handle'] = isset($config['module_ps_seo_pack_twitter_handle']) ? $config['module_ps_seo_pack_twitter_handle'] : '';
+        $data['module_ps_seo_pack_twitter_card_type'] = isset($config['module_ps_seo_pack_twitter_card_type']) ? $config['module_ps_seo_pack_twitter_card_type'] : '';
+        $data['module_ps_seo_pack_item_condition'] = isset($config['module_ps_seo_pack_item_condition']) ? $config['module_ps_seo_pack_item_condition'] : 0;
+        $data['module_ps_seo_pack_item_condition_assoc'] = isset($config['module_ps_seo_pack_item_condition_assoc']) ? $config['module_ps_seo_pack_item_condition_assoc'] : [];
+        $data['module_ps_seo_pack_open_graph_stock_status'] = isset($config['module_ps_seo_pack_open_graph_stock_status']) ? $config['module_ps_seo_pack_open_graph_stock_status'] : 0;
+        $data['module_ps_seo_pack_open_graph_stock_status_assoc'] = isset($config['module_ps_seo_pack_open_graph_stock_status_assoc']) ? $config['module_ps_seo_pack_open_graph_stock_status_assoc'] : [];
+
 
         $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 
@@ -101,20 +113,40 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             }
         }
 
+        $separator = version_compare(VERSION, '4.0.2.0', '>=') ? '.' : '|';
 
-        // Store defaults
-        $data['config_name'] = $this->config->get('config_name');
-        $data['config_owner'] = $this->config->get('config_owner');
-        $data['config_address'] = $this->config->get('config_address');
-        $data['config_meta_description'] = $this->config->get('config_meta_description');
-        $data['config_geocode'] = explode(',', $this->config->get('config_geocode'));
+        $data['action'] = $this->url->link('extension/ps_seo_pack/module/ps_seo_pack' . $separator . 'save', 'user_token=' . $this->session->data['user_token']);
+        $data['back'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module');
 
+        $data['user_token'] = $this->session->data['user_token'];
 
-        $this->load->model('localisation/currency');
+        $data['stock_statuses'] = $this->model_localisation_stock_status->getStockStatuses();
 
-        $currencies = $this->model_localisation_currency->getCurrencies();
+        $data['languages'] = $this->model_localisation_language->getLanguages();
+
+        $data['store_id'] = $store_id;
+
+        $data['stores'] = [];
+
+        $data['stores'][] = [
+            'store_id' => 0,
+            'name' => $this->config->get('config_name') . '&nbsp;' . $this->language->get('text_default'),
+            'href' => $this->url->link('extension/ps_seo_pack/module/ps_seo_pack', 'user_token=' . $this->session->data['user_token'] . '&store_id=0'),
+        ];
+
+        $stores = $this->model_setting_store->getStores();
+
+        foreach ($stores as $store) {
+            $data['stores'][] = [
+                'store_id' => $store['store_id'],
+                'name' => $store['name'],
+                'href' => $this->url->link('extension/ps_seo_pack/module/ps_seo_pack', 'user_token=' . $this->session->data['user_token'] . '&store_id=' . $store['store_id']),
+            ];
+        }
 
         $data['currency_options'] = [];
+
+        $currencies = $this->model_localisation_currency->getCurrencies();
 
         foreach ($currencies as $currency) {
             if ($currency['status']) {
@@ -134,8 +166,8 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         ];
 
         $data['stock_status_options'] = [
-            0 => $this->language->get('entry_stock_status_0'),
-            1 => $this->language->get('entry_stock_status_1'),
+            $this->language->get('entry_stock_status_0'),
+            $this->language->get('entry_stock_status_1'),
         ];
 
         $data['schema_org_options'] = [
@@ -197,35 +229,6 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $this->language->get('text_item_condition_product_field'),
         ];
 
-        $data['module_ps_seo_pack_store_name'] = isset($config['module_ps_seo_pack_store_name']) ? $config['module_ps_seo_pack_store_name'] : [];
-        $data['module_ps_seo_pack_store_owner'] = isset($config['module_ps_seo_pack_store_owner']) ? $config['module_ps_seo_pack_store_owner'] : [];
-        $data['module_ps_seo_pack_store_description'] = isset($config['module_ps_seo_pack_store_description']) ? $config['module_ps_seo_pack_store_description'] : [];
-        $data['module_ps_seo_pack_postal_address'] = isset($config['module_ps_seo_pack_postal_address']) ? $config['module_ps_seo_pack_postal_address'] : [];
-        $data['module_ps_seo_pack_location_address'] = isset($config['module_ps_seo_pack_location_address']) ? $config['module_ps_seo_pack_location_address'] : [];
-        $data['module_ps_seo_pack_alternate_store_name'] = isset($config['module_ps_seo_pack_alternate_store_name']) ? $config['module_ps_seo_pack_alternate_store_name'] : [];
-        $data['module_ps_seo_pack_same_as'] = isset($config['module_ps_seo_pack_same_as']) ? $config['module_ps_seo_pack_same_as'] : [];
-        $data['module_ps_seo_pack_price_range'] = isset($config['module_ps_seo_pack_price_range']) ? $config['module_ps_seo_pack_price_range'] : '';
-        $data['module_ps_seo_pack_geo_coordinates'] = isset($config['module_ps_seo_pack_geo_coordinates']) ? $config['module_ps_seo_pack_geo_coordinates'] : [];
-        $data['module_ps_seo_pack_opening_hour'] = isset($config['module_ps_seo_pack_opening_hour']) ? $config['module_ps_seo_pack_opening_hour'] : [];
-        $data['module_ps_seo_pack_contact_point'] = isset($config['module_ps_seo_pack_contact_point']) ? $config['module_ps_seo_pack_contact_point'] : [];
-        $data['module_ps_seo_pack_return_policy'] = isset($config['module_ps_seo_pack_return_policy']) ? $config['module_ps_seo_pack_return_policy'] : 0;
-        $data['module_ps_seo_pack_return_policies'] = isset($config['module_ps_seo_pack_return_policies']) ? $config['module_ps_seo_pack_return_policies'] : [];
-        $data['module_ps_seo_pack_sdm_stock_status'] = isset($config['module_ps_seo_pack_sdm_stock_status']) ? $config['module_ps_seo_pack_sdm_stock_status'] : 0;
-        $data['module_ps_seo_pack_sdm_stock_status_assoc'] = isset($config['module_ps_seo_pack_sdm_stock_status_assoc']) ? $config['module_ps_seo_pack_sdm_stock_status_assoc'] : [];
-        $data['module_ps_seo_pack_shipping_rate'] = isset($config['module_ps_seo_pack_shipping_rate']) ? $config['module_ps_seo_pack_shipping_rate'] : 0;
-        $data['module_ps_seo_pack_shipping_rates'] = isset($config['module_ps_seo_pack_shipping_rates']) ? $config['module_ps_seo_pack_shipping_rates'] : [];
-        $data['module_ps_seo_pack_sdm'] = isset($config['module_ps_seo_pack_sdm']) ? $config['module_ps_seo_pack_sdm'] : 0;
-        $data['module_ps_seo_pack_dublin_core'] = isset($config['module_ps_seo_pack_dublin_core']) ? $config['module_ps_seo_pack_dublin_core'] : 0;
-        $data['module_ps_seo_pack_open_graph'] = isset($config['module_ps_seo_pack_open_graph']) ? $config['module_ps_seo_pack_open_graph'] : 0;
-        $data['module_ps_seo_pack_twitter'] = isset($config['module_ps_seo_pack_twitter']) ? $config['module_ps_seo_pack_twitter'] : 0;
-        $data['module_ps_seo_pack_store_language_code'] = isset($config['module_ps_seo_pack_store_language_code']) ? $config['module_ps_seo_pack_store_language_code'] : $this->config->get('config_language');
-        $data['module_ps_seo_pack_facebook_app_id'] = isset($config['module_ps_seo_pack_facebook_app_id']) ? $config['module_ps_seo_pack_facebook_app_id'] : '';
-        $data['module_ps_seo_pack_twitter_handle'] = isset($config['module_ps_seo_pack_twitter_handle']) ? $config['module_ps_seo_pack_twitter_handle'] : '';
-        $data['module_ps_seo_pack_twitter_card_type'] = isset($config['module_ps_seo_pack_twitter_card_type']) ? $config['module_ps_seo_pack_twitter_card_type'] : '';
-        $data['module_ps_seo_pack_item_condition'] = isset($config['module_ps_seo_pack_item_condition']) ? $config['module_ps_seo_pack_item_condition'] : 0;
-        $data['module_ps_seo_pack_item_condition_assoc'] = isset($config['module_ps_seo_pack_item_condition_assoc']) ? $config['module_ps_seo_pack_item_condition_assoc'] : [];
-        $data['module_ps_seo_pack_open_graph_stock_status'] = isset($config['module_ps_seo_pack_open_graph_stock_status']) ? $config['module_ps_seo_pack_open_graph_stock_status'] : 0;
-        $data['module_ps_seo_pack_open_graph_stock_status_assoc'] = isset($config['module_ps_seo_pack_open_graph_stock_status_assoc']) ? $config['module_ps_seo_pack_open_graph_stock_status_assoc'] : [];
 
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
@@ -234,7 +237,17 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         $this->response->setOutput($this->load->view('extension/ps_seo_pack/module/ps_seo_pack', $data));
     }
 
-    public function shippingdestination()
+    /**
+     * Retrieves a list of countries based on a name filter for autocomplete functionality.
+     *
+     * This method checks for a 'filter_name' parameter in the request. If present, it uses
+     * this value to filter the countries. It loads the country model to fetch the filtered
+     * list of countries, returning only the first five results. The method constructs a JSON
+     * response containing the names and ISO codes of the matched countries.
+     *
+     * @return void
+     */
+    public function countryautocomplete(): void
     {
         $json = [];
 
@@ -244,21 +257,23 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $filter_name = '';
         }
 
-        $this->load->model('localisation/country');
+        if (oc_strlen($filter_name) > 0) {
+            $this->load->model('localisation/country');
 
-        $filter_data = [
-            'filter_name' => $filter_name,
-            'start' => 0,
-            'limit' => 5,
-        ];
-
-        $result = $this->model_localisation_country->getCountries($filter_data);
-
-        foreach ($result as $key => $value) {
-            $json[] = [
-                'name' => $value['name'],
-                'iso_code_2' => $value['iso_code_2'],
+            $filter_data = [
+                'filter_name' => $filter_name,
+                'start' => 0,
+                'limit' => 5,
             ];
+
+            $result = $this->model_localisation_country->getCountries($filter_data);
+
+            foreach ($result as $key => $value) {
+                $json[] = [
+                    'name' => $value['name'],
+                    'iso_code_2' => $value['iso_code_2'],
+                ];
+            }
         }
 
         $this->response->addHeader('Content-Type: application/json');
@@ -266,6 +281,29 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
     }
 
     /**
+     * Saves the settings for the PS SEO Pack module.
+     *
+     * This method validates the input data from the request, checking for necessary permissions
+     * and required fields. If all validations pass, it saves the settings to the database.
+     * The method returns a JSON response containing success or error messages.
+     *
+     * The following validations are performed:
+     * - User permission check: Ensures the user has the 'modify' permission for the SEO Pack module.
+     * - Required fields validation:
+     *   - Checks for the presence of 'store_id'.
+     *   - Ensures store name, store owner, and store description are provided for each language.
+     * - Postal and location addresses: Validates fields if 'module_ps_seo_pack_sdm' is set.
+     * - Contact points: Checks for empty values or missing data.
+     * - Shipping rates: Validates the shipping rate values and destinations.
+     * - Return policies: Validates return policies against defined categories and ensures proper values are provided.
+     *
+     * On successful validation:
+     * - Saves the settings using the model's editSetting method.
+     * - Returns a success message in JSON format.
+     *
+     * On validation failure:
+     * - Returns an error message in JSON format with details of the validation issues.
+     *
      * @return void
      */
     public function save(): void
@@ -434,6 +472,14 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
     }
 
     /**
+     * Installs the SEO Pack module.
+     *
+     * This method checks if the current user has the permission to modify the SEO
+     * Pack module settings. If permission is granted, it loads the required models
+     * and sets the module's status to enabled. Additionally, it configures an event
+     * trigger that allows the module to perform actions before the common header
+     * of the catalog view is rendered, depending on the OpenCart version.
+     *
      * @return void
      */
     public function install(): void
@@ -468,6 +514,13 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
     }
 
     /**
+     * Uninstalls the SEO Pack module.
+     *
+     * This method removes the event associated with the `ps_seo_pack` module
+     * if the user has the necessary permissions. It first checks whether the
+     * user has permission to modify the extension, and if so, it proceeds
+     * to load the event model and deletes the event.
+     *
      * @return void
      */
     public function uninstall(): void

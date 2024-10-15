@@ -1,9 +1,22 @@
 <?php
 namespace Opencart\Catalog\Controller\Extension\PsSeoPack\Module;
-
+/**
+ * Class PsSeoPack
+ *
+ * @package Opencart\Catalog\Controller\Extension\PsSeoPack\Module
+ */
 class PsSeoPack extends \Opencart\System\Engine\Controller
 {
-    public function eventCatalogViewCommonHeaderBefore(&$route, &$args, &$template)
+    /**
+     * Event handler for `catalog/view/common/header/before`.
+     *
+     * @param string $route
+     * @param array $args
+     * @param string $template
+     *
+     * @return void
+     */
+    public function eventCatalogViewCommonHeaderBefore(string &$route, array &$args, string &$template): void
     {
         if (!$this->config->get('module_ps_seo_pack_status')) {
             return;
@@ -17,9 +30,10 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         $this->load->language('extension/ps_seo_pack/module/ps_seo_pack');
 
+        $this->load->model('extension/ps_seo_pack/module/ps_seo_pack');
         $this->load->model('localisation/language');
         $this->load->model('setting/setting');
-        $this->load->model('extension/ps_seo_pack/module/ps_seo_pack');
+        $this->load->model('tool/image');
 
         $languages = $this->model_localisation_language->getLanguages();
 
@@ -173,17 +187,12 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
             if (!empty($result['meta_description'])) {
                 $short_description = oc_substr($result['meta_description'], 0, 150);
-            } else if (!empty($result['description'])) {
-                $short_description = oc_substr($result['description'], 0, 150);
-            } else {
-                $short_description = '';
-            }
-
-            if (!empty($result['meta_description'])) {
                 $long_description = oc_substr($result['meta_description'], 0, 1000);
             } else if (!empty($result['description'])) {
+                $short_description = oc_substr($result['description'], 0, 150);
                 $long_description = oc_substr($result['description'], 0, 1000);
             } else {
+                $short_description = '';
                 $long_description = '';
             }
 
@@ -195,7 +204,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
                 $args['ps_seo_pack_dublincores'] = [
                     'DC.Type' => 'InteractiveResource',
-                    'DC.Title' => $this->document->getTitle(), // Default
+                    'DC.Title' => $result['title'], // Default
                     'DC.Creator' => $store_name, // User configured
                     'DC.Description' => $short_description,
                     'DC.Publisher' => $store_owner, // User configured
@@ -228,38 +237,14 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                 $html_prefix[] = 'article: https://ogp.me/ns/article#';
 
                 $args['ps_seo_pack_opengraphs'] = [
-                    [
-                        'property' => 'og:type',
-                        'content' => 'website'
-                    ],
-                    [
-                        'property' => 'og:locale',
-                        'content' => $this->language->get('code')
-                    ],
-                    [
-                        'property' => 'og:title',
-                        'content' => $this->document->getTitle()
-                    ],
-                    [
-                        'property' => 'og:site_name',
-                        'content' => $store_name
-                    ],
-                    [
-                        'property' => 'og:description',
-                        'content' => $short_description
-                    ],
-                    [
-                        'property' => 'og:url',
-                        'content' => $current_url
-                    ],
-                    [
-                        'property' => 'fb:app_id',
-                        'content' => $facebook_app_id
-                    ],
-                    [
-                        'property' => 'article:publisher',
-                        'content' => $this->config->get('config_url')
-                    ],
+                    ['property' => 'og:type', 'content' => 'website'],
+                    ['property' => 'og:locale', 'content' => $this->language->get('code')],
+                    ['property' => 'og:title', 'content' => $result['title']],
+                    ['property' => 'og:site_name', 'content' => $store_name],
+                    ['property' => 'og:description', 'content' => $short_description],
+                    ['property' => 'og:url', 'content' => $current_url],
+                    ['property' => 'fb:app_id', 'content' => $facebook_app_id],
+                    ['property' => 'article:publisher', 'content' => $this->config->get('config_url')],
                 ];
 
                 if (
@@ -267,46 +252,33 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                     $result['date_added'] !== '0000-00-00 00:00:00' &&
                     $result['date_modified'] !== '0000-00-00 00:00:00'
                 ) {
-                    $args['ps_seo_pack_opengraphs'][] = [
-                        'property' => 'article:published_time',
-                        'content' => date('Y-m-d\TH:i:sP', strtotime($result['date_added']))
-                    ];
-                    $args['ps_seo_pack_opengraphs'][] = [
-                        'property' => 'article:modified_time',
-                        'content' => date('Y-m-d\TH:i:sP', strtotime($result['date_modified']))
-                    ];
+                    $args['ps_seo_pack_opengraphs'][] = ['property' => 'article:published_time', 'content' => date('Y-m-d\TH:i:sP', strtotime($result['date_added']))];
+                    $args['ps_seo_pack_opengraphs'][] = ['property' => 'article:modified_time', 'content' => date('Y-m-d\TH:i:sP', strtotime($result['date_modified']))];
                 }
 
-                if ($ps_seo_pack_route === 'product/product' && !$result['error']) {
+                if (isset($result['tags'])) {
                     foreach ($result['tags'] as $tag) {
-                        $args['ps_seo_pack_opengraphs'][] = [
-                            'property' => 'article:tag',
-                            'content' => $tag
-                        ];
+                        $args['ps_seo_pack_opengraphs'][] = ['property' => 'article:tag', 'content' => $tag];
                     }
+                }
 
-                    if ($result['category']) {
-                        $args['ps_seo_pack_opengraphs'][] = [
-                            'property' => 'article:section',
-                            'content' => $result['category']
-                        ];
-                    }
+                if (isset($result['category'])) {
+                    $args['ps_seo_pack_opengraphs'][] = ['property' => 'article:section', 'content' => $result['category']];
+                }
 
-                    $args['ps_seo_pack_opengraphs'][] = [
-                        'property' => 'product:brand',
-                        'content' => $result['manufacturer']
-                    ];
+                if (isset($result['manufacturer'])) {
+                    $args['ps_seo_pack_opengraphs'][] = ['property' => 'product:brand', 'content' => $result['manufacturer']];
+                }
 
-                    $args['ps_seo_pack_opengraphs'][] = [
-                        'property' => 'product:price:amount',
-                        'content' => $result['price']
-                    ];
+                if (isset($result['price'])) {
+                    $args['ps_seo_pack_opengraphs'][] = ['property' => 'product:price:amount', 'content' => $result['price']];
+                }
 
-                    $args['ps_seo_pack_opengraphs'][] = [
-                        'property' => 'product:price:currency',
-                        'content' => $result['price_currency']
-                    ];
+                if (isset($result['price_currency'])) {
+                    $args['ps_seo_pack_opengraphs'][] = ['property' => 'product:price:currency', 'content' => $result['price_currency']];
+                }
 
+                if (isset($result['quantity'], $result['stock_status_id'])) {
                     if ($result['quantity'] > 0) {
                         $json_availability = 'available for order';
                     } else {
@@ -322,20 +294,21 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                         }
                     }
 
-                    $args['ps_seo_pack_opengraphs'][] = [
-                        'property' => 'product:availability',
-                        'content' => $json_availability
-                    ];
+                    $args['ps_seo_pack_opengraphs'][] = ['property' => 'product:availability', 'content' => $json_availability];
+                }
 
+                if (isset($result['images']) && $result['images']) {
                     foreach ($result['images'] as $images) {
                         $args['ps_seo_pack_opengraphs'][] = ['property' => 'og:image', 'content' => $images];
                     }
+                } else {
+                    $args['ps_seo_pack_opengraphs'][] = ['property' => 'og:image', 'content' => $store_image_url];
+                }
 
+                if (isset($result['additional_property'])) {
                     foreach ($result['additional_property'] as $index => $additional_property) {
                         $args['ps_seo_pack_opengraphs'][] = ['property' => 'product:custom_label_' . $index, 'content' => $additional_property['name'] . ' ' . $additional_property['text']];
                     }
-                } else {
-                    $args['ps_seo_pack_opengraphs'][] = ['property' => 'og:image', 'content' => $store_image_url];
                 }
             }
             #endregion
@@ -344,22 +317,24 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             if ($twitter_enabled) {
                 $args['ps_seo_pack_twitters'] = [
                     ['name' => 'twitter:site', 'content' => $twitter_handle],
-                    ['name' => 'twitter:title', 'content' => $this->document->getTitle()],
+                    ['name' => 'twitter:title', 'content' => $result['title']],
                     ['name' => 'twitter:description', 'content' => $short_description],
                     ['name' => 'twitter:card', 'content' => $twitter_card_type],
                 ];
 
-                if ($ps_seo_pack_route === 'product/product' && !$result['error']) {
+                if (isset($result['images']) && $result['images']) {
                     foreach ($result['images'] as $images) {
                         $args['ps_seo_pack_twitters'][] = ['name' => 'twitter:image', 'content' => $store_image_url];
                     }
+                } else {
+                    $args['ps_seo_pack_twitters'][] = ['name' => 'twitter:image', 'content' => $store_image_url];
+                }
 
+                if (isset($result['additional_property'])) {
                     foreach ($result['additional_property'] as $index => $additional_property) {
                         $args['ps_seo_pack_twitters'][] = ['name' => 'twitter:label' . $index, 'content' => $additional_property['name']];
                         $args['ps_seo_pack_twitters'][] = ['name' => 'twitter:data' . $index, 'content' => $additional_property['text']];
                     }
-                } else {
-                    $args['ps_seo_pack_twitters'][] = ['name' => 'twitter:image', 'content' => $store_image_url];
                 }
             }
             #endregion
@@ -373,7 +348,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                     '@type' => 'WebPage',
                     '@id' => $this->config->get('config_url'),
                     'url' => $this->config->get('config_url'),
-                    'name' => $this->document->getTitle(),
+                    'name' => $result['title'],
                     'isPartOf' => [
                         '@id' => sprintf('%s#%s', $this->config->get('config_url'), 'website'),
                     ],
@@ -574,7 +549,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                         'url' => $current_url,
                         'name' => $result['name'],
                         'description' => $long_description,
-                        'image' => $result['images'],
+                        'image' => (isset($result['images']) && $result['images']) ? $result['images'] : [$store_image_url],
                         'brand' => $result['manufacturer'],
                         'productID' => $result['product_id'],
                         'model' => $result['model'],
@@ -631,7 +606,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                                     'value' => (float) $shipping_rate['rate'],
                                     'currency' => $shipping_rate['currency'],
                                 ],
-                                'shippingDestination' => [
+                                'countryautocomplete' => [
                                     '@type' => 'DefinedRegion',
                                     'addressCountry' => $shipping_rate['destination_id'],
                                 ],
@@ -795,25 +770,14 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             }
 
             $args['ps_seo_pack_html_prefix'] = implode(' ', $html_prefix);
-        }
 
+            $args['title'] = $result['title'] . ' | ' . $store_owner;
 
-        // echo '<details><pre>';
-        // print_r($this->request->get);
-        // echo '</pre></details>';
-
-        // if ($ps_seo_pack_route === 'product/manufacturer.info') {
-        //     $args['title'] = $this->language->get('text_brand') . ': ' . $this->document->getTitle() . ' | ' . $store_owner;
-        // } else {
-        $args['title'] = $this->document->getTitle() . ' | ' . $store_owner;
-        // }
-
-        if ($config_description = $this->document->getDescription()) {
-            $args['description'] = oc_substr($config_description, 0, 150);
-        } else if ($short_description) {
-            $args['description'] = $short_description;
-        } else if ($long_description) {
-            $args['description'] = oc_substr($long_description, 0, 150);
+            if ($short_description) {
+                $args['description'] = $short_description;
+            } else if ($long_description) {
+                $args['description'] = oc_substr($long_description, 0, 150);
+            }
         }
 
         $headerViews = $this->model_extension_ps_seo_pack_module_ps_seo_pack->replaceHeaderViews($args);
@@ -821,7 +785,14 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         $template = $this->replaceViews($route, $template, $headerViews);
     }
 
-    private function getInformationContact($languages): array
+    /**
+     * Get information/contact route informations.
+     *
+     * @param array $languages
+     *
+     * @return array
+     */
+    private function getInformationContact(array $languages): array
     {
         $result = [];
 
@@ -836,8 +807,9 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         $result = [
             'error' => false,
-            'description' => '',
-            'meta_description' => '',
+            'title' => $this->language->get('heading_title'),
+            'description' => $this->config->get('config_meta_description'),
+            'meta_description' => $this->config->get('config_meta_description'),
             'url' => $urls,
             'breadcrumb' => [],
         ];
@@ -856,7 +828,14 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         return $result;
     }
 
-    private function getCommonHome($languages): array
+    /**
+     * Get common/home route informations.
+     *
+     * @param array $languages
+     *
+     * @return array
+     */
+    private function getCommonHome(array $languages): array
     {
         $result = [];
 
@@ -871,6 +850,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         $result = [
             'error' => false,
+            'title' => $this->config->get('config_meta_title'),
             'description' => $this->config->get('config_meta_description'),
             'meta_description' => $this->config->get('config_meta_description'),
             'url' => $urls,
@@ -885,7 +865,14 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         return $result;
     }
 
-    private function getAccountLogin($languages)
+    /**
+     * Get account/login route informations.
+     *
+     * @param array $languages
+     *
+     * @return array
+     */
+    private function getAccountLogin(array $languages): array
     {
         $result = [];
 
@@ -900,8 +887,9 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         $result = [
             'error' => false,
-            'description' => '',
-            'meta_description' => '',
+            'title' => $this->language->get('heading_title'),
+            'description' => $this->config->get('config_meta_description'),
+            'meta_description' => $this->config->get('config_meta_description'),
             'url' => $urls,
             'breadcrumb' => [],
         ];
@@ -926,7 +914,14 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         return $result;
     }
 
-    private function getAccountRegister($languages)
+    /**
+     * Get account/register route informations.
+     *
+     * @param array $languages
+     *
+     * @return array
+     */
+    private function getAccountRegister(array $languages): array
     {
         $result = [];
 
@@ -941,8 +936,9 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         $result = [
             'error' => false,
-            'description' => '',
-            'meta_description' => '',
+            'title' => $this->language->get('heading_title'),
+            'description' => $this->config->get('config_meta_description'),
+            'meta_description' => $this->config->get('config_meta_description'),
             'url' => $urls,
             'breadcrumb' => [],
         ];
@@ -967,7 +963,14 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         return $result;
     }
 
-    private function getAccountForgotten($languages)
+    /**
+     * Get account/forgotten route informations.
+     *
+     * @param array $languages
+     *
+     * @return array
+     */
+    private function getAccountForgotten(array $languages): array
     {
         $result = [];
 
@@ -982,8 +985,9 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         $result = [
             'error' => false,
-            'description' => '',
-            'meta_description' => '',
+            'title' => $this->language->get('heading_title'),
+            'description' => $this->config->get('config_meta_description'),
+            'meta_description' => $this->config->get('config_meta_description'),
             'url' => $urls,
             'breadcrumb' => [],
         ];
@@ -1008,7 +1012,14 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         return $result;
     }
 
-    private function getProductManufacturerInfo($languages)
+    /**
+     * Get product/manufacturer.info route informations.
+     *
+     * @param array $languages
+     *
+     * @return array
+     */
+    private function getProductManufacturerInfo(array $languages): array
     {
         if (isset($this->request->get['manufacturer_id'])) {
             $manufacturer_id = (int) $this->request->get['manufacturer_id'];
@@ -1019,6 +1030,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         $result = [];
 
         $this->load->model('catalog/manufacturer');
+        $this->load->model('tool/image');
 
         $manufacturer_info = $this->model_catalog_manufacturer->getManufacturer($manufacturer_id);
 
@@ -1050,11 +1062,19 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                 ];
             }
 
+            $images = [];
+
+            if (is_file(DIR_IMAGE . $manufacturer_info['image'])) {
+                $images[] = $this->model_tool_image->resize($manufacturer_info['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height'));
+            }
+
             $result = [
                 'error' => false,
-                'description' => '',
-                'meta_description' => '',
+                'title' => $manufacturer_info['name'],
+                'description' => $this->config->get('config_meta_description'),
+                'meta_description' => $this->config->get('config_meta_description'),
                 'url' => $urls,
+                'images' => $images,
                 'breadcrumb' => [],
             ];
 
@@ -1077,8 +1097,9 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         } else {
             $result = [
                 'error' => true,
-                'description' => '',
-                'meta_description' => '',
+                'title' => $this->language->get('heading_title'),
+                'description' => $this->config->get('config_meta_description'),
+                'meta_description' => $this->config->get('config_meta_description'),
                 'url' => null,
                 'breadcrumb' => [],
             ];
@@ -1098,7 +1119,14 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         return $result;
     }
 
-    private function getProductManufacturer($languages)
+    /**
+     * Get product/manufacturer route informations.
+     *
+     * @param array $languages
+     *
+     * @return array
+     */
+    private function getProductManufacturer(array $languages): array
     {
         $result = [];
 
@@ -1113,8 +1141,9 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         $result = [
             'error' => false,
-            'description' => '',
-            'meta_description' => '',
+            'title' => $this->language->get('heading_title'),
+            'description' => $this->config->get('config_meta_description'),
+            'meta_description' => $this->config->get('config_meta_description'),
             'url' => $urls,
             'breadcrumb' => [],
         ];
@@ -1133,7 +1162,14 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         return $result;
     }
 
-    private function getInformationSitemap($languages)
+    /**
+     * Get information/sitemap route informations.
+     *
+     * @param array $languages
+     *
+     * @return array
+     */
+    private function getInformationSitemap(array $languages): array
     {
         $result = [];
 
@@ -1148,8 +1184,9 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         $result = [
             'error' => false,
-            'description' => '',
-            'meta_description' => '',
+            'title' => $this->language->get('heading_title'),
+            'description' => $this->config->get('config_meta_description'),
+            'meta_description' => $this->config->get('config_meta_description'),
             'url' => $urls,
             'breadcrumb' => [],
         ];
@@ -1168,7 +1205,14 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         return $result;
     }
 
-    private function getCheckoutCart($languages)
+    /**
+     * Get checkout/cart route informations.
+     *
+     * @param array $languages
+     *
+     * @return array
+     */
+    private function getCheckoutCart(array $languages): array
     {
         $result = [];
 
@@ -1183,8 +1227,9 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         $result = [
             'error' => false,
-            'description' => '',
-            'meta_description' => '',
+            'title' => $this->language->get('heading_title'),
+            'description' => $this->config->get('config_meta_description'),
+            'meta_description' => $this->config->get('config_meta_description'),
             'url' => $urls,
             'breadcrumb' => [],
         ];
@@ -1203,7 +1248,14 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         return $result;
     }
 
-    private function getProductSearch($languages)
+    /**
+     * Get product/search route informations.
+     *
+     * @param array $languages
+     *
+     * @return array
+     */
+    private function getProductSearch(array $languages): array
     {
         $url = '';
 
@@ -1256,8 +1308,9 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         $result = [
             'error' => false,
-            'description' => '',
-            'meta_description' => '',
+            'title' => $this->language->get('heading_title'),
+            'description' => $this->config->get('config_meta_description'),
+            'meta_description' => $this->config->get('config_meta_description'),
             'url' => $urls,
             'breadcrumb' => [],
         ];
@@ -1276,7 +1329,14 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         return $result;
     }
 
-    private function getProductProduct($languages)
+    /**
+     * Get product/product route informations.
+     *
+     * @param array $languages
+     *
+     * @return array
+     */
+    private function getProductProduct(array $languages): array
     {
         if (isset($this->request->get['product_id'])) {
             $product_id = (int) $this->request->get['product_id'];
@@ -1284,10 +1344,12 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $product_id = 0;
         }
 
+        $this->load->language('extension/ps_seo_pack/module/ps_seo_pack');
         $this->load->model('catalog/product');
         $this->load->model('catalog/category');
         $this->load->model('catalog/manufacturer');
         $this->load->model('catalog/review');
+        $this->load->model('tool/image');
 
         $result = [];
 
@@ -1296,15 +1358,15 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         if ($product_info) {
             $images = [];
 
-            if (is_file(DIR_IMAGE . html_entity_decode($product_info['image'], ENT_QUOTES, 'UTF-8'))) {
-                $images[] = $this->model_tool_image->resize(html_entity_decode($product_info['image'], ENT_QUOTES, 'UTF-8'), $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height'));
+            if (is_file(DIR_IMAGE . $product_info['image'])) {
+                $images[] = $this->model_tool_image->resize($product_info['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height'));
             }
 
             $other_images = $this->model_catalog_product->getImages($product_id);
 
             foreach (array_slice($other_images, 0, 10) as $other_image) {
-                if (is_file(DIR_IMAGE . html_entity_decode($other_image['image'], ENT_QUOTES, 'UTF-8'))) {
-                    $images[] = $this->model_tool_image->resize(html_entity_decode($other_image['image'], ENT_QUOTES, 'UTF-8'), $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height'));
+                if (is_file(DIR_IMAGE . $other_image['image'])) {
+                    $images[] = $this->model_tool_image->resize($other_image['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height'));
                 }
             }
 
@@ -1322,6 +1384,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
             $result = [
                 'error' => false,
+                'title' => $product_info['name'],
                 'name' => $product_info['name'],
                 'description' => $this->normalizeDescription($product_info['description']),
                 'meta_description' => $this->normalizeDescription($product_info['meta_description']),
@@ -1606,8 +1669,9 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         } else {
             $result = [
                 'error' => true,
-                'description' => '',
-                'meta_description' => '',
+                'title' => $this->language->get('heading_title'),
+                'description' => $this->config->get('config_meta_description'),
+                'meta_description' => $this->config->get('config_meta_description'),
                 'url' => null,
                 'breadcrumb' => [],
             ];
@@ -1627,7 +1691,14 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         return $result;
     }
 
-    private function getInformationInformation($languages)
+    /**
+     * Get information/information route informations.
+     *
+     * @param array $languages
+     *
+     * @return array
+     */
+    private function getInformationInformation(array $languages): array
     {
         if (isset($this->request->get['information_id'])) {
             $information_id = (int) $this->request->get['information_id'];
@@ -1653,6 +1724,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
             $result = [
                 'error' => false,
+                'title' => $information_info['title'],
                 'description' => $this->normalizeDescription($information_info['description']),
                 'meta_description' => $this->normalizeDescription($information_info['meta_description']),
                 'url' => $urls,
@@ -1672,8 +1744,9 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         } else {
             $result = [
                 'error' => true,
-                'description' => '',
-                'meta_description' => '',
+                'title' => $this->language->get('heading_title'),
+                'description' => $this->config->get('config_meta_description'),
+                'meta_description' => $this->config->get('config_meta_description'),
                 'url' => null,
                 'breadcrumb' => [],
             ];
@@ -1693,7 +1766,14 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         return $result;
     }
 
-    private function getProductCategory($languages): array
+    /**
+     * Get product/category route informations.
+     *
+     * @param array $languages
+     *
+     * @return array
+     */
+    private function getProductCategory(array $languages): array
     {
         if (isset($this->request->get['path'])) {
             $path = (string) $this->request->get['path'];
@@ -1706,17 +1786,26 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         $category_id = (int) array_pop($parts);
 
         $this->load->model('catalog/category');
+        $this->load->model('tool/image');
 
         $result = [];
 
         $category_info = $this->model_catalog_category->getCategory($category_id);
 
         if ($category_info) {
+            $images = [];
+
+            if (is_file(DIR_IMAGE . $category_info['image'])) {
+                $images[] = $this->model_tool_image->resize($category_info['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height'));
+            }
+
             $result = [
                 'error' => false,
+                'title' => '',
                 'description' => $this->normalizeDescription($category_info['description']),
                 'meta_description' => $this->normalizeDescription($category_info['meta_description']),
                 'url' => null,
+                'images' => $images,
                 'date_added' => $category_info['date_added'],
                 'date_modified' => $category_info['date_modified'],
                 'breadcrumb' => [],
@@ -1756,6 +1845,16 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                 if ($sub_category_info) {
                     if (empty($result['description'])) {
                         $result['description'] = $this->normalizeDescription($sub_category_info['description']);
+                    }
+
+                    if (empty($result['images'])) {
+                        $images = [];
+
+                        if (is_file(DIR_IMAGE . $sub_category_info['image'])) {
+                            $images[] = $this->model_tool_image->resize($sub_category_info['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height'));
+                        }
+
+                        $result['images'] = $images;
                     }
 
                     $result['breadcrumb'][] = [
@@ -1809,11 +1908,13 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             }
 
             $result['url'] = $urls;
+            $result['title'] = $category_info['name'];
         } else {
             $result = [
                 'error' => true,
-                'description' => '',
-                'meta_description' => '',
+                'title' => $this->language->get('heading_title'),
+                'description' => $this->config->get('config_meta_description'),
+                'meta_description' => $this->config->get('config_meta_description'),
                 'url' => null,
                 'breadcrumb' => [],
             ];
@@ -1833,7 +1934,26 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         return $result;
     }
 
-    private function compactOpeningHours($days)
+    /**
+     * Compresses opening hours into a more compact format by identifying
+     * contiguous days with the same opening hours.
+     *
+     * This method processes an array of days and their corresponding
+     * opening hours (AM and PM) and groups consecutive days with the
+     * same hours into a single entry. If there are days without
+     * specified hours, those are ignored, and any ongoing range is
+     * finalized.
+     *
+     * @param array $days An associative array where each key is a day
+     *                    (e.g., 'Monday', 'Tuesday') and each value
+     *                    is an associative array containing 'am' and
+     *                    'pm' opening hours.
+     *
+     * @return array An array of compacted opening hour ranges. Each
+     *               entry contains the formatted string representation
+     *               of the range, e.g., 'Monday to Tuesday: 09:00 - 17:00'.
+     */
+    private function compactOpeningHours(array $days): array
     {
         $result = [];
         $prev_am = $prev_pm = '';
@@ -1879,8 +1999,23 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         return $result;
     }
 
-    // Helper function to format a range like "Mo-Fr 08:00-17:00"
-    private function formatRange($start_day, $end_day, $am, $pm)
+    /**
+     * Formats a range of days and times into a readable string.
+     *
+     * This method generates a string representation of a range of days
+     * from a start day to an end day, along with specified AM and PM times.
+     * If the start day and end day are the same, it returns a single day
+     * with the specified time range. Otherwise, it returns the range of
+     * days with the specified time.
+     *
+     * @param string $start_day The starting day of the range (e.g., 'monday').
+     * @param string $end_day The ending day of the range (e.g., 'friday').
+     * @param string $am The starting time in AM (e.g., '09:00').
+     * @param string $pm The ending time in PM (e.g., '17:00').
+     *
+     * @return string A formatted string indicating the range of days and times.
+     */
+    private function formatRange(string $start_day, string $end_day, string $am, string $pm): string
     {
         $dayNames = [
             'monday' => 'Mo',
@@ -1899,18 +2034,48 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         }
     }
 
-    private function normalizeDescription($description, $max_length = 1000): string
+    /**
+     * Normalize a description string by removing HTML tags, decoding HTML entities,
+     * and replacing multiple whitespace characters with a single space.
+     *
+     * This method takes a raw description string, processes it to ensure that
+     * the output is clean and free of unnecessary formatting, which is especially
+     * useful for displaying user-generated content or cleaning up input data.
+     *
+     * @param string $description The raw description string that needs normalization.
+     *
+     * @return string The normalized description with HTML tags stripped, HTML entities decoded,
+     *                and excess whitespace reduced to a single space.
+     */
+    private function normalizeDescription(string $description): string
     {
         return trim(
             preg_replace(
-                ['/[\r\n\s\t]+/', '/&[a-z]+;/i'], // Combine newlines, tabs, and spaces; handle HTML entities
-                [' ', ''],                        // Replace them with single space or empty string
+                ['/[\r\n\t]+/', '/\s+/i'], // Combine newlines, tabs, and spaces
+                [' ', ' '],            // Replace them with single space or empty string
                 strip_tags(html_entity_decode($description, ENT_QUOTES, 'UTF-8')) // Decode entities and strip tags
             )
         );
     }
 
-    protected function getTemplateBuffer($route, $event_template_buffer)
+    /**
+     * Retrieves the contents of a template file based on the provided route.
+     *
+     * This method checks if an event template buffer is provided. If so, it returns that buffer.
+     * If not, it constructs the template file path based on the current theme settings and checks
+     * for the existence of the template file. If the file exists, it reads and returns its contents.
+     * It supports loading templates from both the specified theme directory and the default template directory.
+     *
+     * @param string $route The route for which the template is being retrieved.
+     *                      This should match the naming convention for the template files.
+     * @param string $event_template_buffer The template buffer that may be passed from an event.
+     *                                       If provided, this buffer will be returned directly,
+     *                                       bypassing file retrieval.
+     *
+     * @return mixed Returns the contents of the template file as a string if it exists,
+     *               or false if the template file cannot be found or read.
+     */
+    protected function getTemplateBuffer(string $route, string $event_template_buffer): mixed
     {
         if ($event_template_buffer) {
             return $event_template_buffer;
@@ -1962,7 +2127,26 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         return false;
     }
 
-    protected function modCheck($file)
+    /**
+     * Checks and modifies the provided file path based on predefined directory constants.
+     *
+     * This method checks if the file path starts with specific directory constants (`DIR_MODIFICATION`,
+     * `DIR_APPLICATION`, and `DIR_SYSTEM`). Depending on these conditions, it modifies the file path to
+     * point to the appropriate directory under `DIR_MODIFICATION`.
+     *
+     * - If the file path starts with `DIR_MODIFICATION`, it checks if it should point to either the
+     *   `admin` or `catalog` directory based on the definition of `DIR_CATALOG`.
+     * - If `DIR_CATALOG` is defined, the method checks for the file in the `admin` directory.
+     *   Otherwise, it checks in the `catalog` directory.
+     * - If the file path starts with `DIR_SYSTEM`, it checks for the file in the `system` directory
+     *   within `DIR_MODIFICATION`.
+     *
+     * The method ensures that the returned file path exists before modifying it.
+     *
+     * @param string $file The original file path to check and modify.
+     * @return string|null The modified file path if found, or null if it does not exist.
+     */
+    protected function modCheck(string $file): mixed
     {
         if (defined('DIR_MODIFICATION')) {
             if ($this->startsWith($file, DIR_MODIFICATION)) {
@@ -1985,7 +2169,17 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         return $file;
     }
 
-    protected function startsWith($haystack, $needle)
+    /**
+     * Checks if a given string starts with a specified substring.
+     *
+     * This method determines if the string $haystack begins with the substring $needle.
+     *
+     * @param string $haystack The string to be checked.
+     * @param string $needle The substring to search for at the beginning of $haystack.
+     *
+     * @return bool Returns true if $haystack starts with $needle; otherwise, false.
+     */
+    protected function startsWith(string $haystack, string $needle): bool
     {
         if (strlen($haystack) < strlen($needle)) {
             return false;
@@ -1994,7 +2188,21 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         return (substr($haystack, 0, strlen($needle)) == $needle);
     }
 
-    protected function replaceNth($search, $replace, $string, $nthPositions)
+    /**
+     * Replaces specific occurrences of a substring in a string with a new substring.
+     *
+     * This method searches for all occurrences of a specified substring ($search) in a given string ($string)
+     * and replaces the occurrences at the positions specified in the $nthPositions array with a new substring ($replace).
+     *
+     * @param string $search The substring to search for in the string.
+     * @param string $replace The substring to replace the found occurrences with.
+     * @param string $string The input string in which replacements will be made.
+     * @param array $nthPositions An array of positions (1-based index) indicating which occurrences
+     *                            of the search substring to replace.
+     *
+     * @return mixed The modified string with the specified occurrences replaced, or the original string if no matches are found.
+     */
+    protected function replaceNth(string $search, string $replace, string $string, array $nthPositions): mixed
     {
         $pattern = '/' . preg_quote($search, '/') . '/';
         $matches = [];
@@ -2012,7 +2220,25 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         return $string;
     }
 
-    protected function replaceViews($route, $template, $views)
+    /**
+     * Replaces placeholders in a template with corresponding values from the views array.
+     *
+     * This method retrieves the template content based on the given route and template name,
+     * then replaces specified search strings with their corresponding replace strings.
+     * If positions are specified, the method performs replacements only at those positions.
+     *
+     * @param string $route The route associated with the template.
+     * @param string $template The name of the template to be processed.
+     * @param array $views An array of associative arrays where each associative array contains:
+     *                     - string 'search': The string to search for in the template.
+     *                     - string 'replace': The string to replace the 'search' string with.
+     *                     - array|null 'positions': (Optional) An array of positions
+     *                     where replacements should occur. If not provided,
+     *                     all occurrences will be replaced.
+     *
+     * @return mixed The modified template content after performing the replacements.
+     */
+    protected function replaceViews(string $route, string $template, array $views): mixed
     {
         $output = $this->getTemplateBuffer($route, $template);
 

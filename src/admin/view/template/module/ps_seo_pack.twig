@@ -474,8 +474,8 @@
 										<table id="item-condition-assoc-table" class="table table-bordered table-hover">
 											<thead>
 												<tr>
-													<td class="text-start">{{ entry_item_condition_assoc_1 }}</td>
-													<td class="text-start">{{ entry_item_condition_assoc_2 }}</td>
+													<td class="text-start">{{ entry_item_condition_assoc_schema_org }}</td>
+													<td class="text-start">{{ entry_item_condition_assoc_table_col }}</td>
 												</tr>
 											</thead>
 											<tbody>
@@ -486,7 +486,7 @@
 														{{ value }}
 													</td>
 													<td class="text-start">
-														<input type="text" name="module_ps_seo_pack_item_condition_assoc[{{ loop.index0 }}][col_value]" value="{{ module_ps_seo_pack_item_condition_assoc[loop.index0].col_value | default('') }}" placeholder="{{ entry_item_condition_assoc_2 }}" class="form-control" />
+														<input type="text" name="module_ps_seo_pack_item_condition_assoc[{{ loop.index0 }}][col_value]" value="{{ module_ps_seo_pack_item_condition_assoc[loop.index0].col_value | default('') }}" placeholder="{{ entry_item_condition_assoc_table_col }}" class="form-control" />
 													</td>
 												</tr>
 												{% endfor %}
@@ -787,7 +787,7 @@ function countryAutocomplete(input, input_id)
 	input.autocomplete({
 		'source': function (request, response) {
 			$.ajax({
-				url: 'index.php?route=extension/ps_seo_pack/module/ps_seo_pack.shippingdestination&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
+				url: 'index.php?route=extension/ps_seo_pack/module/ps_seo_pack.countryautocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
 				dataType: 'json',
 				success: function (json) {
 					response($.map(json, function (item) {
