@@ -72,7 +72,7 @@ The **LD+JSON structured data** integrated by the **Playful Sparkle - SEO Pack**
   - Pricing (including discounts)
   - Availability status
   - Shipping details
-  - Additional properties (e.g., dimensions)
+  - Additional properties (e.g., dimensions, shipping details, return policy, item condition, item availability etc.)
 
 - **Merchant Return Policies**: Clearly outlines return policies applicable to different countries, improving transparency.
 
@@ -92,10 +92,7 @@ The **LD+JSON structured data** integrated by the **Playful Sparkle - SEO Pack**
 
 ### Dublin Core Metadata
 
-Integrating **Dublin Core metadata** enhances content discoverability. It helps search engines better understand your content, leading to improved visibility and higher traffic. For example:
-- **DC.Title**: Defines the product name.
-- **DC.Description**: Provides a brief overview of the product.
-- **DC.Rights**: Establishes copyright rights, protecting intellectual property.
+Integrating **Dublin Core metadata** enhances content discoverability. It helps search engines better understand your content, leading to improved visibility and higher traffic.
 
 ---
 
@@ -109,9 +106,9 @@ Incorporating **Twitter metadata** enhances social media sharing by providing es
 
 ## Troubleshooting
 
-- **Structured Data Not Displaying**: Ensure that Structured Markup Data is enabled in the settings and that product data is correctly filled out.
+- **Structured Data not displaying**: Ensure that Structured Markup Data is enabled in the settings and that product data is correctly filled out.
 
-- **Metadata Tags Not Appearing**: Verify that the corresponding Dublin Core, Open Graph, or Twitter options are enabled in the settings.
+- **Metadata Tags not appearing**: Verify that the corresponding Dublin Core, Open Graph, or Twitter options are enabled in the settings.
 
 ## Support & Feedback
 
