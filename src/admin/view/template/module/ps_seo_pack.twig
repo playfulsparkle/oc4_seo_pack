@@ -41,6 +41,18 @@
 					<div class="tab-content">
 						<div id="tab-store" class="tab-pane active">
 
+							<div class="row mb-3">
+								<label class="col-sm-2 col-form-label" for="input-enable-extension">{{ entry_enable_extension }}</label>
+								<div class="col-sm-10">
+									<div class="form-check form-switch form-switch-lg">
+										<input type="hidden" name="module_ps_seo_pack_status" value="0" />
+										<input type="checkbox" name="module_ps_seo_pack_status" value="1" class="form-check-input" {% if module_ps_seo_pack_status %} checked{% endif %} id="input-enable-extension" />
+									</div>
+								</div>
+							</div>
+
+							<hr />
+
 							<div class="row mb-3 required">
 								<label class="col-sm-2 col-form-label">{{ entry_store_name }}</label>
 								<div class="col-sm-10">
@@ -782,7 +794,6 @@
 					</div>
 
 					<input type="hidden" name="store_id" value="{{ store_id }}">
-					<input type="hidden" name="module_ps_seo_pack_status" value="1">
 				</form>
 			</div>
 		</div>

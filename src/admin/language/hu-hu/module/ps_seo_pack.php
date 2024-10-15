@@ -50,6 +50,7 @@ $_['tab_twitter']                               = 'Twitter';
 $_['tab_help_and_support']                      = 'Segítség &amp; támogatás';
 
 // Entry
+$_['entry_enable_extension']                    = 'Bővítmény engedélyezése ehhez az áruházhoz';
 $_['entry_store_language_code']                 = 'Áruház alapértelmezett nyelve';
 $_['entry_item_condition']                      = 'Termék állapot';
 $_['entry_store_name']                          = 'Áruház neve';
@@ -135,7 +136,7 @@ $_['help_return_policy']                        = 'Válassza ki, hogy milyen vis
 $_['help_item_condition']                       = 'A termék állapota, amely megjelenik a felhasználói felületen';
 $_['help_sdm_stock_status']                     = 'Ezek a készlet státuszok (2-3 nap, készleten, elfogyott, előrendelhető) a "elfogyott" helyett jelennek meg, hogy pontosabb elérhetőségi részleteket nyújtsanak, amikor egy terméket tipikusan elfogyottnak jelölnének meg.';
 
-// Hiba
+// Error
 $_['error_permission']                          = 'Figyelmeztetés: Nincs jogosultsága az SEO Pack modul módosításához!';
 $_['error_store_id']                            = 'Figyelmeztetés: A űrlap nem tartalmazza a áruház azonosítóját!';
 $_['error_form']                                = 'Az űrlap hibákat tartalmaz. Kérjük, javítsa ki a kiemelt mezőket.';

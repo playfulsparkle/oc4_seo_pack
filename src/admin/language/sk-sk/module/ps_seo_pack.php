@@ -50,6 +50,7 @@ $_['tab_twitter']                               = 'Twitter';
 $_['tab_help_and_support']                      = 'Pomoc a podpora';
 
 // Entry
+$_['entry_enable_extension']                    = 'Povoliť rozšírenie pre tento obchod';
 $_['entry_store_language_code']                 = 'Predvolený jazyk obchodu';
 $_['entry_item_condition']                      = 'Stav produktu';
 $_['entry_store_name']                          = 'Názov obchodu';

@@ -50,6 +50,7 @@ $_['tab_twitter']                               = 'Twitter';
 $_['tab_help_and_support']                      = 'Hilfe &amp; Unterstützung';
 
 // Entry
+$_['entry_enable_extension']                    = 'Erweiterung für diesen Shop aktivieren';
 $_['entry_store_language_code']                 = 'Standard Sprache des Shops';
 $_['entry_item_condition']                      = 'Zustand des Artikels';
 $_['entry_store_name']                          = 'Shop-Name';

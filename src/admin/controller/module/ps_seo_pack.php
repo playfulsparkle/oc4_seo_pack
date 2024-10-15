@@ -59,6 +59,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         $config = $this->model_setting_setting->getSetting('module_ps_seo_pack', $store_id);
 
+        $data['module_ps_seo_pack_status'] = isset($config['module_ps_seo_pack_status']) ? (bool) $config['module_ps_seo_pack_status'] : false;
         $data['module_ps_seo_pack_store_name'] = isset($config['module_ps_seo_pack_store_name']) ? $config['module_ps_seo_pack_store_name'] : [];
         $data['module_ps_seo_pack_store_owner'] = isset($config['module_ps_seo_pack_store_owner']) ? $config['module_ps_seo_pack_store_owner'] : [];
         $data['module_ps_seo_pack_store_description'] = isset($config['module_ps_seo_pack_store_description']) ? $config['module_ps_seo_pack_store_description'] : [];
@@ -486,11 +487,6 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
     {
         if ($this->user->hasPermission('modify', 'extension/ps_seo_pack/module/ps_seo_pack')) {
             $this->load->model('setting/event');
-            $this->load->model('setting/setting');
-
-            $install_settings = ['module_ps_seo_pack_status' => true];
-
-            $this->model_setting_setting->editSetting('module_ps_seo_pack', $install_settings);
 
             $separator = version_compare(VERSION, '4.0.2.0', '>=') ? '.' : '|';
 
