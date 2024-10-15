@@ -104,9 +104,9 @@ $_['entry_schema_org_option_onlineonly']        = 'Online Only';
 $_['entry_schema_org_option_limited']           = 'Limited Availability';
 $_['entry_schema_org_option_discontinued']      = 'Discontinued';
 $_['entry_schema_org_option_soldout']           = 'Sold Out';
-$_['entry_open_graph_option_instock']           = 'Available for Order';
-$_['entry_open_graph_option_outofstock']        = 'Out of Stock';
-$_['entry_open_graph_option_backorder']         = 'Back Order';
+$_['entry_open_graph_option_instock']            = 'Available for Order';
+$_['entry_open_graph_option_outofstock']         = 'Out of Stock';
+$_['entry_open_graph_option_backorder']          = 'Back Order';
 $_['entry_return_policy_status']                = 'Return Policy Status';
 $_['entry_shipping_method_status']              = 'Shipping Method Status';
 $_['entry_sdm']                                 = 'Enable Structure Data Markup';
@@ -126,14 +126,14 @@ $_['entry_active_store']                        = 'Active Store';
 
 // Button
 $_['button_add']                                = 'Add New';
-$_['button_copy_from_location_address']         = 'Copy data from Location Address to Postal Address';
-$_['button_copy_from_postal_address']           = 'Copy data from Postal Address to Location Address';
+$_['button_copy_from_location_address']         = 'Copy from Location Address to Postal Address';
+$_['button_copy_from_postal_address']           = 'Copy from Postal Address to Location Address';
 
 // Help
 $_['help_geo_coordinates']                      = 'Look up your <a href="https://www.latlong.net" target="_blank">GEO Coordinates here</a>';
 $_['help_return_policy']                        = 'If <strong>Returns are not permitted</strong> is selected, neither Return Method nor Return Fee options can be selected, and Merchant Return Days should be set to zero. For all other return policies, appropriate Return Method and Fee options must be chosen.';
 $_['help_item_condition']                       = 'The item condition (new, used, refurbished, or damaged) will be determined from the product table\'s Location column, based on the values you enter next to each state input field.';
-$_['help_sdm_stock_status']                     = 'These stock statuses (2-3 days, in stock, out of stock, pre-order) will be displayed in place of "sold out" to provide more specific availability details when a product would typically be marked as out of stock.';
+$_['help_sdm_stock_status']                         = 'These stock statuses (2-3 days, in stock, out of stock, pre-order) will be displayed in place of "sold out" to provide more specific availability details when a product would typically be marked as out of stock.';
 
 // Error
 $_['error_permission']                          = 'Warning: You do not have permission to modify SEO Pack module!';

@@ -237,7 +237,6 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                 $html_prefix[] = 'article: https://ogp.me/ns/article#';
 
                 $args['ps_seo_pack_opengraphs'] = [
-                    ['property' => 'og:type', 'content' => 'website'],
                     ['property' => 'og:locale', 'content' => $this->language->get('code')],
                     ['property' => 'og:title', 'content' => $result['title']],
                     ['property' => 'og:site_name', 'content' => $store_name],
@@ -246,6 +245,12 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                     ['property' => 'fb:app_id', 'content' => $facebook_app_id],
                     ['property' => 'article:publisher', 'content' => $this->config->get('config_url')],
                 ];
+
+                if ($ps_seo_pack_route === 'information/information') {
+                    $args['ps_seo_pack_opengraphs'][] = ['property' => 'og:type', 'content' => 'article'];
+                } else {
+                    $args['ps_seo_pack_opengraphs'][] = ['property' => 'og:type', 'content' => 'website'];
+                }
 
                 if (
                     isset($result['date_added'], $result['date_modified']) &&
