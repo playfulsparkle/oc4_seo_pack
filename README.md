@@ -1,24 +1,38 @@
 # Playful Sparkle - SEO Pack Extension for OpenCart 4
 
-The Playful Sparkle - SEO Pack is a comprehensive SEO extension for OpenCart 4 designed to enhance your webshop’s search engine visibility by incorporating structured data, rich snippets, and metadata tags. This extension automatically adds LD+JSON structured data, Dublin Core (meta), Open Graph (meta), and Twitter (meta) tags to your webshop’s header. It supports multi-store and multi-language setups, allowing you to customize the SEO for each store individually.
-
-The extension ensures proper metadata integration that improves your site's appearance in search results and boosts visibility on social media platforms.
+The **Playful Sparkle - SEO Pack** is a comprehensive SEO extension designed to enhance your OpenCart 4 webshop’s search engine visibility. This extension integrates structured data, rich snippets (Structured Data Markup (LD+JSON)), and metadata tags (Dublin Core, Open Graph, and Twitter) into your webshop’s header, ensuring better performance in search results. It supports multi-store and multi-language setups, allowing for individual SEO customization for each store.
 
 ## Key Features
-- **Structured Data (LD+JSON)**: Supports rich snippets, including product info, price, availability, ratings, reviews, organization, and return policies.
-- **Dublin Core Metadata**: Adds basic metadata for content description.
-- **Open Graph Metadata**: Generates Open Graph tags for product sharing on social platforms like Facebook.
-- **Twitter Metadata**: Adds Twitter card metadata for products, including price and availability.
-- **Multi-store and Multi-language Support**: Customize metadata and structured data for each store and language.
-- **Rich Customization Options**: Personalize your store's name, owner details, description, and logo.
-- **Link Tag Generation**: Automatically adds `<link>` tags for language support, making your site more SEO-friendly across multiple languages.
-- **Full Control**: Configure rich snippets for stock status, shipping methods, return policies, and more.
 
-## Important note
+- **Structured Data Markup (LD+JSON)**:
+  - Supports rich snippets, including product information, price, availability, ratings, reviews, organization, and return policies.
+
+- **Dublin Core Metadata**:
+  - Adds essential metadata for content description.
+
+- **Open Graph Metadata**:
+  - Generates Open Graph tags for effective product sharing on social platforms like Facebook.
+
+- **Twitter Metadata**:
+  - Incorporates Twitter card metadata for products, including pricing and availability.
+
+- **Multi-store and Multi-language Support**:
+  - Customize metadata and structured data for each store and language.
+
+- **Rich Customization Options**:
+  - Personalize your store's name, owner details, description, and logo.
+
+- **Link Tag Generation**:
+  - Automatically adds `<link>` tags for language support, improving SEO across multiple languages.
+
+- **Full Control**:
+  - Configure rich snippets for stock status, shipping methods, return policies, and more.
+
+## Important Note
 
 OpenCart requires all extension package filenames to end in the .ocmod.zip format for successful installation. The Playful Sparkle - SEO Pack extension must follow this naming convention to ensure compatibility with OpenCart's installer.
 
-## Installation
+## Installation Instructions
 
 ### 1. Download the Extension
 Download the latest **Playful Sparkle - SEO Pack** release from this repository.
@@ -41,67 +55,64 @@ Download the latest **Playful Sparkle - SEO Pack** release from this repository.
 4. Configure the extension as desired, enabling or disabling `Structured Markup Data`, `Dublin Core`, `Open Graph`, and `Twitter`.
 5. Save your configuration.
 
-## Settings
+## Settings Overview
 
-### LD+JSON Structured Data Markup Description
+### LD+JSON Structured Data Markup
 
-The **LD+JSON structured data** markup integrated by the **Playful Sparkle - SEO Pack** enhances the SEO capabilities of your OpenCart webshop. This markup is crucial for search engines to understand the context and content of your webpage, leading to improved visibility in search results. Below are the key technical features and benefits of the structured data implemented by the extension:
+The **LD+JSON structured data** integrated by the **Playful Sparkle - SEO Pack** significantly enhances the SEO capabilities of your OpenCart webshop. It helps search engines understand your webpage's context and content, leading to improved visibility in search results.
 
-#### Enhanced Rich Snippets
-The structured data enables rich snippets in search engine results, providing potential customers with vital information about your products directly in the search results, which can improve click-through rates.
+#### Benefits:
 
-#### Detailed Product Information
-The use of the `Product` type within the structured data allows for detailed descriptions of products, including attributes like:
+- **Enhanced Rich Snippets**: Improves click-through rates by providing vital information about your products directly in search results.
+
+- **Detailed Product Information**: Allows for detailed descriptions of products, including:
   - Name
   - Description
   - Images
-  - Pricing information (including discount pricing information)
+  - Pricing (including discounts)
   - Availability status
-  - Offers, including shipping details
-  - Additional product properties like: width, height, length etc.
+  - Shipping details
+  - Additional properties (e.g., dimensions)
 
-#### Merchant Return Policies
-By specifying `MerchantReturnPolicy`, the markup clearly outlines the return policies applicable to different countries, improving transparency and trust with potential buyers.
+- **Merchant Return Policies**: Clearly outlines return policies applicable to different countries, improving transparency.
 
-#### Optimized for Local Search
-The inclusion of `Organization` and `Store` schema types helps search engines understand your business's physical location and contact details, enhancing local SEO.
+- **Optimized for Local Search**: Enhances local SEO by helping search engines understand your business's physical location and contact details.
 
-#### Breadcrumb Navigation
-The implementation of `BreadcrumbList` structured data improves site navigation by clearly defining the hierarchy of your website. This not only enhances user experience but also aids search engines in understanding the site's structure, which can positively impact indexing.
+- **Breadcrumb Navigation**: Improves site navigation by defining the hierarchy of your website, benefiting user experience and search engine indexing.
 
-#### Opening Hours
-The structured data can include `OpeningHoursSpecification`, providing customers with detailed information about your store's operating hours. This information helps users plan their visits and enhances local search visibility.
+- **Opening Hours**: Provides detailed operating hours to help customers plan visits and enhances local search visibility.
 
-#### Ratings and Reviews
-By incorporating `AggregateRating`, the markup allows you to display an overall rating score derived from customer reviews. This feature enhances credibility and encourages potential customers to make purchasing decisions.
+- **Ratings and Reviews**: Incorporates overall ratings and individual reviews to enhance credibility and influence purchasing decisions.
 
-Including individual reviews using the `Review` schema helps search engines understand the context and content of customer feedback, which can influence buying behavior and improve trust.
+- **Actionable Links**: Facilitates user engagement through easy integration of actions like reading or searching.
 
-#### Actionable Links
-The inclusion of `potentialAction` attributes allows for easy integration of actions like reading or searching, enhancing user engagement on your site.
-
-#### Future-proofing for Voice Search
-The structured data provides a semantic structure that is increasingly important for voice search optimization, making it more likely that your products will be surfaced in voice search results.
+- **Future-proofing for Voice Search**: Provides a semantic structure increasingly important for voice search optimization.
 
 ---
 
 ### Dublin Core Metadata
 
-Integrating **Dublin Core metadata** enhances content discoverability. This structured metadata format helps search engines better understand your content, leading to improved visibility and potentially higher traffic. For instance, the **DC.Title** meta tag defines the product name, while **DC.Description** provides a brief overview, helping users quickly grasp what you offer. By using this metadata, clients can also establish copyright rights, as seen in the **DC.Rights** tag, which protects intellectual property and informs users of ownership.
+Integrating **Dublin Core metadata** enhances content discoverability. It helps search engines better understand your content, leading to improved visibility and higher traffic. For example:
+- **DC.Title**: Defines the product name.
+- **DC.Description**: Provides a brief overview of the product.
+- **DC.Rights**: Establishes copyright rights, protecting intellectual property.
 
 ---
 
 ### Open Graph Metadata Benefits
 
-Integrating **Open Graph metadata** significantly enhances a webpage's visibility on social media platforms, making it easier for users to discover and share products. By providing essential information such as product details, images, and availability, it creates rich previews that attract more clicks and engagement. For instance, the metadata can display a compelling title, description, and multiple images. This not only improves user experience but also drives traffic and potential sales through social sharing.
+Integrating **Open Graph metadata** significantly enhances your webpage's visibility on social media, making it easier for users to discover and share products. It provides essential information, creating rich previews that attract clicks and engagement. Key elements include compelling titles, descriptions, and images, driving traffic and potential sales.
 
 ### Twitter Metadata Benefits
 
-Integrating **Twitter metadata** into your website enhances social media sharing by providing essential product information in a visually appealing format. This metadata helps attract attention on Twitter by displaying rich content, such as images and descriptions, directly in tweets. For example, the metadata can showcase product titles alongside a vivid image and a brief description, making it more enticing for users to engage. Additionally, including details like custom product labels can provide valuable insights, further encouraging potential customers to click through and explore your offerings.
+Incorporating **Twitter metadata** enhances social media sharing by providing essential product information in an engaging format. It attracts attention on Twitter by displaying rich content, including images and descriptions, directly in tweets. Custom product labels further encourage clicks and exploration.
 
 ## Troubleshooting
-- **Structured Data not displaying**: Ensure Structured Markup Data is enabled in the settings and that your product data is correctly filled out.
-- **Metadata tags not appearing**: Verify that the corresponding Dublin Core, Open Graph, or Twitter options are enabled in the settings.
+
+- **Structured Data Not Displaying**: Ensure that Structured Markup Data is enabled in the settings and that product data is correctly filled out.
+
+- **Metadata Tags Not Appearing**: Verify that the corresponding Dublin Core, Open Graph, or Twitter options are enabled in the settings.
 
 ## Support & Feedback
+
 After your purchase, you will receive free updates for the OpenCart 4 version. If future updates are released for the 4.x series, they will be available free of charge. If you encounter any problems or need assistance, you can request support via email at [support@playfulsparkle.com](support@playfulsparkle.com).
