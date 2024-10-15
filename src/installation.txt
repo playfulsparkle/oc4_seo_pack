@@ -1,18 +1,22 @@
 Playful Sparkle - SEO Pack Extension for OpenCart 4
 
-The Playful Sparkle - SEO Pack enhances the SEO of your OpenCart webshop by adding essential structured data and metadata. With support for multiple stores and languages, this extension helps improve search engine visibility and optimize content for social media engagement.
+The Playful Sparkle - SEO Pack is a comprehensive SEO extension for OpenCart 4 designed to enhance your webshop’s search engine visibility by incorporating structured data, rich snippets, and metadata tags. This extension automatically adds LD+JSON structured data, Dublin Core (meta), Open Graph (meta), and Twitter (meta) tags to your webshop’s header. It supports multi-store and multi-language setups, allowing you to customize the SEO for each store individually.
+
+The extension ensures proper metadata integration that improves your site's appearance in search results and boosts visibility on social media platforms.
 
 Demo frontend - https://demo.playfulsparkle.com/opencart4/
 Demo backend - https://demo.playfulsparkle.com/opencart4/admin/
 
 Key Features
 
-- Structured Markup Data (LD+JSON): Provides rich snippets for prices, reviews, ratings, can display both regular and discount price and more.
-- Dublin Core: Adds Dublin Core metadata to improve content discoverability.
-- Open Graph: Helps control how your content appears when shared on social media.
-- Twitter Cards: Configures metadata to control how content appears in Twitter feeds.
-- Multi-store and multi-language support: Ensures seamless integration across different stores and languages.
-- Customizable Settings: Store name, owner, description, logo, and stock status can all be adjusted.
+- Structured Data (LD+JSON): Supports rich snippets, including product info, price, availability, ratings, reviews, organization, and return policies.
+- Dublin Core Metadata: Adds basic metadata for content description.
+- Open Graph Metadata: Generates Open Graph tags for product sharing on social platforms like Facebook.
+- Twitter Metadata: Adds Twitter card metadata for products, including price and availability.
+- Multi-store and Multi-language Support: Customize metadata and structured data for each store and language.
+- Rich Customization Options: Personalize your store's name, owner details, description, and logo.
+- Link Tag Generation: Automatically adds `<link>` tags for language support, making your site more SEO-friendly across multiple languages.
+- Full Control: Configure rich snippets for stock status, shipping methods, return policies, and more.
 
 Installation Guide
 
