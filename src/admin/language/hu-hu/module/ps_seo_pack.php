@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']                             = 'Playful Sparkle - SEO Pack';
+$_['heading_fix']                               = 'Gyakori hibák javítása';
 
 // Text
 $_['text_module']                               = 'Modulok';
@@ -129,6 +130,7 @@ $_['entry_active_store']                        = 'Aktív áruház';
 $_['button_add']                                = 'Új hozzáadása';
 $_['button_copy_from_location_address']         = 'Adatok másolása a telephely címről a postai címre';
 $_['button_copy_from_postal_address']           = 'Adatok másolása a postai címről a telephely címre';
+$_['button_fix_event_handler']                  = 'Event Handler javítása';
 
 // Help
 $_['help_geo_coordinates']                      = 'Itt nézze meg a <a href="https://www.latlong.net" target="_blank">GEO koordinátákat</a>';
@@ -137,8 +139,9 @@ $_['help_item_condition']                       = 'A termék állapota, amely me
 $_['help_sdm_stock_status']                     = 'Ezek a készlet státuszok (2-3 nap, készleten, elfogyott, előrendelhető) a "elfogyott" helyett jelennek meg, hogy pontosabb elérhetőségi részleteket nyújtsanak, amikor egy terméket tipikusan elfogyottnak jelölnének meg.';
 
 // Error
-$_['error_permission']                          = 'Figyelmeztetés: Nincs jogosultsága az SEO Pack modul módosításához!';
-$_['error_store_id']                            = 'Figyelmeztetés: A űrlap nem tartalmazza a áruház azonosítóját!';
+$_['error_permission']                          = 'Figyelem: Nincs jogosultsága az SEO Pack modul módosításához!';
+$_['error_event']                               = 'Figyelem: Hiba történt az eseménykezelő regisztrálása során';
+$_['error_store_id']                            = 'Figyelem: A űrlap nem tartalmazza a áruház azonosítóját!';
 $_['error_form']                                = 'Az űrlap hibákat tartalmaz. Kérjük, javítsa ki a kiemelt mezőket.';
 $_['error_return_country']                      = 'Kérjük, válassza ki az országot a reklamációs politika számára.';
 $_['error_return_method']                       = 'Kérjük, válasszon egy érvényes visszaküldési módszert.';

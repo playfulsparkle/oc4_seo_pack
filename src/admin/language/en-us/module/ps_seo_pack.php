@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']                             = 'Playful Sparkle - SEO Pack';
+$_['heading_fix']                               = 'Fix common bugs';
 
 // Text
 $_['text_module']                               = 'Modules';
@@ -129,6 +130,7 @@ $_['entry_active_store']                        = 'Active Store';
 $_['button_add']                                = 'Add New';
 $_['button_copy_from_location_address']         = 'Copy from Location Address to Postal Address';
 $_['button_copy_from_postal_address']           = 'Copy from Postal Address to Location Address';
+$_['button_fix_event_handler']                  = 'Fix Event Handler';
 
 // Help
 $_['help_geo_coordinates']                      = 'Look up your <a href="https://www.latlong.net" target="_blank">GEO Coordinates here</a>';
@@ -138,6 +140,7 @@ $_['help_sdm_stock_status']                         = 'These stock statuses (2-3
 
 // Error
 $_['error_permission']                          = 'Warning: You do not have permission to modify SEO Pack module!';
+$_['error_event']                               = 'Warning: There was an error registering event handler';
 $_['error_store_id']                            = 'Warning: Form does not contain store_id!';
 $_['error_form']                                = 'The form contains errors. Please correct the highlighted fields.';
 $_['error_return_country']                      = 'Please select country for the return policy.';

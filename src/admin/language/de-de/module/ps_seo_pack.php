@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']                             = 'Playful Sparkle - SEO Pack';
+$_['heading_fix']                               = 'Häufige Fehler beheben';
 
 // Text
 $_['text_module']                               = 'Module';
@@ -129,6 +130,7 @@ $_['entry_active_store']                        = 'Aktiver Shop';
 $_['button_add']                                = 'Neu hinzufügen';
 $_['button_copy_from_location_address']         = 'Daten von der Standortadresse in die Postadresse kopieren';
 $_['button_copy_from_postal_address']           = 'Daten von der Postadresse in die Standortadresse kopieren';
+$_['button_fix_event_handler']                  = 'Event Handler beheben';
 
 // Help
 $_['help_geo_coordinates']                      = 'Suchen Sie Ihre <a href="https://www.latlong.net" target="_blank">GEO-Koordinaten hier</a>';
@@ -138,6 +140,7 @@ $_['help_sdm_stock_status']                     = 'Diese Lagerbestände (2-3 Tag
 
 // Error
 $_['error_permission']                          = 'Warnung: Sie haben keine Berechtigung, das SEO Pack-Modul zu ändern!';
+$_['error_event']                               = 'Warnung: Es gab einen Fehler bei der Registrierung des Ereignis-Handlers';
 $_['error_store_id']                            = 'Warnung: Das Formular enthält keine store_id!';
 $_['error_form']                                = 'Das Formular enthält Fehler. Bitte korrigieren Sie die hervorgehobenen Felder.';
 $_['error_return_country']                      = 'Bitte wählen Sie ein Land für die Rückgabebestimmungen aus.';

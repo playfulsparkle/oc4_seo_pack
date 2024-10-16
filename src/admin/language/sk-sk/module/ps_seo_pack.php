@@ -1,6 +1,7 @@
 <?php
 // Heading
 $_['heading_title']                             = 'Playful Sparkle - SEO Pack';
+$_['heading_fix']                               = 'Oprava bežných chýb';
 
 // Text
 $_['text_module']                               = 'Moduly';
@@ -129,6 +130,7 @@ $_['entry_active_store']                        = 'Aktívny obchod';
 $_['button_add']                                = 'Pridať nový';
 $_['button_copy_from_location_address']         = 'Kopírovať údaje z adresy prevádzky na poštovú adresu';
 $_['button_copy_from_postal_address']           = 'Kopírovať údaje z poštovej adresy na adresu prevádzky';
+$_['button_fix_event_handler']                  = 'Opraviť Event Handler';
 
 // Help
 $_['help_geo_coordinates']                      = 'Tu si môžete pozrieť <a href="https://www.latlong.net" target="_blank">GEO koordináty</a>';
@@ -138,6 +140,7 @@ $_['help_sdm_stock_status']                     = 'Tieto stavy zásob (2-3 dni, 
 
 // Error
 $_['error_permission']                          = 'Upozornenie: Nemáte oprávnenie na úpravu modulu SEO Pack!';
+$_['error_event']                               = 'Upozornenie: Pri registrácii spracovateľa udalostí došlo k chybe';
 $_['error_store_id']                            = 'Upozornenie: Formulár neobsahuje identifikátor obchodu!';
 $_['error_form']                                = 'Formulár obsahuje chyby. Prosím, opravte vyznačené polia.';
 $_['error_return_country']                      = 'Prosím, vyberte krajinu pre reklamačnú politiku.';
