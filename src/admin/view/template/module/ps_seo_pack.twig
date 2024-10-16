@@ -802,47 +802,45 @@
 	</div>
 </div>
 <script>
-function countryAutocomplete(input, input_id)
-{
-	input.autocomplete({
-		'source': function (request, response) {
-			$.ajax({
-				url: 'index.php?route=extension/ps_seo_pack/module/ps_seo_pack.countryautocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
-				dataType: 'json',
-				success: function (json) {
-					response($.map(json, function (item) {
-						return {
-							label: item['name'],
-							value: item['iso_code_2']
-						}
-					}));
-				}
-			});
-		},
-		'select': function (item) {
+	function countryAutocomplete(input, input_id) {
+		input.autocomplete({
+			'source': function (request, response) {
+				$.ajax({
+					url: 'index.php?route=extension/ps_seo_pack/module/ps_seo_pack.countryautocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
+					dataType: 'json',
+					success: function (json) {
+						response($.map(json, function (item) {
+							return {
+								label: item['name'],
+								value: item['iso_code_2']
+							}
+						}));
+					}
+				});
+			},
+			'select': function (item) {
 				input.val(item['label']);
 				input_id.val(item['value']);
-		}
+			}
+		});
+	}
+
+	$(document).on('focus', 'input[id^="input-return-policy-country"], input[id^="input-shipping-rate-destination"]', function () {
+		var $this = $(this);
+		var $this_id = $(this).next('input[id^="input-return-policy-country-id"]');
+
+		countryAutocomplete($this, $this_id);
 	});
-}
 
-$(document).on('focus', 'input[id^="input-return-policy-country"]', function () {
-	var $this = $(this);
-	var $this_id = $(this).next('input[id^="input-return-policy-country-id"]');
+	$(document).on('focus', 'input[id^="input-shipping-rate-destination"]', function () {
+		var $this = $(this);
+		var $this_id = $(this).next('input[id^="input-shipping-rate-destination-id"]');
 
-	countryAutocomplete($this, $this_id);
-});
+		countryAutocomplete($this, $this_id);
+	});
 
-$(document).on('focus', 'input[id^="input-shipping-rate-destination"]', function () {
-	var $this = $(this);
-	var $this_id = $(this).next('input[id^="input-shipping-rate-destination-id"]');
-
-	countryAutocomplete($this, $this_id);
-});
-
-function contactPoimtRowTpl(row_id)
-{
-	var html = '<tr id="contact-point-row-' + row_id + '">';
+	function contactPoimtRowTpl(row_id) {
+		var html = '<tr id="contact-point-row-' + row_id + '">';
 		html += '  <td class="text-start">';
 		html += '  		<input type="text" name="module_ps_seo_pack_contact_point[' + row_id + '][telephone]" value="" id="input-contact-point-telephone-' + row_id + '" placeholder="{{ entry_telephone }}" class="form-control"/>';
 		html += '     <div id="error-input-contact-point-telephone-' + row_id + '" class="invalid-feedback"></div>';
@@ -855,11 +853,10 @@ function contactPoimtRowTpl(row_id)
 		html += '</tr>';
 
 		return html;
-}
+	}
 
-function shippingRateRowTpl(row_id)
-{
-	var html = '<tr id="shipping-rate-row-' + row_id + '">';
+	function shippingRateRowTpl(row_id) {
+		var html = '<tr id="shipping-rate-row-' + row_id + '">';
 		html += '	<td class="text-start">';
 		html += '		<div class="input-group">';
 		html += '			<input type="number" min="0" name="module_ps_seo_pack_shipping_rates[' + row_id + '][rate]" value="" id="input-shipping-rate-rate-' + row_id + '" placeholder="{{ entry_shipping_rate }}" class="form-control" />';
@@ -899,76 +896,74 @@ function shippingRateRowTpl(row_id)
 		html += '</tr>';
 
 		return html;
-}
+	}
 
-function returnPolicyRowTpl(row_id)
-{
-	var html = '<tr id="return-policy-row-' + row_id + '">';
-	html += '	<td class="text-start">';
-	html += '		<input type="text" name="module_ps_seo_pack_return_policies[' + row_id + '][country]" value="" placeholder="{{ entry_country }}" data-oc-target="autocomplete-return-policy-country-' + row_id + '" id="input-return-policy-country-' + row_id + '" class="form-control" autocomplete="off" />';
-	html += '		<input type="hidden" name="module_ps_seo_pack_return_policies[' + row_id + '][country_id]" value="" id="input-return-policy-country-id-' + row_id + '" class="form-control" />';
-	html += '		<ul id="autocomplete-return-policy-country-' + row_id + '" class="dropdown-menu"></ul>';
-	html += '		<div id="error-input-return-policy-country-' + row_id + '" class="invalid-feedback"></div>';
-	html += '	</td>';
-	html += '	<td class="text-start">';
-	html += '		<select name="module_ps_seo_pack_return_policies[' + row_id + '][return_policy_category]" id="input-return-policy-return-policy-category-' + row_id + '" class="form-select">';
-	html += '			{% for key, value in return_policy_category_options %}<option value="{{ key }}">{{ value }}</option>{% endfor %}';
-	html += '		</select>';
-	html += '	</td>';
-	html += '	<td class="text-start">';
-	html += '		<select name="module_ps_seo_pack_return_policies[' + row_id + '][return_method]" id="input-return-policy-return-method-' + row_id + '" class="form-select">';
-	html += '			{% for key, value in return_method_options %}<option value="{{ key }}">{{ value }}</option>{% endfor %}';
-	html += '		</select>';
-	html += '		<div id="error-input-return-policy-return-method-' + row_id + '" class="invalid-feedback"></div>';
-	html += '	</td>';
-	html += '	<td class="text-start">';
-	html += '		<input type="number" min="0" max="31" name="module_ps_seo_pack_return_policies[' + row_id + '][return_days]" value="" id="input-return-policy-return-days-' + row_id + '" placeholder="{{ entry_return_days }}" class="form-control" />';
-	html += '		<div id="error-input-return-policy-return-days-' + row_id + '" class="invalid-feedback"></div>';
-	html += '	</td>';
-	html += '	<td class="text-start">';
-	html += '		<select name="module_ps_seo_pack_return_policies[' + row_id + '][return_fee]" id="input-return-policy-return-fee-' + row_id + '" class="form-select">';
-	html += '			{% for key, value in return_fee_options %}<option value="{{ key }}">{{ value }}</option>{% endfor %}';
-	html += '		</select>';
-	html += '		<div id="error-input-return-policy-return-fee-' + row_id + '" class="invalid-feedback"></div>';
-	html += '	</td>';
-	html += '	<td class="text-end"><button type="button" onclick="$(\'#return-policy-row-' + row_id + '\').remove();" data-bs-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>';
-	html += '</tr>';
+	function returnPolicyRowTpl(row_id) {
+		var html = '<tr id="return-policy-row-' + row_id + '">';
+		html += '	<td class="text-start">';
+		html += '		<input type="text" name="module_ps_seo_pack_return_policies[' + row_id + '][country]" value="" placeholder="{{ entry_country }}" data-oc-target="autocomplete-return-policy-country-' + row_id + '" id="input-return-policy-country-' + row_id + '" class="form-control" autocomplete="off" />';
+		html += '		<input type="hidden" name="module_ps_seo_pack_return_policies[' + row_id + '][country_id]" value="" id="input-return-policy-country-id-' + row_id + '" class="form-control" />';
+		html += '		<ul id="autocomplete-return-policy-country-' + row_id + '" class="dropdown-menu"></ul>';
+		html += '		<div id="error-input-return-policy-country-' + row_id + '" class="invalid-feedback"></div>';
+		html += '	</td>';
+		html += '	<td class="text-start">';
+		html += '		<select name="module_ps_seo_pack_return_policies[' + row_id + '][return_policy_category]" id="input-return-policy-return-policy-category-' + row_id + '" class="form-select">';
+		html += '			{% for key, value in return_policy_category_options %}<option value="{{ key }}">{{ value }}</option>{% endfor %}';
+		html += '		</select>';
+		html += '	</td>';
+		html += '	<td class="text-start">';
+		html += '		<select name="module_ps_seo_pack_return_policies[' + row_id + '][return_method]" id="input-return-policy-return-method-' + row_id + '" class="form-select">';
+		html += '			{% for key, value in return_method_options %}<option value="{{ key }}">{{ value }}</option>{% endfor %}';
+		html += '		</select>';
+		html += '		<div id="error-input-return-policy-return-method-' + row_id + '" class="invalid-feedback"></div>';
+		html += '	</td>';
+		html += '	<td class="text-start">';
+		html += '		<input type="number" min="0" max="31" name="module_ps_seo_pack_return_policies[' + row_id + '][return_days]" value="" id="input-return-policy-return-days-' + row_id + '" placeholder="{{ entry_return_days }}" class="form-control" />';
+		html += '		<div id="error-input-return-policy-return-days-' + row_id + '" class="invalid-feedback"></div>';
+		html += '	</td>';
+		html += '	<td class="text-start">';
+		html += '		<select name="module_ps_seo_pack_return_policies[' + row_id + '][return_fee]" id="input-return-policy-return-fee-' + row_id + '" class="form-select">';
+		html += '			{% for key, value in return_fee_options %}<option value="{{ key }}">{{ value }}</option>{% endfor %}';
+		html += '		</select>';
+		html += '		<div id="error-input-return-policy-return-fee-' + row_id + '" class="invalid-feedback"></div>';
+		html += '	</td>';
+		html += '	<td class="text-end"><button type="button" onclick="$(\'#return-policy-row-' + row_id + '\').remove();" data-bs-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa-solid fa-minus-circle"></i></button></td>';
+		html += '</tr>';
 
-	return html;
-}
+		return html;
+	}
 
-var contact_point_row = {{ module_ps_seo_pack_contact_point|length }};
+	var contact_point_row = {{ module_ps_seo_pack_contact_point|length }};
 
-$('#button-contact-point').on('click', function () {
-	var html = contactPoimtRowTpl(contact_point_row);
+	$('#button-contact-point').on('click', function () {
+		var html = contactPoimtRowTpl(contact_point_row);
 
-	$('#contact-point-table tbody').append(html);
+		$('#contact-point-table tbody').append(html);
 
-	contact_point_row++;
-});
-
-
-var shipping_rate_row = {{ module_ps_seo_pack_shipping_rates|length }};
-
-$('#button-shipping-rate').on('click', function () {
-	var html = shippingRateRowTpl(shipping_rate_row);
-
-	$('#shipping-rate-table tbody').append(html);
-
-	shipping_rate_row++;
-});
+		contact_point_row++;
+	});
 
 
-var return_policy_row = {{ module_ps_seo_pack_return_policies|length }};
+	var shipping_rate_row = {{ module_ps_seo_pack_shipping_rates|length }};
 
-$('#button-return-policy').on('click', function () {
-	var html = returnPolicyRowTpl(return_policy_row);
+	$('#button-shipping-rate').on('click', function () {
+		var html = shippingRateRowTpl(shipping_rate_row);
 
-	$('#return-policy-table tbody').append(html);
+		$('#shipping-rate-table tbody').append(html);
 
-	return_policy_row++;
-});
+		shipping_rate_row++;
+	});
 
+
+	var return_policy_row = {{ module_ps_seo_pack_return_policies|length }};
+
+	$('#button-return-policy').on('click', function () {
+		var html = returnPolicyRowTpl(return_policy_row);
+
+		$('#return-policy-table tbody').append(html);
+
+		return_policy_row++;
+	});
 
 	$('input[id^="input-alternate-store-name"]').on('keypress', function (e) {
 		if (e.which === 13) {
@@ -986,10 +981,6 @@ $('#button-return-policy').on('click', function () {
 		}
 	});
 
-	$('table[id^="alternate-store-name-list"]').on('click', '.btn', function () {
-		$(this).parent().parent().remove();
-	});
-
 	$('input[id^="input-same-as"]').on('keypress', function (e) {
 		if (e.which === 13) {
 			e.preventDefault();
@@ -1005,7 +996,7 @@ $('#button-return-policy').on('click', function () {
 		}
 	});
 
-	$('table[id^="same-as-list"]').on('click', '.btn', function () {
+	$('table[id^="alternate-store-name-list"], table[id^="same-as-list"]').on('click', '.btn', function () {
 		$(this).parent().parent().remove();
 	});
 
@@ -1033,14 +1024,14 @@ $('#button-return-policy').on('click', function () {
 		window.location = $(this).val();
 	});
 
-	$('button[data-copy-input-group]').on('click', function() {
-    var inputs = $('#' + $(this).data('copy-input-group') + ' input[type="text"]');
+	$('button[data-copy-input-group]').on('click', function () {
+		var inputs = $('#' + $(this).data('copy-input-group') + ' input[type="text"]');
 
-    inputs.each(function() {
-        var targetInput = $('#' + $(this).data('target-input'));
+		inputs.each(function () {
+			var targetInput = $('#' + $(this).data('target-input'));
 
-        targetInput.val($(this).val());
-    });
-});
+			targetInput.val($(this).val());
+		});
+	});
 </script>
 {{ footer }}
