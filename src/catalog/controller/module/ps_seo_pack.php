@@ -114,7 +114,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         $store_image = isset($config['module_ps_seo_pack_image']) ? $config['module_ps_seo_pack_image'] : '';
 
-        if (is_file(DIR_IMAGE . $store_image)) {
+        if ($store_image && is_file(DIR_IMAGE . $store_image)) {
             $store_image_url = $this->model_tool_image->resize($store_image, 1500, 1500);
         } else {
             $store_image_url = $this->model_tool_image->resize('no_image.png', 1500, 1500);

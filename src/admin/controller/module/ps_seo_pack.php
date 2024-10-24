@@ -268,12 +268,12 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                 'limit' => 5,
             ];
 
-            $result = $this->model_localisation_country->getCountries($filter_data);
+            $countries = $this->model_localisation_country->getCountries($filter_data);
 
-            foreach ($result as $key => $value) {
+            foreach ($countries as $country) {
                 $json[] = [
-                    'name' => $value['name'],
-                    'iso_code_2' => $value['iso_code_2'],
+                    'name' => $country['name'],
+                    'iso_code_2' => $country['iso_code_2'],
                 ];
             }
         }
@@ -325,37 +325,47 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         }
 
         if (!$json) {
-            foreach ($this->request->post['module_ps_seo_pack_store_name'] as $language_id => $value) {
-                if (oc_strlen(trim(($value))) === 0) {
-                    $json['error']['input-store-name-' . $language_id] = $this->language->get('error_store_name');
+            if (isset($this->request->post['module_ps_seo_pack_store_name'])) {
+                foreach ($this->request->post['module_ps_seo_pack_store_name'] as $language_id => $value) {
+                    if (oc_strlen(trim(($value))) === 0) {
+                        $json['error']['input-store-name-' . $language_id] = $this->language->get('error_store_name');
+                    }
                 }
             }
 
-            foreach ($this->request->post['module_ps_seo_pack_store_owner'] as $language_id => $value) {
-                if (oc_strlen(trim(($value))) === 0) {
-                    $json['error']['input-store-owner-' . $language_id] = $this->language->get('error_store_owner');
+            if (isset($this->request->post['module_ps_seo_pack_store_owner'])) {
+                foreach ($this->request->post['module_ps_seo_pack_store_owner'] as $language_id => $value) {
+                    if (oc_strlen(trim(($value))) === 0) {
+                        $json['error']['input-store-owner-' . $language_id] = $this->language->get('error_store_owner');
+                    }
                 }
             }
 
-            foreach ($this->request->post['module_ps_seo_pack_store_description'] as $language_id => $value) {
-                if (oc_strlen(trim(($value))) === 0) {
-                    $json['error']['input-store-description-' . $language_id] = $this->language->get('error_store_description');
+            if (isset($this->request->post['module_ps_seo_pack_store_description'])) {
+                foreach ($this->request->post['module_ps_seo_pack_store_description'] as $language_id => $value) {
+                    if (oc_strlen(trim(($value))) === 0) {
+                        $json['error']['input-store-description-' . $language_id] = $this->language->get('error_store_description');
+                    }
                 }
             }
 
-            if ((bool) $this->request->post['module_ps_seo_pack_sdm']) {
-                foreach ($this->request->post['module_ps_seo_pack_postal_address'] as $language_id => $input_fields) {
-                    foreach ($input_fields as $key => $value) {
-                        if (oc_strlen(trim(($value))) === 0) {
-                            $json['error']['input-postal-address-' . strtr($key, '_', '-') . '-' . $language_id] = $this->language->get('error_postal_address_' . $key);
+            if (isset($this->request->post['module_ps_seo_pack_sdm']) && (bool) $this->request->post['module_ps_seo_pack_sdm']) {
+                if (isset($this->request->post['module_ps_seo_pack_postal_address'])) {
+                    foreach ($this->request->post['module_ps_seo_pack_postal_address'] as $language_id => $input_fields) {
+                        foreach ($input_fields as $key => $value) {
+                            if (oc_strlen(trim(($value))) === 0) {
+                                $json['error']['input-postal-address-' . strtr($key, '_', '-') . '-' . $language_id] = $this->language->get('error_postal_address_' . $key);
+                            }
                         }
                     }
                 }
 
-                foreach ($this->request->post['module_ps_seo_pack_location_address'] as $language_id => $input_fields) {
-                    foreach ($input_fields as $key => $value) {
-                        if (oc_strlen(trim($value)) === 0) {
-                            $json['error']['input-location-address-' . strtr($key, '_', '-') . '-' . $language_id] = $this->language->get('error_location_address_' . $key);
+                if (isset($this->request->post['module_ps_seo_pack_location_address'])) {
+                    foreach ($this->request->post['module_ps_seo_pack_location_address'] as $language_id => $input_fields) {
+                        foreach ($input_fields as $key => $value) {
+                            if (oc_strlen(trim($value)) === 0) {
+                                $json['error']['input-location-address-' . strtr($key, '_', '-') . '-' . $language_id] = $this->language->get('error_location_address_' . $key);
+                            }
                         }
                     }
                 }
@@ -373,13 +383,13 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                 }
             }
 
-            if ((bool) $this->request->post['module_ps_seo_pack_open_graph']) {
+            if (isset($this->request->post['module_ps_seo_pack_open_graph']) && (bool) $this->request->post['module_ps_seo_pack_open_graph']) {
                 if (oc_strlen(trim($this->request->post['module_ps_seo_pack_facebook_app_id'])) === 0) {
                     $json['error']['input-facebook-app-id'] = $this->language->get('error_facebook_app_id');
                 }
             }
 
-            if ((bool) $this->request->post['module_ps_seo_pack_twitter']) {
+            if (isset($this->request->post['module_ps_seo_pack_twitter']) && (bool) $this->request->post['module_ps_seo_pack_twitter']) {
                 if (oc_strlen(trim($this->request->post['module_ps_seo_pack_twitter_handle'])) === 0) {
                     $json['error']['input-twitter-handle'] = $this->language->get('error_twitter_handle');
                 }
