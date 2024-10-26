@@ -185,12 +185,12 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                 $current_url = $first_url['href'];
             }
 
-            if (oc_strlen(trim($result['meta_description'])) > 0) {
-                $short_description = oc_substr($result['meta_description'], 0, 150);
-                $long_description = oc_substr($result['meta_description'], 0, 1000);
-            } else if (oc_strlen(trim($result['description'])) > 0) {
-                $short_description = oc_substr($result['description'], 0, 150);
-                $long_description = oc_substr($result['description'], 0, 1000);
+            if ($this->_strlen(trim($result['meta_description'])) > 0) {
+                $short_description = $this->_substr($result['meta_description'], 0, 150);
+                $long_description = $this->_substr($result['meta_description'], 0, 1000);
+            } else if ($this->_strlen(trim($result['description'])) > 0) {
+                $short_description = $this->_substr($result['description'], 0, 150);
+                $long_description = $this->_substr($result['description'], 0, 1000);
             } else {
                 $short_description = '';
                 $long_description = '';
@@ -524,7 +524,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                 if ($ps_seo_pack_route === 'product/product' && !$result['error']) {
                     $json_item_condition = 'NewCondition';
 
-                    if ($item_condition_enabled && oc_strlen(trim($result['location'])) > 0) {
+                    if ($item_condition_enabled && $this->_strlen(trim($result['location'])) > 0) {
                         foreach ($item_condition_assocs as $item_condition_assoc) {
                             if ($item_condition_assoc['col_value'] === $result['location']) {
                                 $json_item_condition = $item_condition_assoc['item_condition'];
@@ -778,14 +778,14 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                 $args['ps_seo_pack_html_prefix'] = implode(' ', $html_prefix);
             }
 
-            if (oc_strlen(trim($store_owner)) > 0) {
+            if ($this->_strlen(trim($store_owner)) > 0) {
                 $args['title'] = $result['title'] . ' | ' . $store_owner;
             }
 
-            if (oc_strlen(trim($short_description)) > 0) {
+            if ($this->_strlen(trim($short_description)) > 0) {
                 $args['description'] = $short_description;
-            } else if (oc_strlen(trim($long_description)) > 0) {
-                $args['description'] = oc_substr($long_description, 0, 150);
+            } else if ($this->_strlen(trim($long_description)) > 0) {
+                $args['description'] = $this->_substr($long_description, 0, 150);
             }
         }
 
@@ -1852,7 +1852,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                 $sub_category_info = $this->model_catalog_category->getCategory($path_id);
 
                 if ($sub_category_info) {
-                    if (oc_strlen(trim($result['description'])) === 0) {
+                    if ($this->_strlen(trim($result['description'])) === 0) {
                         $result['description'] = $this->normalizeDescription($sub_category_info['description']);
                     }
 
@@ -1974,7 +1974,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $current_pm = $hours['pm'];
 
             // Skip days without set hours
-            if (oc_strlen(trim($current_am)) === 0 && oc_strlen(trim($current_pm)) === 0) {
+            if ($this->_strlen(trim($current_am)) === 0 && $this->_strlen(trim($current_pm)) === 0) {
                 if ($range_start !== '') {
                     $result[] = $this->formatRange($range_start, $last_day, $prev_am, $prev_pm);
                 }
@@ -2260,5 +2260,61 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         }
 
         return $output;
+    }
+
+    /**
+     * Get the length of a string while ensuring compatibility across OpenCart versions.
+     *
+     * This method returns the length of the provided string. It utilizes different
+     * string length functions based on the OpenCart version being used to ensure
+     * accurate handling of UTF-8 characters.
+     *
+     * - For OpenCart versions before 4.0.1.0, it uses `utf8_strlen()`.
+     * - For OpenCart versions from 4.0.1.0 up to (but not including) 4.0.2.0,
+     *   it uses `\Opencart\System\Helper\Utf8\strlen()`.
+     * - For OpenCart version 4.0.2.0 and above, it uses `oc_strlen()`.
+     *
+     * @param string $value The input string whose length is to be calculated.
+     *
+     * @return int The length of the input string.
+     */
+    private function _strlen(string $value): int
+    {
+        if (version_compare(VERSION, '4.0.1.0', '<')) { // OpenCart versions before 4.0.1.0
+            return utf8_strlen($value);
+        } elseif (version_compare(VERSION, '4.0.2.0', '<')) { // OpenCart version 4.0.1.0 up to, but not including, 4.0.2.0
+            return \Opencart\System\Helper\Utf8\strlen($value);
+        }
+
+        return oc_strlen($value); // OpenCart version 4.0.2.0 and above
+    }
+
+    /**
+     * Get a substring from a string while ensuring compatibility across OpenCart versions.
+     *
+     * This method returns a portion of the provided string. It utilizes different
+     * substring functions based on the OpenCart version being used to ensure
+     * accurate handling of UTF-8 characters.
+     *
+     * - For OpenCart versions before 4.0.1.0, it uses `utf8_substr()`.
+     * - For OpenCart versions from 4.0.1.0 up to (but not including) 4.0.2.0,
+     *   it uses `\Opencart\System\Helper\Utf8\substr()`.
+     * - For OpenCart version 4.0.2.0 and above, it uses `substr()`.
+     *
+     * @param string $value The input string from which to extract the substring.
+     * @param int $start The starting position of the substring.
+     * @param int|null $length The length of the substring (optional).
+     *
+     * @return string The extracted substring.
+     */
+    private function _substr(string $value, int $start, ?int $length = null): string
+    {
+        if (version_compare(VERSION, '4.0.1.0', '<')) { // OpenCart versions before 4.0.1.0
+            return utf8_substr($value, $start, $length);
+        } elseif (version_compare(VERSION, '4.0.2.0', '<')) { // OpenCart version 4.0.1.0 up to, but not including, 4.0.2.0
+            return \Opencart\System\Helper\Utf8\substr($value, $start, $length);
+        }
+
+        return substr($value, $start, $length); // OpenCart version 4.0.2.0 and above
     }
 }

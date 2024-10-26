@@ -95,7 +95,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         $image = isset($config['module_ps_seo_pack_image']) ? $config['module_ps_seo_pack_image'] : '';
 
-        if (oc_strlen(trim($image)) === 0) {
+        if ($this->_strlen(trim($image)) === 0) {
             $data['module_ps_seo_pack_image'] = [
                 'image' => '',
                 'thumb' => $data['placeholder'],
@@ -259,7 +259,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $filter_name = '';
         }
 
-        if (oc_strlen($filter_name) > 0) {
+        if ($this->_strlen($filter_name) > 0) {
             $this->load->model('localisation/country');
 
             $filter_data = [
@@ -327,7 +327,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         if (!$json) {
             if (isset($this->request->post['module_ps_seo_pack_store_name'])) {
                 foreach ($this->request->post['module_ps_seo_pack_store_name'] as $language_id => $value) {
-                    if (oc_strlen(trim(($value))) === 0) {
+                    if ($this->_strlen(trim(($value))) === 0) {
                         $json['error']['input-store-name-' . $language_id] = $this->language->get('error_store_name');
                     }
                 }
@@ -335,7 +335,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
             if (isset($this->request->post['module_ps_seo_pack_store_owner'])) {
                 foreach ($this->request->post['module_ps_seo_pack_store_owner'] as $language_id => $value) {
-                    if (oc_strlen(trim(($value))) === 0) {
+                    if ($this->_strlen(trim(($value))) === 0) {
                         $json['error']['input-store-owner-' . $language_id] = $this->language->get('error_store_owner');
                     }
                 }
@@ -343,7 +343,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
             if (isset($this->request->post['module_ps_seo_pack_store_description'])) {
                 foreach ($this->request->post['module_ps_seo_pack_store_description'] as $language_id => $value) {
-                    if (oc_strlen(trim(($value))) === 0) {
+                    if ($this->_strlen(trim(($value))) === 0) {
                         $json['error']['input-store-description-' . $language_id] = $this->language->get('error_store_description');
                     }
                 }
@@ -353,7 +353,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                 if (isset($this->request->post['module_ps_seo_pack_postal_address'])) {
                     foreach ($this->request->post['module_ps_seo_pack_postal_address'] as $language_id => $input_fields) {
                         foreach ($input_fields as $key => $value) {
-                            if (oc_strlen(trim(($value))) === 0) {
+                            if ($this->_strlen(trim(($value))) === 0) {
                                 $json['error']['input-postal-address-' . strtr($key, '_', '-') . '-' . $language_id] = $this->language->get('error_postal_address_' . $key);
                             }
                         }
@@ -363,7 +363,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                 if (isset($this->request->post['module_ps_seo_pack_location_address'])) {
                     foreach ($this->request->post['module_ps_seo_pack_location_address'] as $language_id => $input_fields) {
                         foreach ($input_fields as $key => $value) {
-                            if (oc_strlen(trim($value)) === 0) {
+                            if ($this->_strlen(trim($value)) === 0) {
                                 $json['error']['input-location-address-' . strtr($key, '_', '-') . '-' . $language_id] = $this->language->get('error_location_address_' . $key);
                             }
                         }
@@ -373,7 +373,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                 if (isset($this->request->post['module_ps_seo_pack_contact_point'])) {
                     foreach ($this->request->post['module_ps_seo_pack_contact_point'] as $row_id => $input_fields) {
                         foreach ($input_fields as $field_name => $field_value) {
-                            if (oc_strlen(trim($field_value)) === 0) {
+                            if ($this->_strlen(trim($field_value)) === 0) {
                                 $json['error']['input-contact-point-' . strtr($field_name, '_', '-') . '-' . $row_id] = $this->language->get('error_contact_point_' . $field_name);
                             }
                         }
@@ -384,13 +384,13 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             }
 
             if (isset($this->request->post['module_ps_seo_pack_open_graph']) && (bool) $this->request->post['module_ps_seo_pack_open_graph']) {
-                if (oc_strlen(trim($this->request->post['module_ps_seo_pack_facebook_app_id'])) === 0) {
+                if ($this->_strlen(trim($this->request->post['module_ps_seo_pack_facebook_app_id'])) === 0) {
                     $json['error']['input-facebook-app-id'] = $this->language->get('error_facebook_app_id');
                 }
             }
 
             if (isset($this->request->post['module_ps_seo_pack_twitter']) && (bool) $this->request->post['module_ps_seo_pack_twitter']) {
-                if (oc_strlen(trim($this->request->post['module_ps_seo_pack_twitter_handle'])) === 0) {
+                if ($this->_strlen(trim($this->request->post['module_ps_seo_pack_twitter_handle'])) === 0) {
                     $json['error']['input-twitter-handle'] = $this->language->get('error_twitter_handle');
                 }
             }
@@ -401,7 +401,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                         $json['error']['input-shipping-rate-rate-' . $row_id] = $this->language->get('error_shipping_rate_rate');
                     }
 
-                    if (oc_strlen(trim($data['destination'])) === 0 || oc_strlen(trim($data['destination_id'])) === 0) {
+                    if ($this->_strlen(trim($data['destination'])) === 0 || $this->_strlen(trim($data['destination_id'])) === 0) {
                         $json['error']['input-shipping-rate-destination-' . $row_id] = $this->language->get('error_shipping_rate_destination');
                     }
 
@@ -449,7 +449,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                     $return_days = isset($data['return_days']) ? (int) $data['return_days'] : 0;
                     $return_fee = isset($data['return_fee']) ? $data['return_fee'] : '';
 
-                    if (oc_strlen(trim($data['country'])) === 0 || oc_strlen(trim($data['country_id'])) === 0) {
+                    if ($this->_strlen(trim($data['country'])) === 0 || $this->_strlen(trim($data['country_id'])) === 0) {
                         $json['error']['input-return-policy-country-' . $row_id] = $this->language->get('error_return_country');
                     }
 
@@ -596,5 +596,32 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
             $this->model_setting_event->deleteEventByCode('module_ps_seo_pack');
         }
+    }
+
+    /**
+     * Get the length of a string while ensuring compatibility across OpenCart versions.
+     *
+     * This method returns the length of the provided string. It utilizes different
+     * string length functions based on the OpenCart version being used to ensure
+     * accurate handling of UTF-8 characters.
+     *
+     * - For OpenCart versions before 4.0.1.0, it uses `utf8_strlen()`.
+     * - For OpenCart versions from 4.0.1.0 up to (but not including) 4.0.2.0,
+     *   it uses `\Opencart\System\Helper\Utf8\strlen()`.
+     * - For OpenCart version 4.0.2.0 and above, it uses `oc_strlen()`.
+     *
+     * @param string $value The input string whose length is to be calculated.
+     *
+     * @return int The length of the input string.
+     */
+    private function _strlen(string $value): int
+    {
+        if (version_compare(VERSION, '4.0.1.0', '<')) { // OpenCart versions before 4.0.1.0
+            return utf8_strlen($value);
+        } elseif (version_compare(VERSION, '4.0.2.0', '<')) { // OpenCart version 4.0.1.0 up to, but not including, 4.0.2.0
+            return \Opencart\System\Helper\Utf8\strlen($value);
+        }
+
+        return oc_strlen($value); // OpenCart version 4.0.2.0 and above
     }
 }
