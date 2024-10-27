@@ -2,6 +2,11 @@
 // Heading
 $_['heading_title']                             = 'Playful Sparkle - SEO Pack';
 $_['heading_fix']                               = 'Gyakori hibák javítása';
+$_['heading_getting_started']                   = 'Kezdő lépések';
+$_['heading_setup']                             = 'SEO Pack beállítása';
+$_['heading_troubleshot']                       = 'Gyakori hibakeresési lépések';
+$_['heading_faq']                               = 'GYIK';
+$_['heading_contact']                           = 'Kapcsolatfelvétel a támogatással';
 
 // Text
 $_['text_module']                               = 'Modulok';
@@ -38,9 +43,11 @@ $_['text_item_condition_damaged']               = 'Sérült';
 $_['text_item_condition_new']                   = 'Új';
 $_['text_item_condition_refurbished']           = 'Felújított';
 $_['text_item_condition_used']                  = 'Használt';
-$_['text_help_intro']                           = 'Segítségre van szüksége a Playful Sparkle - SEO Pack bővítménnyel kapcsolatban? Támogató csapatunk szívesen áll rendelkezésére az <a href="mailto:support@playfulsparkle.com">support@playfulsparkle.com</a> e-mail címen. Célunk, hogy támogassuk az OpenCart boltja SEO-jának hatékony optimalizálását, ezzel hozzájárulva a sikeréhez. Kérdése van a telepítéssel, a konfigurációval vagy a funkciókkal kapcsolatban? Mi itt vagyunk, hogy minden lépésnél segítsük Önt.';
-$_['text_testing_instructions']                 = 'Miután befejezte a beállításokat, a következő hivatkozásokon ellenőrizheti a Playful Sparkle - SEO Pack bővítmény által generált meta tag-eket és LD+JSON-t:';
-$_['text_testing_links']                        = '<ul><li><a href="https://developers.facebook.com/tools/debug/" target="_blank">Facebook Sharing Debugger</a></li><li><a href="https://cards-dev.x.com/validator" target="_blank">Twitter Card Validator</a></li><li><a href="https://www.linkedin.com/post-inspector/" target="_blank">LinkedIn Post Inspector</a></li></ul>';
+$_['text_getting_started']                      = '<p><strong>Áttekintés:</strong> A Playful Sparkle - SEO Csomag az OpenCart 4 számára javítja a webshop keresőoptimalizáltságát struktúrált adatok, gazdag snippetek és metatagok integrálásával. Ez a bővítmény leegyszerűsíti a SEO folyamatot, lehetővé téve, hogy technikai tudás nélkül optimalizálja boltját.</p><p><strong>Előfeltételek:</strong> Győződjön meg róla, hogy OpenCart 4.x, PHP 7.2 vagy újabb verziót használ, és hogy van egy kompatibilis téma, amely támogatja a struktúrált adatokat.</p>';
+$_['text_setup']                                = '<p><strong>SEO Csomag Beállítása:</strong> Lépjen be a SEO Csomag beállításaiba az OpenCart adminisztrációs paneljén. Konfigurálja a struktúrált adatjelölés opcióit, aktiválja vagy letiltja a Dublin Core metadatát, állítsa be az Open Graph tulajdonságait, és adja meg a Twitter azonosítóját a jobb közösségi média integráció érdekében.</p><p>A beállítások befejezése után a Playful Sparkle - SEO Csomag bővítmény által generált metacímkéket és LD+JSON-t az alábbi linkekkel tesztelheti:</p><ul><li><a href="https://developers.facebook.com/tools/debug/" target="_blank">Facebook Sharing Debugger</a></li><li><a href="https://cards-dev.x.com/validator" target="_blank">Twitter Card Validator</a></li><li><a href="https://www.linkedin.com/post-inspector/" target="_blank">LinkedIn Post Inspector</a></li></ul>';
+$_['text_troubleshot']                          = '<ul><li><strong>Strukturált adatok nem jelennek meg:</strong> Ellenőrizze, hogy a struktúrált adatjelölés engedélyezve van-e a beállításokban.</li><li><strong>Dublin Core metadaták nem jelennek meg:</strong> Győződjön meg róla, hogy a Dublin Core metadaták engedélyezve vannak a beállításokban.</li><li><strong>Open Graph címkék nem jelennek meg:</strong> Ellenőrizze, hogy az Open Graph engedélyezve van-e a beállításokban.</li><li><strong>Twitter azonosító nem található:</strong> Ellenőrizze, hogy megadta-e a Twitter azonosítóját, és hogy az integráció engedélyezve van-e.</li><li><strong>Metacímkék nem frissülnek:</strong> Törölje az OpenCart gyorsítótárát, és frissítse az oldalt, hogy láthassa a legújabb változtatásokat.</li><li><strong>Nincs struktúrált adat vagy metadat megjelenítve:</strong> Ha sem a struktúrált adatjelölés, sem a metadat nem jelenik meg, kattintson a kék "Eseménykezelő javítása" gombra a probléma megoldásához.</li></ul>';
+$_['text_faq']                                  = '<details><summary>Milyen előnyei vannak az SEO Csomag bővítmény használatának?</summary>Javítja a webshop keresőoptimalizáltságát struktúrált adatok alkalmazásával, ami jobb rangsorolást és átkattintási arányokat eredményez.</details><details><summary>Mi az a struktúrált adatjelölés?</summary>Ez egy kód, amelyet a weboldalaihoz adnak, hogy segítsenek a keresőmotoroknak megérteni a tartalmát, ami gazdag snippetekhez vezet a keresési eredményekben.</details><details><summary>Hogyan javítják a metadaták a SEO-t?</summary>A Dublin Core és az Open Graph metadaták alapvető információkat nyújtanak a keresőmotoroknak és a közösségi médiának, javítva ezzel az oldal megjelenését és forgalmát.</details><details><summary>Hogyan oldhatom meg a gyakori problémákat?</summary>Olvassa el a hibaelhárítási szakaszunkat, vagy nézzen utána online forrásoknak, hogy útmutatást kapjon az SEO-val kapcsolatos problémák megoldásához.</details>';
+$_['text_contact']                              = '<p>További segítségért kérjük, lépjen kapcsolatba ügyfélszolgálati csapatunkkal:</p><ul><li><strong>Kapcsolat:</strong> <a href="mailto:%s">%s</a></li><li><strong>Dokumentáció:</strong> <a href="%s" target="_blank" rel="noopener noreferrer">Felhasználói dokumentáció</a></li></ul>';
 
 // Tab
 $_['tab_store']                                 = 'Áruház';
@@ -130,7 +137,7 @@ $_['entry_active_store']                        = 'Aktív áruház';
 $_['button_add']                                = 'Új hozzáadása';
 $_['button_copy_from_location_address']         = 'Adatok másolása a telephely címről a postai címre';
 $_['button_copy_from_postal_address']           = 'Adatok másolása a postai címről a telephely címre';
-$_['button_fix_event_handler']                  = 'Event Handler javítása';
+$_['button_fix_event_handler']                  = 'Eseménykezelő javítása';
 
 // Help
 $_['help_geo_coordinates']                      = 'Itt nézze meg a <a href="https://www.latlong.net" target="_blank">GEO koordinátákat</a>';

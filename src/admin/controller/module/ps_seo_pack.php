@@ -7,6 +7,16 @@ namespace Opencart\Admin\Controller\Extension\PsSeoPack\Module;
  */
 class PsSeoPack extends \Opencart\System\Engine\Controller
 {
+        /**
+     * @var string The support email address.
+     */
+    const EXTENSION_EMAIL = 'support@playfulsparkle.com';
+
+    /**
+     * @var string The documentation URL for the extension.
+     */
+    const EXTENSION_DOC = 'https://playfulsparkle.com/en-us/resources/downloads/';
+
     /**
      * @return void
      */
@@ -231,6 +241,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $this->language->get('text_item_condition_product_field'),
         ];
 
+        $data['text_contact'] = sprintf($this->language->get('text_contact'), self::EXTENSION_EMAIL, self::EXTENSION_EMAIL, self::EXTENSION_DOC);
 
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
