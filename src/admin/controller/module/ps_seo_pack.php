@@ -7,7 +7,7 @@ namespace Opencart\Admin\Controller\Extension\PsSeoPack\Module;
  */
 class PsSeoPack extends \Opencart\System\Engine\Controller
 {
-        /**
+    /**
      * @var string The support email address.
      */
     const EXTENSION_EMAIL = 'support@playfulsparkle.com';
