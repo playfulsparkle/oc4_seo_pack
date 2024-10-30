@@ -1,4 +1,4 @@
-# Playful Sparkle - SEO Pack Extension for OpenCart 4
+# Playful Sparkle - SEO Pack for OpenCart 4
 
 The **Playful Sparkle - SEO Pack** is a comprehensive SEO extension designed to enhance your OpenCart 4 webshop’s search engine visibility. This extension integrates structured data, rich snippets (Structured Data Markup (LD+JSON)), and metadata tags (Dublin Core, Open Graph, and Twitter) into your webshop’s header, ensuring better performance in search results. It supports multi-store and multi-language setups, allowing for individual SEO customization for each store.
 
