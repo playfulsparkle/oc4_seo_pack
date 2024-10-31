@@ -1,6 +1,6 @@
 # Playful Sparkle - SEO Pack for OpenCart 4
 
-The **Playful Sparkle - SEO Pack** is a comprehensive SEO extension designed to enhance your OpenCart 4 webshop’s search engine visibility. This extension integrates structured data, rich snippets (Structured Data Markup (LD+JSON)), and metadata tags (Dublin Core, Open Graph, and Twitter) into your webshop’s header, ensuring better performance in search results. It supports multi-store and multi-language setups, allowing for individual SEO customization for each store.
+The **Playful Sparkle - SEO Pack** is a comprehensive SEO extension designed to enhance your OpenCart 4.x webshop’s search engine visibility. This extension integrates structured data, rich snippets (Structured Data Markup (LD+JSON)), and metadata tags (Dublin Core, Open Graph, and Twitter) into your webshop’s header, ensuring better performance in search results. It supports multi-store and multi-language setups, allowing for individual SEO customization for each store.
 
 ## Key Features
 
@@ -27,10 +27,6 @@ The **Playful Sparkle - SEO Pack** is a comprehensive SEO extension designed to 
 
 - **Full Control**:
   - Configure rich snippets for stock status, shipping methods, return policies, and more.
-
-## Important Note
-
-OpenCart requires all extension package filenames to end in the .ocmod.zip format for successful installation. The Playful Sparkle - SEO Pack extension must follow this naming convention to ensure compatibility with OpenCart's installer.
 
 ## Installation Instructions
 
@@ -110,6 +106,20 @@ Incorporating **Twitter metadata** enhances social media sharing by providing es
 
 - **Metadata Tags not appearing**: Verify that the corresponding Dublin Core, Open Graph, or Twitter options are enabled in the settings.
 
+---
+
 ## Support & Feedback
 
 After your purchase, you will receive free updates for the OpenCart 4 version. If future updates are released for the 4.x series, they will be available free of charge. If you encounter any problems or need assistance, you can request support via email at [support@playfulsparkle.com](support@playfulsparkle.com).
+
+---
+
+## License
+
+This project is licensed under the GPL-3.0 license. See the [LICENSE](./LICENSE) file for more information.
+
+---
+
+## Contributing
+
+We welcome contributions! If you would like to contribute to this project, please fork the repository and submit a pull request with your changes.

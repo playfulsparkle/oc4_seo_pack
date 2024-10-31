@@ -16,13 +16,13 @@
     "twitter card"
   ],
   "author": "zsoltoroszlany82 <zsolt.oroszlany@playfulsparkle.com>",
-  "license": "GPL",
+  "license": "BSD 3-Clause",
   "dependencies": {
     "archiver": "^7.0.1",
     "fs": "^0.0.1-security"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/playfulsparkle/oc4_structured_data_markup.git"
+    "url": "git+https://github.com/playfulsparkle/oc4_seo_pack.git"
   }
 }
