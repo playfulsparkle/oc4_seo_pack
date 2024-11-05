@@ -137,7 +137,7 @@ $_['entry_active_store']                        = 'Aktívny obchod';
 $_['button_add']                                = 'Pridať nový';
 $_['button_copy_from_location_address']         = 'Kopírovať údaje z adresy prevádzky na poštovú adresu';
 $_['button_copy_from_postal_address']           = 'Kopírovať údaje z poštovej adresy na adresu prevádzky';
-$_['button_fix_event_handler']                  = 'Opraviť Event Handler';
+$_['button_fix_event_handler']                  = 'Opraviť spracovateľ udalostí';
 
 // Help
 $_['help_geo_coordinates']                      = 'Tu si môžete pozrieť <a href="https://www.latlong.net" target="_blank" rel="external noopener noreferrer">GEO koordináty</a>';

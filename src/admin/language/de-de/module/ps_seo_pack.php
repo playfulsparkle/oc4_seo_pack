@@ -137,7 +137,7 @@ $_['entry_active_store']                        = 'Aktiver Shop';
 $_['button_add']                                = 'Neu hinzufügen';
 $_['button_copy_from_location_address']         = 'Daten von der Standortadresse in die Postadresse kopieren';
 $_['button_copy_from_postal_address']           = 'Daten von der Postadresse in die Standortadresse kopieren';
-$_['button_fix_event_handler']                  = 'Event Handler beheben';
+$_['button_fix_event_handler']                  = 'Ereignishandler beheben';
 
 // Help
 $_['help_geo_coordinates']                      = 'Suchen Sie Ihre <a href="https://www.latlong.net" target="_blank" rel="external noopener noreferrer">GEO-Koordinaten hier</a>';
