@@ -621,18 +621,18 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
      *   it uses `\Opencart\System\Helper\Utf8\strlen()`.
      * - For OpenCart version 4.0.2.0 and above, it uses `oc_strlen()`.
      *
-     * @param string $value The input string whose length is to be calculated.
+     * @param string $string The input string whose length is to be calculated.
      *
      * @return int The length of the input string.
      */
-    private function _strlen(string $value): int
+    private function _strlen(string $string): int
     {
         if (version_compare(VERSION, '4.0.1.0', '<')) { // OpenCart versions before 4.0.1.0
-            return utf8_strlen($value);
+            return utf8_strlen($string);
         } elseif (version_compare(VERSION, '4.0.2.0', '<')) { // OpenCart version 4.0.1.0 up to, but not including, 4.0.2.0
-            return \Opencart\System\Helper\Utf8\strlen($value);
+            return \Opencart\System\Helper\Utf8\strlen($string);
         }
 
-        return oc_strlen($value); // OpenCart version 4.0.2.0 and above
+        return oc_strlen($string); // OpenCart version 4.0.2.0 and above
     }
 }
