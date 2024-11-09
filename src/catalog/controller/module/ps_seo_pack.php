@@ -275,7 +275,9 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                     $args['ps_seo_pack_opengraphs'][] = ['property' => 'product:brand', 'content' => $result['manufacturer']];
                 }
 
-                if (isset($result['price'])) {
+                if (isset($result['special']) && $result['special']) {
+                    $args['ps_seo_pack_opengraphs'][] = ['property' => 'product:price:amount', 'content' => $result['special']];
+                } else if (isset($result['price']) && $result['price']) {
                     $args['ps_seo_pack_opengraphs'][] = ['property' => 'product:price:amount', 'content' => $result['price']];
                 }
 
@@ -1449,17 +1451,17 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             }
 
             if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-                $normal_price = $this->currency->format($this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+                $normal_price = $this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax'));
 
-                $result['price'] = (float) preg_replace('/[^0-9\.,]/', '', $normal_price);
+                $result['price'] = (float) $this->currency->format($normal_price, $this->session->data['currency'], 0, false);
             } else {
                 $result['price'] = false;
             }
 
             if ((float) $product_info['special']) {
-                $special_price = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+                $special_price = $this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax'));
 
-                $result['special'] = (float) preg_replace('/[^0-9\.,]/', '', $special_price);
+                $result['special'] = (float) $this->currency->format($special_price, $this->session->data['currency'], 0, false);
                 $result['special_valid_until'] = $this->model_extension_ps_seo_pack_module_ps_seo_pack->getSpecialPriceDatesByProductId($product_id);
             } else {
                 $result['special'] = false;
