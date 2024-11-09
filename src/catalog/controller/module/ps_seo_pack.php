@@ -1406,7 +1406,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                 'quantity' => (int) $product_info['quantity'],
                 'stock_status_id' => (int) $product_info['stock_status_id'],
                 'location' => $product_info['location'],
-                'price_currency' => $this->session->data['currency'],
+                'price_currency' => $this->config->get('config_currency'),
                 'url' => $urls,
                 'breadcrumb' => [],
                 'images' => array_unique($images),
@@ -1453,7 +1453,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
                 $normal_price = $this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax'));
 
-                $result['price'] = (float) $this->currency->format($normal_price, $this->session->data['currency'], 0, false);
+                $result['price'] = (float) $this->currency->format($normal_price, $this->config->get('config_currency'), 0, false);
             } else {
                 $result['price'] = false;
             }
@@ -1461,7 +1461,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             if ((float) $product_info['special']) {
                 $special_price = $this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax'));
 
-                $result['special'] = (float) $this->currency->format($special_price, $this->session->data['currency'], 0, false);
+                $result['special'] = (float) $this->currency->format($special_price, $this->config->get('config_currency'), 0, false);
                 $result['special_valid_until'] = $this->model_extension_ps_seo_pack_module_ps_seo_pack->getSpecialPriceDatesByProductId($product_id);
             } else {
                 $result['special'] = false;
