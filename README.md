@@ -27,6 +27,18 @@ The **Playful Sparkle - SEO Pack** is a comprehensive SEO extension designed to 
 
 - **Full Control**:
   - Configure rich snippets for stock status, shipping methods, return policies, and more.
+  
+- **Multilingual Support**: The extension is available in the following languages:
+  - Čeština (cs-cz)
+  - Deutsch (de-de)
+  - English (GB) (en-gb)
+  - English (US) (en-us)
+  - Español (es-es)
+  - Français (fr-fr)
+  - Magyar (hu-hu)
+  - Italiano (it-it)
+  - Русский (ru-ru)
+  - Slovenčina (sk-sk)
 
 ## Installation Instructions
 
