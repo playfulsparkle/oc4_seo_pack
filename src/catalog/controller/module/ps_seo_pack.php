@@ -413,7 +413,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                             '@type' => 'SearchAction',
                             'target' => [
                                 '@type' => 'EntryPoint',
-                                'urlTemplate' => $this->url->link('product/search', 'language=' . $this->config->get('config_language') . '&search=') . '{search_term_string}',
+                                'urlTemplate' => str_replace('&amp;', '&', $this->url->link('product/search', 'language=' . $this->config->get('config_language') . '&search=')) . '{search_term_string}',
                             ],
                             'query-input' => [
                                 '@type' => 'PropertyValueSpecification',
@@ -811,7 +811,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         foreach ($languages as $language) {
             $urls[$language['code']] = [
-                'href' => $this->url->link('information/contact', 'language=' . $language['code']),
+                'href' => str_replace('&amp;', '&', $this->url->link('information/contact', 'language=' . $language['code'])),
                 'code' => $language['code'],
             ];
         }
@@ -828,7 +828,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         $result['breadcrumb'][] = [
             '@type' => 'ListItem',
             'name' => $this->language->get('text_frontpage'),
-            'item' => $this->url->link('common/home', 'language=' . $this->config->get('config_language'))
+            'item' => str_replace('&amp;', '&', $this->url->link('common/home', 'language=' . $this->config->get('config_language')))
         ];
 
         $result['breadcrumb'][] = [
@@ -854,7 +854,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         foreach ($languages as $language) {
             $urls[$language['code']] = [
-                'href' => $this->url->link('common/home', 'language=' . $language['code']),
+                'href' => str_replace('&amp;', '&', $this->url->link('common/home', 'language=' . $language['code'])),
                 'code' => $language['code'],
             ];
         }
@@ -891,7 +891,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         foreach ($languages as $language) {
             $urls[$language['code']] = [
-                'href' => $this->url->link('account/login', 'language=' . $language['code']),
+                'href' => str_replace('&amp;', '&', $this->url->link('account/login', 'language=' . $language['code'])),
                 'code' => $language['code'],
             ];
         }
@@ -908,13 +908,13 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         $result['breadcrumb'][] = [
             '@type' => 'ListItem',
             'name' => $this->language->get('text_frontpage'),
-            'item' => $this->url->link('common/home', 'language=' . $this->config->get('config_language'))
+            'item' => str_replace('&amp;', '&', $this->url->link('common/home', 'language=' . $this->config->get('config_language')))
         ];
 
         $result['breadcrumb'][] = [
             '@type' => 'ListItem',
             'name' => $this->language->get('text_account'),
-            'item' => $this->url->link('account/account', 'language=' . $this->config->get('config_language'))
+            'item' => str_replace('&amp;', '&', $this->url->link('account/account', 'language=' . $this->config->get('config_language')))
         ];
 
         $result['breadcrumb'][] = [
@@ -940,7 +940,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         foreach ($languages as $language) {
             $urls[$language['code']] = [
-                'href' => $this->url->link('account/register', 'language=' . $language['code']),
+                'href' => str_replace('&amp;', '&', $this->url->link('account/register', 'language=' . $language['code'])),
                 'code' => $language['code'],
             ];
         }
@@ -957,13 +957,13 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         $result['breadcrumb'][] = [
             '@type' => 'ListItem',
             'name' => $this->language->get('text_frontpage'),
-            'item' => $this->url->link('common/home', 'language=' . $this->config->get('config_language'))
+            'item' => str_replace('&amp;', '&', $this->url->link('common/home', 'language=' . $this->config->get('config_language')))
         ];
 
         $result['breadcrumb'][] = [
             '@type' => 'ListItem',
             'name' => $this->language->get('text_account'),
-            'item' => $this->url->link('account/account', 'language=' . $this->config->get('config_language'))
+            'item' => str_replace('&amp;', '&', $this->url->link('account/account', 'language=' . $this->config->get('config_language')))
         ];
 
         $result['breadcrumb'][] = [
@@ -989,7 +989,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         foreach ($languages as $language) {
             $urls[$language['code']] = [
-                'href' => $this->url->link('account/forgotten', 'language=' . $language['code']),
+                'href' => str_replace('&amp;', '&', $this->url->link('account/forgotten', 'language=' . $language['code'])),
                 'code' => $language['code'],
             ];
         }
@@ -1006,13 +1006,13 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         $result['breadcrumb'][] = [
             '@type' => 'ListItem',
             'name' => $this->language->get('text_frontpage'),
-            'item' => $this->url->link('common/home', 'language=' . $this->config->get('config_language')),
+            'item' => str_replace('&amp;', '&', $this->url->link('common/home', 'language=' . $this->config->get('config_language'))),
         ];
 
         $result['breadcrumb'][] = [
             '@type' => 'ListItem',
             'name' => $this->language->get('text_account'),
-            'item' => $this->url->link('account/account', 'language=' . $this->config->get('config_language')),
+            'item' => str_replace('&amp;', '&', $this->url->link('account/account', 'language=' . $this->config->get('config_language'))),
         ];
 
         $result['breadcrumb'][] = [
@@ -1068,7 +1068,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
             foreach ($languages as $language) {
                 $urls[$language['code']] = [
-                    'href' => $this->url->link('product/manufacturer.info', 'language=' . $language['code'] . '&manufacturer_id=' . $this->request->get['manufacturer_id'] . $url),
+                    'href' => str_replace('&amp;', '&', $this->url->link('product/manufacturer.info', 'language=' . $language['code'] . '&manufacturer_id=' . $this->request->get['manufacturer_id'] . $url)),
                     'code' => $language['code'],
                 ];
             }
@@ -1092,13 +1092,13 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $result['breadcrumb'][] = [
                 '@type' => 'ListItem',
                 'name' => $this->language->get('text_frontpage'),
-                'item' => $this->url->link('common/home', 'language=' . $this->config->get('config_language'))
+                'item' => str_replace('&amp;', '&', $this->url->link('common/home', 'language=' . $this->config->get('config_language')))
             ];
 
             $result['breadcrumb'][] = [
                 '@type' => 'ListItem',
                 'name' => $this->language->get('text_brand'),
-                'item' => $this->url->link('product/manufacturer', 'language=' . $this->config->get('config_language'))
+                'item' => str_replace('&amp;', '&', $this->url->link('product/manufacturer', 'language=' . $this->config->get('config_language')))
             ];
 
             $result['breadcrumb'][] = [
@@ -1118,7 +1118,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $result['breadcrumb'][] = [
                 '@type' => 'ListItem',
                 'name' => $this->language->get('text_frontpage'),
-                'item' => $this->url->link('common/home', 'language=' . $this->config->get('config_language'))
+                'item' => str_replace('&amp;', '&', $this->url->link('common/home', 'language=' . $this->config->get('config_language')))
             ];
 
             $result['breadcrumb'][] = [
@@ -1145,7 +1145,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         foreach ($languages as $language) {
             $urls[$language['code']] = [
-                'href' => $this->url->link('product/manufacturer', 'language=' . $language['code']),
+                'href' => str_replace('&amp;', '&', $this->url->link('product/manufacturer', 'language=' . $language['code'])),
                 'code' => $language['code'],
             ];
         }
@@ -1162,7 +1162,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         $result['breadcrumb'][] = [
             '@type' => 'ListItem',
             'name' => $this->language->get('text_frontpage'),
-            'item' => $this->url->link('common/home', 'language=' . $this->config->get('config_language'))
+            'item' => str_replace('&amp;', '&', $this->url->link('common/home', 'language=' . $this->config->get('config_language')))
         ];
 
         $result['breadcrumb'][] = [
@@ -1188,7 +1188,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         foreach ($languages as $language) {
             $urls[$language['code']] = [
-                'href' => $this->url->link('information/sitemap', 'language=' . $language['code']),
+                'href' => str_replace('&amp;', '&', $this->url->link('information/sitemap', 'language=' . $language['code'])),
                 'code' => $language['code'],
             ];
         }
@@ -1205,7 +1205,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         $result['breadcrumb'][] = [
             '@type' => 'ListItem',
             'name' => $this->language->get('text_frontpage'),
-            'item' => $this->url->link('common/home', 'language=' . $this->config->get('config_language'))
+            'item' => str_replace('&amp;', '&', $this->url->link('common/home', 'language=' . $this->config->get('config_language')))
         ];
 
         $result['breadcrumb'][] = [
@@ -1231,7 +1231,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         foreach ($languages as $language) {
             $urls[$language['code']] = [
-                'href' => $this->url->link('checkout/cart', 'language=' . $language['code']),
+                'href' => str_replace('&amp;', '&', $this->url->link('checkout/cart', 'language=' . $language['code'])),
                 'code' => $language['code'],
             ];
         }
@@ -1248,7 +1248,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         $result['breadcrumb'][] = [
             '@type' => 'ListItem',
             'name' => $this->language->get('text_frontpage'),
-            'item' => $this->url->link('common/home', 'language=' . $this->config->get('config_language'))
+            'item' => str_replace('&amp;', '&', $this->url->link('common/home', 'language=' . $this->config->get('config_language')))
         ];
 
         $result['breadcrumb'][] = [
@@ -1312,7 +1312,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         foreach ($languages as $language) {
             $urls[$language['code']] = [
-                'href' => $this->url->link('product/search', 'language=' . $language['code'] . $url),
+                'href' => str_replace('&amp;', '&', $this->url->link('product/search', 'language=' . $language['code'] . $url)),
                 'code' => $language['code'],
             ];
         }
@@ -1329,7 +1329,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         $result['breadcrumb'][] = [
             '@type' => 'ListItem',
             'name' => $this->language->get('text_frontpage'),
-            'item' => $this->url->link('common/home', 'language=' . $this->config->get('config_language'))
+            'item' => str_replace('&amp;', '&', $this->url->link('common/home', 'language=' . $this->config->get('config_language')))
         ];
 
         $result['breadcrumb'][] = [
@@ -1388,7 +1388,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
             foreach ($languages as $language) {
                 $urls[$language['code']] = [
-                    'href' => $this->url->link('product/product', 'language=' . $language['code'] . '&product_id=' . $product_id),
+                    'href' => str_replace('&amp;', '&', $this->url->link('product/product', 'language=' . $language['code'] . '&product_id=' . $product_id)),
                     'code' => $language['code'],
                 ];
             }
@@ -1473,7 +1473,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $result['breadcrumb'][] = [
                 '@type' => 'ListItem',
                 'name' => $this->language->get('text_frontpage'),
-                'item' => $this->url->link('common/home', 'language=' . $this->config->get('config_language'))
+                'item' => str_replace('&amp;', '&', $this->url->link('common/home', 'language=' . $this->config->get('config_language')))
             ];
 
             if (isset($this->request->get['path'])) {
@@ -1497,7 +1497,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                         $result['breadcrumb'][] = [
                             '@type' => 'ListItem',
                             'name' => $category_info['name'],
-                            'item' => $this->url->link('product/category', 'language=' . $this->config->get('config_language') . '&path=' . $path)
+                            'item' => str_replace('&amp;', '&', $this->url->link('product/category', 'language=' . $this->config->get('config_language') . '&path=' . $path))
                         ];
 
                         $last_category = $category_info['name'];
@@ -1529,7 +1529,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                     $result['breadcrumb'][] = [
                         '@type' => 'ListItem',
                         'name' => $category_info['name'],
-                        'item' => $this->url->link('product/category', 'language=' . $this->config->get('config_language') . '&path=' . $this->request->get['path'] . $url)
+                        'item' => str_replace('&amp;', '&', $this->url->link('product/category', 'language=' . $this->config->get('config_language') . '&path=' . $this->request->get['path'] . $url))
                     ];
 
                     $last_category = $category_info['name'];
@@ -1544,7 +1544,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                 $result['breadcrumb'][] = [
                     '@type' => 'ListItem',
                     'name' => $this->language->get('text_brand'),
-                    'item' => $this->url->link('product/manufacturer', 'language=' . $this->config->get('config_language'))
+                    'item' => str_replace('&amp;', '&', $this->url->link('product/manufacturer', 'language=' . $this->config->get('config_language')))
                 ];
 
                 $url = '';
@@ -1571,7 +1571,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                     $result['breadcrumb'][] = [
                         '@type' => 'ListItem',
                         'name' => $manufacturer_info['name'],
-                        'item' => $this->url->link('product/manufacturer.info', 'language=' . $this->config->get('config_language') . '&manufacturer_id=' . $this->request->get['manufacturer_id'] . $url)
+                        'item' => str_replace('&amp;', '&', $this->url->link('product/manufacturer.info', 'language=' . $this->config->get('config_language') . '&manufacturer_id=' . $this->request->get['manufacturer_id'] . $url))
                     ];
                 }
             }
@@ -1618,7 +1618,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                 $result['breadcrumb'][] = [
                     '@type' => 'ListItem',
                     'name' => $this->language->get('text_search'),
-                    'item' => $this->url->link('product/search', 'language=' . $this->config->get('config_language') . $url)
+                    'item' => str_replace('&amp;', '&', $this->url->link('product/search', 'language=' . $this->config->get('config_language') . $url))
                 ];
             }
 
@@ -1675,7 +1675,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $result['breadcrumb'][] = [
                 '@type' => 'ListItem',
                 'name' => $product_info['name'],
-                'item' => $this->url->link('product/product', 'language=' . $this->config->get('config_language') . $url . '&product_id=' . $product_id)
+                'item' => str_replace('&amp;', '&', $this->url->link('product/product', 'language=' . $this->config->get('config_language') . $url . '&product_id=' . $product_id))
             ];
         } else {
             $result = [
@@ -1690,7 +1690,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $result['breadcrumb'][] = [
                 '@type' => 'ListItem',
                 'name' => $this->language->get('text_frontpage'),
-                'item' => $this->url->link('common/home', 'language=' . $this->config->get('config_language'))
+                'item' => str_replace('&amp;', '&', $this->url->link('common/home', 'language=' . $this->config->get('config_language')))
             ];
 
             $result['breadcrumb'][] = [
@@ -1728,7 +1728,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
             foreach ($languages as $language) {
                 $urls[$language['code']] = [
-                    'href' => $this->url->link('information/information', 'language=' . $language['code'] . '&information_id=' . $information_id),
+                    'href' => str_replace('&amp;', '&', $this->url->link('information/information', 'language=' . $language['code'] . '&information_id=' . $information_id)),
                     'code' => $language['code'],
                 ];
             }
@@ -1745,7 +1745,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $result['breadcrumb'][] = [
                 '@type' => 'ListItem',
                 'name' => $this->language->get('text_frontpage'),
-                'item' => $this->url->link('common/home', 'language=' . $this->config->get('config_language'))
+                'item' => str_replace('&amp;', '&', $this->url->link('common/home', 'language=' . $this->config->get('config_language')))
             ];
 
             $result['breadcrumb'][] = [
@@ -1765,7 +1765,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $result['breadcrumb'][] = [
                 '@type' => 'ListItem',
                 'name' => $this->language->get('text_frontpage'),
-                'item' => $this->url->link('common/home', 'language=' . $this->config->get('config_language'))
+                'item' => str_replace('&amp;', '&', $this->url->link('common/home', 'language=' . $this->config->get('config_language')))
             ];
 
             $result['breadcrumb'][] = [
@@ -1825,7 +1825,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $result['breadcrumb'][] = [
                 '@type' => 'ListItem',
                 'name' => $this->language->get('text_frontpage'),
-                'item' => $this->url->link('common/home', 'language=' . $this->config->get('config_language'))
+                'item' => str_replace('&amp;', '&', $this->url->link('common/home', 'language=' . $this->config->get('config_language')))
             ];
 
             $url = '';
@@ -1871,7 +1871,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                     $result['breadcrumb'][] = [
                         '@type' => 'ListItem',
                         'name' => $sub_category_info['name'],
-                        'item' => $this->url->link('product/category', 'language=' . $this->config->get('config_language') . '&path=' . $path . $url)
+                        'item' => str_replace('&amp;', '&', $this->url->link('product/category', 'language=' . $this->config->get('config_language') . '&path=' . $path . $url))
                     ];
                 }
             }
@@ -1906,14 +1906,14 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $result['breadcrumb'][] = [
                 '@type' => 'ListItem',
                 'name' => $category_info['name'],
-                'item' => $this->url->link('product/category', 'language=' . $this->config->get('config_language') . $url)
+                'item' => str_replace('&amp;', '&', $this->url->link('product/category', 'language=' . $this->config->get('config_language') . $url))
             ];
 
             $urls = [];
 
             foreach ($languages as $language) {
                 $urls[$language['code']] = [
-                    'href' => $this->url->link('product/category', 'language=' . $language['code'] . $url),
+                    'href' => str_replace('&amp;', '&', $this->url->link('product/category', 'language=' . $language['code'] . $url)),
                     'code' => $language['code'],
                 ];
             }
@@ -1933,7 +1933,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $result['breadcrumb'][] = [
                 '@type' => 'ListItem',
                 'name' => $this->language->get('text_frontpage'),
-                'item' => $this->url->link('common/home', 'language=' . $this->config->get('config_language'))
+                'item' => str_replace('&amp;', '&', $this->url->link('common/home', 'language=' . $this->config->get('config_language')))
             ];
 
             $result['breadcrumb'][] = [
