@@ -97,7 +97,7 @@
 								<div class="col-sm-10">
 									<select name="module_ps_seo_pack_store_language_code" id="input-store-language-code" class="form-select">
 										{% for language in languages %}
-										<option value="{{ language.code }}" {% if language.code==module_ps_seo_pack_store_language_code %} selected{% endif %}>{{ language.name }}</option>
+										<option value="{{ language.code }}" {% if language.code == module_ps_seo_pack_store_language_code %} selected{% endif %}>{{ language.name }}</option>
 										{% endfor %}
 									</select>
 								</div>
@@ -448,7 +448,7 @@
 								</div>
 							</div>
 
-							<div class="row mb-3" id="sdm-stock-status-assoc-group"{% if module_ps_seo_pack_sdm_stock_status == 0 %} style="display: none;"{% endif %}>
+							<div class="row mb-3" id="sdm-stock-status-assoc-group"{% if module_ps_seo_pack_sdm_stock_status %} style="display: none;"{% endif %}>
 								<label class="col-sm-2 col-form-label">{{ entry_stock_status_assoc }}</label>
 								<div class="col-sm-10">
 
@@ -498,7 +498,7 @@
 								</div>
 							</div>
 
-							<div class="row mb-3" id="item-condition-group"{% if module_ps_seo_pack_item_condition == 0 %} style="display: none;"{% endif %}>
+							<div class="row mb-3" id="item-condition-group"{% if module_ps_seo_pack_item_condition %} style="display: none;"{% endif %}>
 								<label class="col-sm-2 col-form-label">{{ entry_item_condition_assoc }}</label>
 								<div class="col-sm-10">
 
@@ -541,7 +541,7 @@
 								</div>
 							</div>
 
-							<fieldset class="row mb-3" id="shipping-rate-group"{% if module_ps_seo_pack_shipping_rate == 0 %} style="display: none;"{% endif %}>
+							<fieldset class="row mb-3" id="shipping-rate-group"{% if module_ps_seo_pack_shipping_rate %} style="display: none;"{% endif %}>
 								<legend>{{ text_shipping_rate_deffinitions }}</legend>
 
 								<div class="table-responsive">
@@ -618,7 +618,7 @@
 								</div>
 							</div>
 
-							<fieldset class="row mb-3" id="return-policy-group"{% if module_ps_seo_pack_return_policy == 0 %} style="display: none;"{% endif %}>
+							<fieldset class="row mb-3" id="return-policy-group"{% if module_ps_seo_pack_return_policy %} style="display: none;"{% endif %}>
 								<legend>{{ text_return_policy_deffinitions }}</legend>
 
 								<div class="table-responsive">
@@ -723,7 +723,7 @@
 								</div>
 							</div>
 
-							<div class="row mb-3" id="open-graph-stock-status-assoc-group"{% if module_ps_seo_pack_open_graph_stock_status == 0 %} style="display: none;"{% endif %}>
+							<div class="row mb-3" id="open-graph-stock-status-assoc-group"{% if module_ps_seo_pack_open_graph_stock_status %} style="display: none;"{% endif %}>
 								<label class="col-sm-2 col-form-label">{{ entry_stock_status_assoc }}</label>
 								<div class="col-sm-10">
 

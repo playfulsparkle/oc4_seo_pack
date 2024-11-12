@@ -64,23 +64,23 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         $twitter_card_type = isset($config['module_ps_seo_pack_twitter_card_type']) ? $config['module_ps_seo_pack_twitter_card_type'] : '';
 
         $sdm_stock_status_enabled = isset($config['module_ps_seo_pack_sdm_stock_status']) ? (bool) $config['module_ps_seo_pack_sdm_stock_status'] : false;
-        $sdm_stock_status_assocs = isset($config['module_ps_seo_pack_sdm_stock_status_assoc']) ? $config['module_ps_seo_pack_sdm_stock_status_assoc'] : [];
+        $sdm_stock_status_assocs = isset($config['module_ps_seo_pack_sdm_stock_status_assoc']) ? (array) $config['module_ps_seo_pack_sdm_stock_status_assoc'] : [];
 
         $open_graph_stock_status_enabled = isset($config['module_ps_seo_pack_open_graph_stock_status']) ? (bool) $config['module_ps_seo_pack_open_graph_stock_status'] : false;
-        $open_graph_stock_status_assocs = isset($config['module_ps_seo_pack_open_graph_stock_status_assoc']) ? $config['module_ps_seo_pack_open_graph_stock_status_assoc'] : [];
+        $open_graph_stock_status_assocs = isset($config['module_ps_seo_pack_open_graph_stock_status_assoc']) ? (array) $config['module_ps_seo_pack_open_graph_stock_status_assoc'] : [];
 
         $return_policy_enabled = isset($config['module_ps_seo_pack_return_policy']) ? (bool) $config['module_ps_seo_pack_return_policy'] : false;
-        $return_policies = isset($config['module_ps_seo_pack_return_policies']) ? $config['module_ps_seo_pack_return_policies'] : [];
+        $return_policies = isset($config['module_ps_seo_pack_return_policies']) ? (array) $config['module_ps_seo_pack_return_policies'] : [];
 
         $shipping_rate_enabled = isset($config['module_ps_seo_pack_shipping_rate']) ? (bool) $config['module_ps_seo_pack_shipping_rate'] : false;
-        $shipping_rates = isset($config['module_ps_seo_pack_shipping_rates']) ? $config['module_ps_seo_pack_shipping_rates'] : [];
+        $shipping_rates = isset($config['module_ps_seo_pack_shipping_rates']) ? (array) $config['module_ps_seo_pack_shipping_rates'] : [];
 
         $item_condition_enabled = isset($config['module_ps_seo_pack_item_condition']) ? (bool) $config['module_ps_seo_pack_item_condition'] : false;
-        $item_condition_assocs = isset($config['module_ps_seo_pack_item_condition_assoc']) ? $config['module_ps_seo_pack_item_condition_assoc'] : [];
+        $item_condition_assocs = isset($config['module_ps_seo_pack_item_condition_assoc']) ? (array) $config['module_ps_seo_pack_item_condition_assoc'] : [];
 
-        $store_language_code = isset($config['module_ps_seo_pack_store_language_code']) ? $config['module_ps_seo_pack_store_language_code'] : false;
+        $store_language_code = isset($config['module_ps_seo_pack_store_language_code']) ? (bool) $config['module_ps_seo_pack_store_language_code'] : false;
 
-        $store_name = isset($config['module_ps_seo_pack_store_name']) ? $config['module_ps_seo_pack_store_name'] : [];
+        $store_name = isset($config['module_ps_seo_pack_store_name']) ? (array) $config['module_ps_seo_pack_store_name'] : [];
 
         if (isset($store_name[$config_language_id])) {
             $store_name = $store_name[$config_language_id];
@@ -88,7 +88,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $store_name = '';
         }
 
-        $alternate_store_names = isset($config['module_ps_seo_pack_alternate_store_name']) ? $config['module_ps_seo_pack_alternate_store_name'] : [];
+        $alternate_store_names = isset($config['module_ps_seo_pack_alternate_store_name']) ? (array) $config['module_ps_seo_pack_alternate_store_name'] : [];
 
         if (isset($alternate_store_names[$config_language_id])) {
             $alternate_store_names = $alternate_store_names[$config_language_id];
@@ -96,7 +96,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $alternate_store_names = [];
         }
 
-        $store_owner = isset($config['module_ps_seo_pack_store_owner']) ? $config['module_ps_seo_pack_store_owner'] : [];
+        $store_owner = isset($config['module_ps_seo_pack_store_owner']) ? (array) $config['module_ps_seo_pack_store_owner'] : [];
 
         if (isset($store_owner[$config_language_id])) {
             $store_owner = $store_owner[$config_language_id];
@@ -104,7 +104,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $store_owner = '';
         }
 
-        $store_description = isset($config['module_ps_seo_pack_store_description']) ? $config['module_ps_seo_pack_store_description'] : [];
+        $store_description = isset($config['module_ps_seo_pack_store_description']) ? (array) $config['module_ps_seo_pack_store_description'] : [];
 
         if (isset($store_description[$config_language_id])) {
             $store_description = $store_description[$config_language_id];
@@ -120,11 +120,11 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $store_image_url = $this->model_tool_image->resize('no_image.png', 1500, 1500);
         }
 
-        $same_as = isset($config['module_ps_seo_pack_same_as']) ? $config['module_ps_seo_pack_same_as'] : [];
+        $same_as = isset($config['module_ps_seo_pack_same_as']) ? (array) $config['module_ps_seo_pack_same_as'] : [];
 
-        $opening_hour = isset($config['module_ps_seo_pack_opening_hour']) ? $config['module_ps_seo_pack_opening_hour'] : [];
+        $opening_hour = isset($config['module_ps_seo_pack_opening_hour']) ? (array) $config['module_ps_seo_pack_opening_hour'] : [];
 
-        $postal_address = isset($config['module_ps_seo_pack_postal_address']) ? $config['module_ps_seo_pack_postal_address'] : [];
+        $postal_address = isset($config['module_ps_seo_pack_postal_address']) ? (array) $config['module_ps_seo_pack_postal_address'] : [];
 
         if (isset($postal_address[$config_language_id])) {
             $postal_address = $postal_address[$config_language_id];
@@ -132,7 +132,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $postal_address = [];
         }
 
-        $location_address = isset($config['module_ps_seo_pack_location_address']) ? $config['module_ps_seo_pack_location_address'] : [];
+        $location_address = isset($config['module_ps_seo_pack_location_address']) ? (array) $config['module_ps_seo_pack_location_address'] : [];
 
         if (isset($location_address[$config_language_id])) {
             $location_address = $location_address[$config_language_id];
@@ -140,11 +140,11 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $location_address = [];
         }
 
-        $geo_coordinates = isset($config['module_ps_seo_pack_geo_coordinates']) ? $config['module_ps_seo_pack_geo_coordinates'] : [];
+        $geo_coordinates = isset($config['module_ps_seo_pack_geo_coordinates']) ? (array) $config['module_ps_seo_pack_geo_coordinates'] : [];
 
         $price_range = isset($config['module_ps_seo_pack_price_range']) ? $config['module_ps_seo_pack_price_range'] : '';
 
-        $contact_points = isset($config['module_ps_seo_pack_contact_point']) ? $config['module_ps_seo_pack_contact_point'] : [];
+        $contact_points = isset($config['module_ps_seo_pack_contact_point']) ? (array) $config['module_ps_seo_pack_contact_point'] : [];
 
 
         $result = [];
