@@ -42,11 +42,11 @@
 						<div id="tab-store" class="tab-pane active">
 
 							<div class="row mb-3">
-								<label class="col-sm-2 col-form-label" for="input-enable-extension">{{ entry_enable_extension }}</label>
+								<label for="input-enable-extension" class="col-sm-2 col-form-label">{{ entry_enable_extension }}</label>
 								<div class="col-sm-10">
 									<div class="form-check form-switch form-switch-lg">
 										<input type="hidden" name="module_ps_seo_pack_status" value="0" />
-										<input type="checkbox" name="module_ps_seo_pack_status" value="1" class="form-check-input" {% if module_ps_seo_pack_status %} checked{% endif %} id="input-enable-extension" />
+										<input type="checkbox" name="module_ps_seo_pack_status" value="1" id="input-enable-extension" class="form-check-input" {% if module_ps_seo_pack_status %} checked{% endif %} />
 									</div>
 								</div>
 							</div>
@@ -93,9 +93,9 @@
 							</div>
 
 							<div class="row mb-3 required">
-								<label class="col-sm-2 col-form-label">{{ entry_store_language_code }}</label>
+								<label for="input-store-language-code" class="col-sm-2 col-form-label">{{ entry_store_language_code }}</label>
 								<div class="col-sm-10">
-									<select name="module_ps_seo_pack_store_language_code" class="form-select">
+									<select name="module_ps_seo_pack_store_language_code" id="input-store-language-code" class="form-select">
 										{% for language in languages %}
 										<option value="{{ language.code }}" {% if language.code==module_ps_seo_pack_store_language_code %} selected{% endif %}>{{ language.name }}</option>
 										{% endfor %}
@@ -121,11 +121,11 @@
 						<div id="tab-structured-data-markup" class="tab-pane">
 
 							<div class="row mb-3">
-								<label class="col-sm-2 col-form-label" for="input-structured-data-markup">{{ entry_sdm }}</label>
+								<label for="input-structured-data-markup" class="col-sm-2 col-form-label">{{ entry_sdm }}</label>
 								<div class="col-sm-10">
 									<div class="form-check form-switch form-switch-lg">
 										<input type="hidden" name="module_ps_seo_pack_sdm" value="0" />
-										<input type="checkbox" name="module_ps_seo_pack_sdm" value="1" class="form-check-input" {% if module_ps_seo_pack_sdm %} checked{% endif %} id="input-structured-data-markup" />
+										<input type="checkbox" name="module_ps_seo_pack_sdm" value="1" class="form-check-input" id="input-structured-data-markup" {% if module_ps_seo_pack_sdm %} checked{% endif %} />
 									</div>
 								</div>
 							</div>
@@ -141,39 +141,44 @@
 									<div id="language-{{ language.language_id }}" class="tab-pane{% if loop.first %} active{% endif %}">
 
 										<div class="row mb-3">
+
 											<fieldset class="col-sm-5" id="input-group-postal-address-{{ language.language_id }}">
 												<legend>{{ text_postal_address }}</legend>
 
 												<div class="row mb-3 required">
-													<label class="col-sm-2 col-form-label" for="input-postal-address-country-code-{{ language.language_id }}">{{ entry_country_code }}</label>
+													<label for="input-postal-address-country-code-{{ language.language_id }}" class="col-sm-2 col-form-label">{{ entry_country_code }}</label>
 													<div class="col-sm-10">
 														<input type="text" name="module_ps_seo_pack_postal_address[{{ language.language_id }}][country_code]" value="{{ module_ps_seo_pack_postal_address[language.language_id].country_code | default('') }}" maxlength="2" id="input-postal-address-country-code-{{ language.language_id }}" data-target-input="input-location-address-country-code-{{ language.language_id }}" placeholder="{{ entry_country_code }}" class="form-control" />
 														<div id="error-input-postal-address-country-code-{{ language.language_id }}" class="invalid-feedback"></div>
 													</div>
 												</div>
+
 												<div class="row mb-3 required">
-													<label class="col-sm-2 col-form-label" for="input-postal-address-state-{{ language.language_id }}">{{ entry_state }}</label>
+													<label for="input-postal-address-state-{{ language.language_id }}" class="col-sm-2 col-form-label">{{ entry_state }}</label>
 													<div class="col-sm-10">
 														<input type="text" name="module_ps_seo_pack_postal_address[{{ language.language_id }}][state]" value="{{ module_ps_seo_pack_postal_address[language.language_id].state | default('') }}" id="input-postal-address-state-{{ language.language_id }}" data-target-input="input-location-address-state-{{ language.language_id }}" placeholder="{{ entry_state }}" class="form-control" />
 														<div id="error-input-postal-address-state-{{ language.language_id }}" class="invalid-feedback"></div>
 													</div>
 												</div>
+
 												<div class="row mb-3 required">
-													<label class="col-sm-2 col-form-label" for="input-postal-address-city-{{ language.language_id }}">{{ entry_city }}</label>
+													<label for="input-postal-address-city-{{ language.language_id }}" class="col-sm-2 col-form-label">{{ entry_city }}</label>
 													<div class="col-sm-10">
 														<input type="text" name="module_ps_seo_pack_postal_address[{{ language.language_id }}][city]" value="{{ module_ps_seo_pack_postal_address[language.language_id].city | default('') }}" id="input-postal-address-city-{{ language.language_id }}" data-target-input="input-location-address-city-{{ language.language_id }}" placeholder="{{ entry_city }}" class="form-control" />
 														<div id="error-input-postal-address-city-{{ language.language_id }}" class="invalid-feedback"></div>
 													</div>
 												</div>
+
 												<div class="row mb-3 required">
-													<label class="col-sm-2 col-form-label" for="input-postal-address-postal-code-{{ language.language_id }}">{{ entry_postal_code }}</label>
+													<label for="input-postal-address-postal-code-{{ language.language_id }}" class="col-sm-2 col-form-label">{{ entry_postal_code }}</label>
 													<div class="col-sm-10">
 														<input type="text" name="module_ps_seo_pack_postal_address[{{ language.language_id }}][postal_code]" value="{{ module_ps_seo_pack_postal_address[language.language_id].postal_code | default('') }}" id="input-postal-address-postal-code-{{ language.language_id }}" data-target-input="input-location-address-postal-code-{{ language.language_id }}" placeholder="{{ entry_postal_code }}" class="form-control" />
 														<div id="error-input-postal-address-postal-code-{{ language.language_id }}" class="invalid-feedback"></div>
 													</div>
 												</div>
+
 												<div class="row mb-3 required">
-													<label class="col-sm-2 col-form-label" for="input-postal-address-address-{{ language.language_id }}">{{ entry_address }}</label>
+													<label for="input-postal-address-address-{{ language.language_id }}" class="col-sm-2 col-form-label">{{ entry_address }}</label>
 													<div class="col-sm-10">
 														<input type="text" name="module_ps_seo_pack_postal_address[{{ language.language_id }}][address]" value="{{ module_ps_seo_pack_postal_address[language.language_id].address | default(config_address) }}" id="input-postal-address-address-{{ language.language_id }}" data-target-input="input-location-address-address-{{ language.language_id }}" placeholder="{{ entry_address }}" class="form-control" />
 														<div id="error-input-postal-address-address-{{ language.language_id }}" class="invalid-feedback"></div>
@@ -181,43 +186,49 @@
 												</div>
 
 											</fieldset>
+
 											<div class="col-sm-2" style="align-self: center; text-align: center;">
 												<button type="button" data-bs-toggle="tooltip" title="{{ button_copy_from_location_address }}" data-copy-input-group="input-group-location-address-{{ language.language_id }}" class="btn btn-success"><i class="fa-solid fa-arrow-left"></i></button>
 												<button type="button" data-bs-toggle="tooltip" title="{{ button_copy_from_postal_address }}" data-copy-input-group="input-group-postal-address-{{ language.language_id }}" class="btn btn-success"><i class="fa-solid fa-arrow-right"></i></button>
 											</div>
+
 											<fieldset class="col-sm-5" id="input-group-location-address-{{ language.language_id }}">
 												<legend>{{ text_location_address }}</legend>
 
 												<div class="row mb-3 required">
-													<label class="col-sm-2 col-form-label" for="input-location-address-country-code-{{ language.language_id }}">{{ entry_country_code }}</label>
+													<label for="input-location-address-country-code-{{ language.language_id }}" class="col-sm-2 col-form-label">{{ entry_country_code }}</label>
 													<div class="col-sm-10">
 														<input type="text" name="module_ps_seo_pack_location_address[{{ language.language_id }}][country_code]" value="{{ module_ps_seo_pack_location_address[language.language_id].country_code | default('') }}" maxlength="2" id="input-location-address-country-code-{{ language.language_id }}" data-target-input="input-postal-address-country-code-{{ language.language_id }}" placeholder="{{ entry_country_code }}" class="form-control" />
 														<div id="error-input-location-address-country-code-{{ language.language_id }}" class="invalid-feedback"></div>
 													</div>
 												</div>
+
 												<div class="row mb-3 required">
-													<label class="col-sm-2 col-form-label" for="input-location-address-state-{{ language.language_id }}">{{ entry_state }}</label>
+													<label for="input-location-address-state-{{ language.language_id }}" class="col-sm-2 col-form-label">{{ entry_state }}</label>
 													<div class="col-sm-10">
 														<input type="text" name="module_ps_seo_pack_location_address[{{ language.language_id }}][state]" value="{{ module_ps_seo_pack_location_address[language.language_id].state | default('') }}" id="input-location-address-state-{{ language.language_id }}" data-target-input="input-postal-address-state-{{ language.language_id }}" placeholder="{{ entry_state }}" class="form-control" />
 														<div id="error-input-location-address-state-{{ language.language_id }}" class="invalid-feedback"></div>
 													</div>
 												</div>
+
 												<div class="row mb-3 required">
-													<label class="col-sm-2 col-form-label" for="input-location-address-city-{{ language.language_id }}">{{ entry_city }}</label>
+													<label for="input-location-address-city-{{ language.language_id }}" class="col-sm-2 col-form-label">{{ entry_city }}</label>
 													<div class="col-sm-10">
 														<input type="text" name="module_ps_seo_pack_location_address[{{ language.language_id }}][city]" value="{{ module_ps_seo_pack_location_address[language.language_id].city | default('') }}" id="input-location-address-city-{{ language.language_id }}" data-target-input="input-postal-address-city-{{ language.language_id }}" placeholder="{{ entry_city }}" class="form-control" />
 														<div id="error-input-location-address-city-{{ language.language_id }}" class="invalid-feedback"></div>
 													</div>
 												</div>
+
 												<div class="row mb-3 required">
-													<label class="col-sm-2 col-form-label" for="input-location-address-postal-code-{{ language.language_id }}">{{ entry_postal_code }}</label>
+													<label for="input-location-address-postal-code-{{ language.language_id }}" class="col-sm-2 col-form-label">{{ entry_postal_code }}</label>
 													<div class="col-sm-10">
 														<input type="text" name="module_ps_seo_pack_location_address[{{ language.language_id }}][postal_code]" value="{{ module_ps_seo_pack_location_address[language.language_id].postal_code | default('') }}" id="input-location-address-postal-code-{{ language.language_id }}" data-target-input="input-postal-address-postal-code-{{ language.language_id }}" placeholder="{{ entry_postal_code }}" class="form-control" />
 														<div id="error-input-location-address-postal-code-{{ language.language_id }}" class="invalid-feedback"></div>
 													</div>
 												</div>
+
 												<div class="row mb-3 required">
-													<label class="col-sm-2 col-form-label" for="input-location-address-address-{{ language.language_id }}">{{ entry_address }}</label>
+													<label for="input-location-address-address-{{ language.language_id }}" class="col-sm-2 col-form-label">{{ entry_address }}</label>
 													<div class="col-sm-10">
 														<input type="text" name="module_ps_seo_pack_location_address[{{ language.language_id }}][address]" value="{{ module_ps_seo_pack_location_address[language.language_id].address | default(config_address) }}" id="input-location-address-address-{{ language.language_id }}" data-target-input="input-postal-address-address-{{ language.language_id }}" placeholder="{{ entry_address }}" class="form-control" />
 														<div id="error-input-location-address-address-{{ language.language_id }}" class="invalid-feedback"></div>
@@ -232,7 +243,7 @@
 												<legend>{{ text_store_info }}</legend>
 
 												<div class="row mb-3">
-													<label class="col-sm-2 col-form-label" for="input-alternate-store-name-{{ language.language_id }}">{{ entry_alternate_store_name }}</label>
+													<label class="col-sm-2 col-form-label">{{ entry_alternate_store_name }}</label>
 													<div class="col-sm-10">
 														<input type="text" name="alternate_store_name[{{ language.language_id }}]" value="" placeholder="{{ entry_alternate_store_name }}" id="input-alternate-store-name-{{ language.language_id }}" data-language-id="{{ language.language_id }}" class="form-control" />
 														<div class="input-group">
@@ -275,12 +286,12 @@
 
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">{{ entry_geo_coordinates }}</label>
-								<label class="col-sm-2 col-form-label" for="input-latitude">{{ entry_latitude }}</label>
+								<label for="input-latitude" class="col-sm-2 col-form-label">{{ entry_latitude }}</label>
 								<div class="col-sm-3">
 									<input type="text" minlength="2" maxlength="15" name="module_ps_seo_pack_geo_coordinates[latitude]" value="{{ module_ps_seo_pack_geo_coordinates.latitude | default('') }}" id="input-latitude" placeholder="{{ entry_latitude }}" class="form-control" />
 									<div class="form-text">{{ help_geo_coordinates }}</div>
 								</div>
-								<label class="col-sm-2 col-form-label" for="input-longtitude">{{ entry_longtitude }}</label>
+								<label for="input-longtitude" class="col-sm-2 col-form-label">{{ entry_longtitude }}</label>
 								<div class="col-sm-3">
 									<input type="text" minlength="2" maxlength="15" name="module_ps_seo_pack_geo_coordinates[longtitude]" value="{{ module_ps_seo_pack_geo_coordinates.longtitude | default('') }}" id="input-longtitude" placeholder="{{ entry_longtitude }}" class="form-control" />
 								</div>
@@ -289,6 +300,7 @@
 							<div class="row mb-3">
 								<label class="col-sm-2 col-form-label">{{ entry_opening_hours }}</label>
 								<div class="col-sm-10">
+
 									<div class="row mb-3">
 										<label class="col-sm-2 col-form-label">{{ entry_monday }}</label>
 										<div class="col-sm-4">
@@ -298,6 +310,7 @@
 											<input type="time" name="module_ps_seo_pack_opening_hour[monday][pm]" value="{{ module_ps_seo_pack_opening_hour.monday.pm | default('') }}" placeholder="{{ entry_pm }}" class="form-control" />
 										</div>
 									</div>
+
 									<div class="row mb-3">
 										<label class="col-sm-2 col-form-label">{{ entry_tuesday }}</label>
 										<div class="col-sm-4">
@@ -307,6 +320,7 @@
 											<input type="time" name="module_ps_seo_pack_opening_hour[tuesday][pm]" value="{{ module_ps_seo_pack_opening_hour.tuesday.pm | default('') }}" placeholder="{{ entry_pm }}" class="form-control" />
 										</div>
 									</div>
+
 									<div class="row mb-3">
 										<label class="col-sm-2 col-form-label">{{ entry_wednesday }}</label>
 										<div class="col-sm-4">
@@ -316,6 +330,7 @@
 											<input type="time" name="module_ps_seo_pack_opening_hour[wednesday][pm]" value="{{ module_ps_seo_pack_opening_hour.wednesday.pm | default('') }}" placeholder="{{ entry_pm }}" class="form-control" />
 										</div>
 									</div>
+
 									<div class="row mb-3">
 										<label class="col-sm-2 col-form-label">{{ entry_thursday }}</label>
 										<div class="col-sm-4">
@@ -325,6 +340,7 @@
 											<input type="time" name="module_ps_seo_pack_opening_hour[thursday][pm]" value="{{ module_ps_seo_pack_opening_hour.thursday.pm | default('') }}" placeholder="{{ entry_pm }}" class="form-control" />
 										</div>
 									</div>
+
 									<div class="row mb-3">
 										<label class="col-sm-2 col-form-label">{{ entry_friday }}</label>
 										<div class="col-sm-4">
@@ -334,6 +350,7 @@
 											<input type="time" name="module_ps_seo_pack_opening_hour[friday][pm]" value="{{ module_ps_seo_pack_opening_hour.friday.pm | default('') }}" placeholder="{{ entry_pm }}" class="form-control" />
 										</div>
 									</div>
+
 									<div class="row mb-3">
 										<label class="col-sm-2 col-form-label">{{ entry_saturday }}</label>
 										<div class="col-sm-4">
@@ -343,6 +360,7 @@
 											<input type="time" name="module_ps_seo_pack_opening_hour[saturday][pm]" value="{{ module_ps_seo_pack_opening_hour.saturday.pm | default('') }}" placeholder="{{ entry_pm }}" class="form-control" />
 										</div>
 									</div>
+
 									<div class="row mb-3">
 										<label class="col-sm-2 col-form-label">{{ entry_sunday }}</label>
 										<div class="col-sm-4">
@@ -352,11 +370,12 @@
 											<input type="time" name="module_ps_seo_pack_opening_hour[sunday][pm]" value="{{ module_ps_seo_pack_opening_hour.sunday.pm | default('') }}" placeholder="{{ entry_pm }}" class="form-control" />
 										</div>
 									</div>
+
 								</div>
 							</div>
 
 							<div class="row mb-3">
-								<label class="col-sm-2 col-form-label" for="input-same-as">{{ entry_same_as }}</label>
+								<label for="input-same-as" class="col-sm-2 col-form-label">{{ entry_same_as }}</label>
 								<div class="col-sm-10">
 									<input type="text" name="same_as" value="" placeholder="{{ entry_same_as }}" id="input-same-as" class="form-control" />
 									<div class="input-group">
@@ -470,7 +489,7 @@
 								<label for="input-item-condition" class="col-sm-2 col-form-label">{{ entry_item_condition }}</label>
 								<div class="col-sm-10">
 									<div class="input-group">
-										<select name="module_ps_seo_pack_item_condition" id="input-item-condition" data-controls="item-condition-group" class="form-select">
+										<select name="module_ps_seo_pack_item_condition" data-controls="item-condition-group" id="input-item-condition" class="form-select">
 											{% for key, value in item_condition_options %}
 											<option value="{{ key }}" {% if key == module_ps_seo_pack_item_condition %} selected{% endif %}>{{ value }}</option>
 											{% endfor %}
@@ -513,11 +532,11 @@
 							</div>
 
 							<div class="row mb-3">
-								<label class="col-sm-2 col-form-label" for="input-shipping-rate">{{ entry_shipping_method_status }}</label>
+								<label for="input-shipping-rate" class="col-sm-2 col-form-label">{{ entry_shipping_method_status }}</label>
 								<div class="col-sm-10">
 									<div class="form-check form-switch form-switch-lg">
 										<input type="hidden" name="module_ps_seo_pack_shipping_rate" value="0" />
-										<input type="checkbox" name="module_ps_seo_pack_shipping_rate" value="1" class="form-check-input" {% if module_ps_seo_pack_shipping_rate %} checked{% endif %} id="input-shipping-rate" data-controls="shipping-rate-group" />
+										<input type="checkbox" name="module_ps_seo_pack_shipping_rate" value="1" id="input-shipping-rate" class="form-check-input" data-controls="shipping-rate-group" {% if module_ps_seo_pack_shipping_rate %} checked{% endif %} />
 									</div>
 								</div>
 							</div>
@@ -590,11 +609,11 @@
 							</fieldset>
 
 							<div class="row mb-3">
-								<label class="col-sm-2 col-form-label" for="input-return-policy">{{ entry_return_policy_status }}</label>
+								<label for="input-return-policy" class="col-sm-2 col-form-label">{{ entry_return_policy_status }}</label>
 								<div class="col-sm-10">
 									<div class="form-check form-switch form-switch-lg">
 										<input type="hidden" name="module_ps_seo_pack_return_policy" value="0" />
-										<input type="checkbox" name="module_ps_seo_pack_return_policy" value="1" class="form-check-input" {% if module_ps_seo_pack_return_policy %} checked{% endif %} id="input-return-policy" data-controls="return-policy-group" />
+										<input type="checkbox" name="module_ps_seo_pack_return_policy" value="1" id="input-return-policy" class="form-check-input" data-controls="return-policy-group" {% if module_ps_seo_pack_return_policy %} checked{% endif %} />
 									</div>
 								</div>
 							</div>
@@ -669,11 +688,11 @@
 						<div id="tab-dublin-core" class="tab-pane">
 
 							<div class="row mb-3">
-								<label class="col-sm-2 col-form-label" for="input-dublin-core">{{ entry_dublin_core }}</label>
+								<label for="input-dublin-core" class="col-sm-2 col-form-label">{{ entry_dublin_core }}</label>
 								<div class="col-sm-10">
 									<div class="form-check form-switch form-switch-lg">
 										<input type="hidden" name="module_ps_seo_pack_dublin_core" value="0" />
-										<input type="checkbox" name="module_ps_seo_pack_dublin_core" value="1" class="form-check-input" {% if module_ps_seo_pack_dublin_core %} checked{% endif %} id="input-dublin-core" />
+										<input type="checkbox" name="module_ps_seo_pack_dublin_core" value="1" id="input-dublin-core" class="form-check-input" {% if module_ps_seo_pack_dublin_core %} checked{% endif %} />
 									</div>
 								</div>
 							</div>
@@ -682,11 +701,11 @@
 						<div id="tab-open-graph" class="tab-pane">
 
 							<div class="row mb-3">
-								<label class="col-sm-2 col-form-label" for="input-open-graph">{{ entry_open_graph }}</label>
+								<label for="input-open-graph" class="col-sm-2 col-form-label">{{ entry_open_graph }}</label>
 								<div class="col-sm-10">
 									<div class="form-check form-switch form-switch-lg">
 										<input type="hidden" name="module_ps_seo_pack_open_graph" value="0" />
-										<input type="checkbox" name="module_ps_seo_pack_open_graph" value="1" class="form-check-input" {% if module_ps_seo_pack_open_graph %} checked{% endif %} id="input-open-graph" />
+										<input type="checkbox" name="module_ps_seo_pack_open_graph" value="1" id="input-open-graph" class="form-check-input" {% if module_ps_seo_pack_open_graph %} checked{% endif %} />
 									</div>
 								</div>
 							</div>
@@ -695,7 +714,7 @@
 								<label for="input-open-graph-stock-status" class="col-sm-2 col-form-label">{{ entry_stock_status }}</label>
 								<div class="col-sm-10">
 									<div class="input-group">
-										<select name="module_ps_seo_pack_open_graph_stock_status" id="input-open-graph-stock-status" data-controls="open-graph-stock-status-assoc-group" class="form-select">
+										<select name="module_ps_seo_pack_open_graph_stock_status" id="input-open-graph-stock-status" class="form-select" data-controls="open-graph-stock-status-assoc-group">
 											{% for key, value in stock_status_options %}
 											<option value="{{ key }}" {% if key == module_ps_seo_pack_open_graph_stock_status %} selected{% endif %}>{{ value }}</option>
 											{% endfor %}
@@ -755,11 +774,11 @@
 						<div id="tab-twitter" class="tab-pane">
 
 							<div class="row mb-3">
-								<label class="col-sm-2 col-form-label" for="input-twitter">{{ entry_twitter }}</label>
+								<label for="input-twitter" class="col-sm-2 col-form-label">{{ entry_twitter }}</label>
 								<div class="col-sm-10">
 									<div class="form-check form-switch form-switch-lg">
 										<input type="hidden" name="module_ps_seo_pack_twitter" value="0" />
-										<input type="checkbox" name="module_ps_seo_pack_twitter" value="1" class="form-check-input" {% if module_ps_seo_pack_twitter %} checked{% endif %} id="input-twitter" />
+										<input type="checkbox" name="module_ps_seo_pack_twitter" value="1" id="input-twitter" class="form-check-input" {% if module_ps_seo_pack_twitter %} checked{% endif %} />
 									</div>
 								</div>
 							</div>

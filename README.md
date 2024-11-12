@@ -1,137 +1,71 @@
 # Playful Sparkle - SEO Pack for OpenCart 4
 
-The **Playful Sparkle - SEO Pack** is a comprehensive SEO extension designed to enhance your OpenCart 4.x webshop’s search engine visibility. This extension integrates structured data, rich snippets (Structured Data Markup (LD+JSON)), and metadata tags (Dublin Core, Open Graph, and Twitter) into your webshop’s header, ensuring better performance in search results. It supports multi-store and multi-language setups, allowing for individual SEO customization for each store.
+The **Playful Sparkle - SEO Pack** extension for OpenCart 4.x+ is an essential tool for enhancing your store’s SEO and social media visibility. It seamlessly integrates structured data like LD+JSON, Dublin Core, Open Graph, and Twitter metadata, making it easier for search engines and social platforms to understand and display your content more effectively. The extension offers full customization, including the ability to adjust stock status based on your store's inventory, add social media links, and define shipping or return policies.
 
-## Key Features
+With **LD+JSON** markup, you can enrich your product listings with additional information like price range, opening hours, and geo-coordinates, while **Dublin Core** metadata improves the accuracy of search results. **Open Graph** and **Twitter** tags help ensure that your product images, prices, and other key details appear correctly when shared on social media platforms like Facebook and Twitter. The extension even supports multi-store setups and can automatically adapt your website's HTML code for enhanced search engine optimization.
+
+By using this extension, your products are more likely to appear in rich snippets, increasing visibility on search engine results pages. The ability to customize how your store’s information is presented on social platforms further boosts engagement and traffic. With automatic hreflang tags for multilingual support and the flexibility to enable or disable specific features, this extension helps you create a better, more accessible online shopping experience for a global audience.
+
+---
+
+## Features
 
 - **Structured Data Markup (LD+JSON)**:
-  - Supports rich snippets, including product information, price, availability, ratings, reviews, organization, and return policies.
-
+  - **Enable/Disable Option**: Choose when to activate or deactivate structured data markup for flexibility.
+  - **Enhance Search Visibility**: Boost your product's chances of appearing in rich snippets, improving visibility on search engine result pages (SERPs).
+  - **Additional Information**: Add crucial business details such as postal address, location address, alternate store names, price range, geo-coordinates, opening hours, social media links, and contact points.
+  - **Stock Status Customization**: Customize stock status based on OpenCart’s existing stock statuses to align with your inventory management system.
+  - **Item Condition Customization**: Set item conditions based on product location data for more accurate search results.
+  - **Customizable Shipping & Return Policies**: Tailor shipping rate and return policy definitions to match your store’s specific requirements.
 - **Dublin Core Metadata**:
-  - Adds essential metadata for content description.
-
+  - **Enable/Disable Option**: Activate or deactivate Dublin Core metadata for improved search engine indexing.
+  - **Better Content Discovery**: Enhance the discoverability and relevance of your store’s content across search engines.
 - **Open Graph Metadata**:
-  - Generates Open Graph tags for effective product sharing on social platforms like Facebook.
-
+  - **Enable/Disable Option**: Choose when to use Open Graph metadata for greater social media integration.
+  - **Stock Status Customization**: Customize how product stock status is displayed on social platforms, aligned with your store’s stock availability.
+  - **Enhanced Social Sharing**: Add essential product details (e.g., product images, price, currency, and additional information) for more effective social media sharing, improving engagement and traffic from platforms like Facebook.
+  - **Facebook App ID Integration**: Integrate your Facebook App ID for seamless social media tracking and interaction.
 - **Twitter Metadata**:
-  - Incorporates Twitter card metadata for products, including pricing and availability.
+  - **Enable/Disable Option**: Flexibility to activate or deactivate Twitter metadata for product promotion.
+  - **Customizable Twitter Card Types**: Select the right Twitter card type to optimize your product’s presentation on Twitter, enhancing visibility and click-through rates.
+  - **Twitter Handle Integration**: Associate your store’s Twitter handle for easy brand recognition and social media engagement.
+  - **Product Images**: Attach product images to your Twitter posts for better visual appeal on Twitter feeds.
+- **Automatic HTML Code Adjustments**:
+  - Automatically adds `<html>` tag prefixes based on enabled modules, ensuring your website’s HTML is optimized for SEO.
+- **Hreflang Tags**:
+  - **Automatic Addition of `<link rel="alternate" hreflang="en-gb" href="...">`**: Enhances multilingual support and ensures that search engines deliver the correct version of your site to international users.
+  - **Alternate Language and Regional Links**: Helps search engines understand which language or region version of the page to serve, improving SEO for multilingual websites.
+  - **x-default Tag**: Ensures search engines correctly understand the default language version of your site.
+- **Compatibility**: Integrates smoothly with OpenCart 4.x+, supporting a range of online store setups.
+- **Multilingual Support**: Ready for international use with languages including Čeština (cs-cz), Deutsch (de-de), English (GB) (en-gb), English (US) (en-us), Español (es-es), Français (fr-fr), Magyar (hu-hu), Italiano (it-it), Русский (ru-ru), and Slovenčina (sk-sk).
 
-- **Multi-store and Multi-language Support**:
-  - Customize metadata and structured data for each store and language.
-
-- **Rich Customization Options**:
-  - Personalize your store's name, owner details, description, and logo.
-
-- **Link Tag Generation**:
-  - Automatically adds `<link>` tags for language support, improving SEO across multiple languages.
-
-- **Full Control**:
-  - Configure rich snippets for stock status, shipping methods, return policies, and more.
-  
-- **Multilingual Support**: The extension is available in the following languages:
-  - Čeština (cs-cz)
-  - Deutsch (de-de)
-  - English (GB) (en-gb)
-  - English (US) (en-us)
-  - Español (es-es)
-  - Français (fr-fr)
-  - Magyar (hu-hu)
-  - Italiano (it-it)
-  - Русский (ru-ru)
-  - Slovenčina (sk-sk)
+---
 
 ## Installation Instructions
 
-### 1. Download the Extension
-Download the latest **Playful Sparkle - SEO Pack** release from this repository.
-
-### 2. Upload the Extension Files
-1. Log in to your OpenCart admin panel.
-2. Navigate to `Extensions > Installer`.
-3. Click the `Upload` button and upload the `ps_seo_pack.ocmod.zip` file.
-
-### 3. Install the Extension
-4. Once uploaded, click on the green `Install` button.
-5. Navigate to `Extensions` and select `Modules` from the dropdown.
-6. Locate the **Playful Sparkle - SEO Pack** extension in the list.
-7. Click on the green `Install` button.
-
-### 4. Configure the Extension
-1. After installation, remain on the `Extensions` page and ensure `Modules` is selected from the dropdown.
-2. Click the `Edit` button next to the installed extension.
-3. Select your store from the upper-right corner.
-4. Configure the extension as desired, enabling or disabling `Structured Markup Data`, `Dublin Core`, `Open Graph`, and `Twitter`.
-5. Save your configuration.
-
-## Settings Overview
-
-### LD+JSON Structured Data Markup
-
-The **LD+JSON structured data** integrated by the **Playful Sparkle - SEO Pack** significantly enhances the SEO capabilities of your OpenCart webshop. It helps search engines understand your webpage's context and content, leading to improved visibility in search results.
-
-#### Benefits:
-
-- **Enhanced Rich Snippets**: Improves click-through rates by providing vital information about your products directly in search results.
-
-- **Detailed Product Information**: Allows for detailed descriptions of products, including:
-  - Name
-  - Description
-  - Images
-  - Pricing (including discounts)
-  - Availability status
-  - Shipping details
-  - Additional properties (e.g., dimensions, shipping details, return policy, item condition, item availability etc.)
-
-- **Merchant Return Policies**: Clearly outlines return policies applicable to different countries, improving transparency.
-
-- **Optimized for Local Search**: Enhances local SEO by helping search engines understand your business's physical location and contact details.
-
-- **Breadcrumb Navigation**: Improves site navigation by defining the hierarchy of your website, benefiting user experience and search engine indexing.
-
-- **Opening Hours**: Provides detailed operating hours to help customers plan visits and enhances local search visibility.
-
-- **Ratings and Reviews**: Incorporates overall ratings and individual reviews to enhance credibility and influence purchasing decisions.
-
-- **Actionable Links**: Facilitates user engagement through easy integration of actions like reading or searching.
-
-- **Future-proofing for Voice Search**: Provides a semantic structure increasingly important for voice search optimization.
+1. Download the latest version from this repository.
+2. Log in to your OpenCart admin panel.
+3. Navigate to `Extensions > Installer`.
+4. Click the `Upload` button and upload the `ps_seo_pack.ocmod.zip` file.
+5. Locate the extension in the `Installed Extensions` list and click the `Install` button.
+6. Navigate to `Extensions > Extensions` and select `Modules` from the `Choose the extension type` dropdown list.
+7. Locate the extension in the `Modules` list and click the `Install` button.
+8. Click the `Edit` button, configure the extension parameters, and click the `Save` button to save your settings.
 
 ---
 
-### Dublin Core Metadata
+## Support & Inquiries
 
-Integrating **Dublin Core metadata** enhances content discoverability. It helps search engines better understand your content, leading to improved visibility and higher traffic.
-
----
-
-### Open Graph Metadata Benefits
-
-Integrating **Open Graph metadata** significantly enhances your webpage's visibility on social media, making it easier for users to discover and share products. It provides essential information, creating rich previews that attract clicks and engagement. Key elements include compelling titles, descriptions, and images, driving traffic and potential sales.
-
-### Twitter Metadata Benefits
-
-Incorporating **Twitter metadata** enhances social media sharing by providing essential product information in an engaging format. It attracts attention on Twitter by displaying rich content, including images and descriptions, directly in tweets. Custom product labels further encourage clicks and exploration.
-
-## Troubleshooting
-
-- **Structured Data not displaying**: Ensure that Structured Markup Data is enabled in the settings and that product data is correctly filled out.
-
-- **Metadata Tags not appearing**: Verify that the corresponding Dublin Core, Open Graph, or Twitter options are enabled in the settings.
-
----
-
-## Support & Feedback
-
-After your purchase, you will receive free updates for the OpenCart 4 version. If future updates are released for the 4.x series, they will be available free of charge. If you encounter any problems or need assistance, you can request support via email at [support@playfulsparkle.com](support@playfulsparkle.com).
+For assistance or inquiries related to this extension, please open an issue on this repository or contact us via email at [support@playfulsparkle.com](mailto:support@playfulsparkle.com).
 
 ---
 
 ## License
 
-This project is licensed under the GPL-3.0 license. See the [LICENSE](./LICENSE) file for more information.
+This project is distributed under the GPL-3.0 license. Please refer to the [LICENSE](./LICENSE) file for further details.
 
 ---
 
 ## Contributing
 
-We welcome contributions! If you would like to contribute to this project, please fork the repository and submit a pull request with your changes.
+We encourage contributions from the community. To contribute, please fork the repository and submit a pull request with your proposed changes.
