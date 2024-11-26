@@ -51,6 +51,8 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         $current_url = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
+        $separator = version_compare(VERSION, '4.0.2.0', '>=') ? '.' : '|';
+
         $config = $this->model_setting_setting->getSetting('module_ps_seo_pack', $config_store_id);
 
         $sdm_enabled = isset($config['module_ps_seo_pack_sdm']) ? (bool) $config['module_ps_seo_pack_sdm'] : false;
@@ -157,7 +159,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $result = $this->getAccountRegister($languages);
         } else if ($ps_seo_pack_route === 'account/forgotten') {
             $result = $this->getAccountForgotten($languages);
-        } else if ($ps_seo_pack_route === 'product/manufacturer.info') {
+        } else if ($ps_seo_pack_route === 'product/manufacturer' . $separator . 'info') {
             $result = $this->getProductManufacturerInfo($languages);
         } else if ($ps_seo_pack_route === 'product/manufacturer') {
             $result = $this->getProductManufacturer($languages);
@@ -1024,7 +1026,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
     }
 
     /**
-     * Get product/manufacturer.info route informations.
+     * Get product/manufacturer[.|]info route informations.
      *
      * @param array $languages
      *
@@ -1037,6 +1039,8 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         } else {
             $manufacturer_id = 0;
         }
+
+        $separator = version_compare(VERSION, '4.0.2.0', '>=') ? '.' : '|';
 
         $result = [];
 
@@ -1068,7 +1072,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
             foreach ($languages as $language) {
                 $urls[$language['code']] = [
-                    'href' => str_replace('&amp;', '&', $this->url->link('product/manufacturer.info', 'language=' . $language['code'] . '&manufacturer_id=' . $this->request->get['manufacturer_id'] . $url)),
+                    'href' => str_replace('&amp;', '&', $this->url->link('product/manufacturer' . $separator . 'info', 'language=' . $language['code'] . '&manufacturer_id=' . $this->request->get['manufacturer_id'] . $url)),
                     'code' => $language['code'],
                 ];
             }
@@ -1355,6 +1359,8 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $product_id = 0;
         }
 
+        $separator = version_compare(VERSION, '4.0.2.0', '>=') ? '.' : '|';
+
         $this->load->language('extension/ps_seo_pack/module/ps_seo_pack');
         $this->load->model('catalog/product');
         $this->load->model('catalog/category');
@@ -1571,7 +1577,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                     $result['breadcrumb'][] = [
                         '@type' => 'ListItem',
                         'name' => $manufacturer_info['name'],
-                        'item' => str_replace('&amp;', '&', $this->url->link('product/manufacturer.info', 'language=' . $this->config->get('config_language') . '&manufacturer_id=' . $this->request->get['manufacturer_id'] . $url))
+                        'item' => str_replace('&amp;', '&', $this->url->link('product/manufacturer' . $separator . 'info', 'language=' . $this->config->get('config_language') . '&manufacturer_id=' . $this->request->get['manufacturer_id'] . $url))
                     ];
                 }
             }
