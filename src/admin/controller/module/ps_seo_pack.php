@@ -535,6 +535,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             } else {
                 $result = $this->model_setting_event->addEvent(
                     'module_ps_seo_pack',
+                    '',
                     'catalog/view/common/header/before',
                     'extension/ps_seo_pack/module/ps_seo_pack' . $separator . 'eventCatalogViewCommonHeaderBefore'
                 );
@@ -583,6 +584,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             } else {
                 $this->model_setting_event->addEvent(
                     'module_ps_seo_pack',
+                    '',
                     'catalog/view/common/header/before',
                     'extension/ps_seo_pack/module/ps_seo_pack' . $separator . 'eventCatalogViewCommonHeaderBefore'
                 );
