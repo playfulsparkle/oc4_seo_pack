@@ -132,6 +132,8 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         $data['user_token'] = $this->session->data['user_token'];
 
+        $data['oc4_separator'] = $separator;
+
         $data['stock_statuses'] = $this->model_localisation_stock_status->getStockStatuses();
 
         $data['languages'] = $this->model_localisation_language->getLanguages();
