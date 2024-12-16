@@ -567,7 +567,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
      */
     public function install(): void
     {
-        if ($this->user->hasPermission('modify', 'extension/ps_seo_pack/module/ps_seo_pack')) {
+        if ($this->user->hasPermission('modify', 'extension/module')) {
             $this->load->model('setting/event');
 
             $this->model_setting_event->deleteEventByCode('module_ps_seo_pack');
@@ -606,7 +606,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
      */
     public function uninstall(): void
     {
-        if ($this->user->hasPermission('modify', 'extension/ps_seo_pack/module/ps_seo_pack')) {
+        if ($this->user->hasPermission('modify', 'extension/module')) {
             $this->load->model('setting/event');
 
             $this->model_setting_event->deleteEventByCode('module_ps_seo_pack');
