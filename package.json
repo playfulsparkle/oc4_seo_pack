@@ -16,7 +16,7 @@
     "twitter card"
   ],
   "author": "zsoltoroszlany82 <zsolt.oroszlany@playfulsparkle.com>",
-  "license": "BSD 3-Clause",
+  "license": "Proprietary",
   "dependencies": {
     "archiver": "^7.0.1",
     "fs": "^0.0.1-security"

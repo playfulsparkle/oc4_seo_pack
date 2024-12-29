@@ -1,28 +1,149 @@
-BSD 3-Clause License
+SOFTWARE LICENSE AGREEMENT
 
-Copyright (c) 2024, Playful Sparkle
+This Software License Agreement ("Agreement") is entered into by and between
+Playful Sparkle, located at Dolinka 26, 991 28 Dolinka, Slovak Republic
+("Licensor") and the end user ("Licensee") who installs or uses the
+Playful Sparkle - SEO Pack for OpenCart 4 extension ("Software")
+provided by Licensor.
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
+By installing, copying, or using the Software, the Licensee agrees to be bound
+by the terms of this Agreement, along with OpenCart's terms and conditions,
+which govern the use of the OpenCart platform and its marketplace. If the
+Licensee does not agree to these terms, they must not install or use
+the Software.
 
-1. Redistributions of source code must retain the above copyright notice, this
-   list of conditions and the following disclaimer.
+1. GRANT OF LICENSE
 
-2. Redistributions in binary form must reproduce the above copyright notice,
-   this list of conditions and the following disclaimer in the documentation
-   and/or other materials provided with the distribution.
+Subject to the terms of this Agreement, Licensor grants the Licensee a
+non-exclusive, non-transferable license to use the Software on a single domain
+for the Licensee's business use only. This license is valid only for the term
+of 12 months, starting from the date the Licensee activates the Software using
+the provided license key.
 
-3. Neither the name of the copyright holder nor the names of its
-   contributors may be used to endorse or promote products derived from
-   this software without specific prior written permission.
+This license is also subject to the terms and conditions set forth by OpenCart,
+which may be found at OpenCart's
+Terms & Conditions https://www.opencart.com/index.php?route=cms/terms. In case
+of any conflict between this Agreement and OpenCart's terms, the terms of
+OpenCart shall prevail with respect to the use of the OpenCart platform.
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+2. LICENSE RESTRICTIONS
+
+The Licensee may not:
+
+* Modify, adapt, translate, or create derivative works based on the Software.
+* Distribute, sublicense, rent, or resell the Software to third parties.
+* Reverse engineer, decompile, or disassemble the Software, except as permitted
+  by applicable law.
+* Use the Software for any commercial purposes outside of its intended use
+  within a single domain.
+
+3. SUPPORT AND UPDATES
+
+Licensor will provide the Licensee with technical support and software updates
+for a period of 12 months from the date of Software activation. After this
+period, support and updates will no longer be available unless the Licensee
+renews the support agreement.
+
+* Support: Includes assistance via email or other communication methods as
+  determined by the Licensor.
+* Updates: Licensor will provide bug fixes, patches, and new releases of
+  the Software.
+
+These support and update terms apply unless the Licensee’s access is affected
+by OpenCart’s policies or limitations within the OpenCart marketplace.
+
+4. LICENSE KEY AND ACTIVATION
+
+To use the Software, the Licensee must activate it using the provided
+license key. The Licensee agrees that:
+
+* The Software will function only when the license key is validated.
+* If the Licensee removes or disables the license key validation check, they
+will lose the right to receive support and updates.
+
+This process is subject to OpenCart's marketplace terms if the Software was
+purchased through OpenCart's platform.
+
+5. PAYMENT TERMS
+
+Payment for the Software will be processed through either the OpenCart
+marketplace or via the PayPal secure checkout page provided by the Licensee.
+Payment terms are governed by the policies of the OpenCart marketplace or
+PayPal, as applicable. The Licensee agrees to adhere to all payment requirements
+set by OpenCart or PayPal during the transaction.
+
+In case of any issues with payment processing, the Licensee must refer to
+OpenCart's or PayPal's customer support or dispute resolution processes.
+
+* OpenCart customer service: https://www.opencart.com/index.php?route=support/contact
+* PayPal customer service: https://www.paypal.com/us/cshelp/contact-us
+
+6. OWNERSHIP AND INTELLECTUAL PROPERTY
+
+Licensor retains all rights, title, and interest in and to the Software,
+including all intellectual property rights. The Licensee’s rights to use the
+Software are limited to those explicitly granted under this Agreement.
+This Agreement does not transfer any ownership of the Software to the Licensee.
+
+7. WARRANTY DISCLAIMER
+
+The Software is provided "as is," and Licensor makes no warranties, express or
+implied, including but not limited to the implied warranties of merchantability
+or fitness for a particular purpose. The Licensor does not warrant that the
+Software will meet the Licensee’s requirements or that its operation will be
+uninterrupted or error-free.
+
+8. LIMITATION OF LIABILITY
+
+To the fullest extent permitted by law, Licensor shall not be liable for any
+indirect, incidental, special, or consequential damages arising out of or in
+connection with the use or inability to use the Software, even if Licensor has
+been advised of the possibility of such damages. The Licensor’s total liability
+shall not exceed the amount paid by the Licensee for the Software.
+
+9. TERM AND TERMINATION
+
+This Agreement will remain in effect until terminated by either party.
+The Licensee may terminate this Agreement at any time by ceasing all use of the
+Software and deleting all copies. Licensor may terminate this Agreement if the
+Licensee breaches any terms of this Agreement, such as disabling the license
+key check. Upon termination, the Licensee must stop using the Software and
+destroy all copies.
+
+10. GDPR COMPLIANCE AND DATA PROCESSING
+
+In compliance with the General Data Protection Regulation (GDPR), the Licensor
+hereby affirms that, during the license key validation process, no personal data
+or information capable of identifying the Licensee or any individual is
+collected, processed, or stored. The license key is utilized exclusively for the
+purpose of verifying the authenticity of the Software license and ensuring its
+proper operation. The Licensor does not collect, retain, or process any
+identifiable user data in connection with the activation or validation of the
+license key.
+
+11. CONTACT INFORMATION
+
+Playful Sparkle
+Dolinka 26
+991 28 Dolinka
+Slovak Republic
+
+E-mail: support@playfulsparkle.com
+Web: https://playfulsparkle.com
+
+12. GOVERNING LAW AND DISPUTE RESOLUTION
+
+This Agreement shall be governed by and construed in accordance with the laws of
+Slovakia. Any dispute arising under or in connection with this Agreement shall
+be resolved through binding arbitration in Slovakia, in accordance with the
+rules of the Slovak Arbitration Association, and the decision shall be final
+and binding.
+
+This dispute resolution process will be in addition to any remedies available
+through OpenCart’s marketplace or PayPal's customer dispute procedures.
+
+13. ACCEPTANCE
+
+By installing, activating, or using the Software, the Licensee agrees to the
+terms and conditions set forth in this Agreement. If the Licensee does not agree
+to these terms, they should not install or use the Software.
