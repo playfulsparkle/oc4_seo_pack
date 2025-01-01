@@ -1079,7 +1079,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
             $images = [];
 
-            if (is_file(DIR_IMAGE . $manufacturer_info['image'])) {
+            if (!empty($manufacturer_info['image'])) {
                 $images[] = $this->model_tool_image->resize($manufacturer_info['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height'));
             }
 
@@ -1375,14 +1375,14 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         if ($product_info) {
             $images = [];
 
-            if (is_file(DIR_IMAGE . $product_info['image'])) {
+            if (!empty($product_info['image'])) {
                 $images[] = $this->model_tool_image->resize($product_info['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height'));
             }
 
             $other_images = $this->model_catalog_product->getImages($product_id);
 
             foreach (array_slice($other_images, 0, 10) as $other_image) {
-                if (is_file(DIR_IMAGE . $other_image['image'])) {
+                if (!empty($other_image['image'])) {
                     $images[] = $this->model_tool_image->resize($other_image['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height'));
                 }
             }
@@ -1812,7 +1812,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         if ($category_info) {
             $images = [];
 
-            if (is_file(DIR_IMAGE . $category_info['image'])) {
+            if (!empty($category_info['image'])) {
                 $images[] = $this->model_tool_image->resize($category_info['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height'));
             }
 
@@ -1867,7 +1867,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
                     if ($result['images']) {
                         $images = [];
 
-                        if (is_file(DIR_IMAGE . $sub_category_info['image'])) {
+                        if (!empty($sub_category_info['image'])) {
                             $images[] = $this->model_tool_image->resize($sub_category_info['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height'));
                         }
 
