@@ -113,7 +113,12 @@ HTML
      */
     public function getSpecialPriceDatesByProductId(int $product_id): mixed
     {
-        $query = $this->db->query("SELECT `date_end` FROM `" . DB_PREFIX . "product_special` WHERE `product_id` = '" . (int) $product_id . "' AND `customer_group_id` = '" . (int) $this->config->get('config_customer_group_id') . "' AND ((`date_start` = '0000-00-00' OR `date_start` < NOW()) AND (`date_end` = '0000-00-00' OR `date_end` > NOW()))");
+        if (version_compare(VERSION, '4.1.0.0', '>=')) {
+            $query = $this->db->query("SELECT `date_end` FROM `" . DB_PREFIX . "product_discount` WHERE `product_id` = '" . (int) $product_id . "' AND `customer_group_id` = '" . (int) $this->config->get('config_customer_group_id') . "' AND `quantity` = '1' AND `special` = '1' AND ((`date_start` = '0000-00-00' OR `date_start` < NOW()) AND (`date_end` = '0000-00-00' OR `date_end` > NOW())) ORDER BY `priority` ASC, `price` ASC LIMIT 1");
+        } else {
+            $query = $this->db->query("SELECT `date_end` FROM `" . DB_PREFIX . "product_special` WHERE `product_id` = '" . (int) $product_id . "' AND `customer_group_id` = '" . (int) $this->config->get('config_customer_group_id') . "' AND ((`date_start` = '0000-00-00' OR `date_start` < NOW()) AND (`date_end` = '0000-00-00' OR `date_end` > NOW()))");
+        }
+
 
         if ($query->num_rows) {
             return $query->row['date_end'];
