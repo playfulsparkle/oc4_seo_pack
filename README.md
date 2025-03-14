@@ -37,7 +37,7 @@ By using this extension, your products are more likely to appear in rich snippet
   - **Alternate Language and Regional Links**: Helps search engines understand which language or region version of the page to serve, improving SEO for multilingual websites.
   - **x-default Tag**: Ensures search engines correctly understand the default language version of your site.
 - **Compatibility**: Integrates smoothly with OpenCart 4.x+, supporting a range of online store setups.
-- **Multilingual Support**: Ready for international use with languages including Čeština (cs-cz), Deutsch (de-de), English (GB) (en-gb), English (US) (en-us), Español (es-es), Français (fr-fr), Magyar (hu-hu), Italiano (it-it), Русский (ru-ru), and Slovenčina (sk-sk).
+- **Multilingual Support**: Ready for international use with languages including Čeština (cs-cz), Deutsch (de-de), English (GB) (en-gb), English (US) (en-us), Español (es-es), Français (fr-fr), Magyar (hu-hu), Italiano (it-it), Русский (ru-ru), Ελληνικά (el-GR), العربية (ar), Polski (pl-pl), and Slovenčina (sk-sk).
 
 ---
 
