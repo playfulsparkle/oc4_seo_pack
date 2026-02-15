@@ -2,7 +2,7 @@
     "name": "Playful Sparkle - SEO Pack",
     "description": "Boost SEO and social media visibility with structured data integration, rich snippets, and social media customization for better engagement.",
     "code": "ps_seo_pack",
-    "license": "Proprietary",
+    "license": "GPL",
     "version": "1.0.1",
     "author": "Playful Sparkle",
     "link": "https://github.com/playfulsparkle/oc4_seo_pack.git"
