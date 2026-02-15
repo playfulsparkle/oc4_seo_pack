@@ -1,7 +1,6 @@
 <?php
 // Heading
 $_['heading_title']                             = 'Playful Sparkle - SEO Pack';
-$_['heading_fix']                               = 'Διόρθωση κοινών σφαλμάτων';
 $_['heading_getting_started']                   = 'Ξεκινώντας';
 $_['heading_setup']                             = 'Ρύθμιση του SEO Pack';
 $_['heading_troubleshot']                       = 'Συνηθισμένη Αντιμετώπιση Προβλημάτων';
@@ -137,7 +136,6 @@ $_['entry_active_store']                        = 'Ενεργό Κατάστημ
 $_['button_add']                                = 'Προσθήκη Νέου';
 $_['button_copy_from_location_address']         = 'Αντιγραφή δεδομένων από τη Διεύθυνση Τοποθεσίας στην Ταχυδρομική Διεύθυνση';
 $_['button_copy_from_postal_address']           = 'Αντιγραφή δεδομένων από την Ταχυδρομική Διεύθυνση στη Διεύθυνση Τοποθεσίας';
-$_['button_fix_event_handler']                  = 'Διόρθωση Event Handler';
 
 // Help
 $_['help_geo_coordinates']                      = 'Αναζητήστε τις <a href="https://www.latlong.net" target="_blank" rel="external noopener noreferrer">Γεωγραφικές σας Συντεταγμένες εδώ</a>';

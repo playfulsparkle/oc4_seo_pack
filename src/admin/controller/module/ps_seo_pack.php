@@ -127,7 +127,6 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         $separator = version_compare(VERSION, '4.0.2.0', '>=') ? '.' : '|';
 
         $data['action'] = $this->url->link('extension/ps_seo_pack/module/ps_seo_pack' . $separator . 'save', 'user_token=' . $this->session->data['user_token']);
-        $data['fix_event_handler'] = $this->url->link('extension/ps_seo_pack/module/ps_seo_pack' . $separator . 'fixEventHandler', 'user_token=' . $this->session->data['user_token']);
         $data['back'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=module');
 
         $data['user_token'] = $this->session->data['user_token'];
@@ -502,52 +501,6 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
             $this->model_setting_setting->editSetting('module_ps_seo_pack', $this->request->post, $this->request->post['store_id']);
 
             $json['success'] = $this->language->get('text_success');
-        }
-
-        $this->response->addHeader('Content-Type: application/json');
-        $this->response->setOutput(json_encode($json));
-    }
-
-    public function fixEventHandler(): void
-    {
-        $this->load->language('extension/ps_seo_pack/module/ps_seo_pack');
-
-        $json = [];
-
-        if (!$this->user->hasPermission('modify', 'extension/ps_seo_pack/module/ps_seo_pack')) {
-            $json['error'] = $this->language->get('error_permission');
-        }
-
-        if (!$json) {
-            $this->load->model('setting/event');
-
-            $this->model_setting_event->deleteEventByCode('module_ps_seo_pack');
-
-            $separator = version_compare(VERSION, '4.0.2.0', '>=') ? '.' : '|';
-
-            if (version_compare(VERSION, '4.0.1.0', '>=')) {
-                $result = $this->model_setting_event->addEvent([
-                    'code' => 'module_ps_seo_pack',
-                    'description' => '',
-                    'trigger' => 'catalog/view/common/header/before',
-                    'action' => 'extension/ps_seo_pack/module/ps_seo_pack' . $separator . 'eventCatalogViewCommonHeaderBefore',
-                    'status' => '1',
-                    'sort_order' => '0'
-                ]);
-            } else {
-                $result = $this->model_setting_event->addEvent(
-                    'module_ps_seo_pack',
-                    '',
-                    'catalog/view/common/header/before',
-                    'extension/ps_seo_pack/module/ps_seo_pack' . $separator . 'eventCatalogViewCommonHeaderBefore'
-                );
-            }
-
-            if ($result > 0) {
-                $json['success'] = $this->language->get('text_success');
-            } else {
-                $json['error'] = $this->language->get('error_event');
-            }
         }
 
         $this->response->addHeader('Content-Type: application/json');

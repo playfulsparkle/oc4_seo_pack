@@ -1,7 +1,6 @@
 <?php
 // Heading
 $_['heading_title']                             = 'Playful Sparkle - حزمة تحسين محركات البحث';
-$_['heading_fix']                               = 'إصلاح الأخطاء الشائعة';
 $_['heading_getting_started']                   = 'ابدأ';
 $_['heading_setup']                             = 'إعداد حزمة تحسين محركات البحث';
 $_['heading_troubleshot']                       = 'استكشاف الأخطاء وإصلاحها الشائعة';
@@ -137,7 +136,6 @@ $_['entry_active_store']                        = 'المتجر النشط';
 $_['button_add']                                = 'إضافة جديد';
 $_['button_copy_from_location_address']         = 'نسخ البيانات من عنوان الموقع إلى العنوان البريدي';
 $_['button_copy_from_postal_address']           = 'نسخ البيانات من العنوان البريدي إلى عنوان الموقع';
-$_['button_fix_event_handler']                  = 'إصلاح معالج الأحداث';
 
 // Help
 $_['help_geo_coordinates']                      = 'ابحث عن <a href="https://www.latlong.net" target="_blank" rel="external noopener noreferrer">إحداثيات GEO هنا</a>';

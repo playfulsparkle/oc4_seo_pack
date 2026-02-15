@@ -1,7 +1,6 @@
 <?php
 // Heading
 $_['heading_title']                             = 'Playful Sparkle - SEO Pack';
-$_['heading_fix']                               = 'Fix common bugs';
 $_['heading_getting_started']                   = 'Getting Started';
 $_['heading_setup']                             = 'Setting Up SEO Pack';
 $_['heading_troubleshot']                       = 'Common Troubleshooting';
@@ -137,7 +136,6 @@ $_['entry_active_store']                        = 'Active Store';
 $_['button_add']                                = 'Add New';
 $_['button_copy_from_location_address']         = 'Copy data from Location Address to Postal Address';
 $_['button_copy_from_postal_address']           = 'Copy data from Postal Address to Location Address';
-$_['button_fix_event_handler']                  = 'Fix Event Handler';
 
 // Help
 $_['help_geo_coordinates']                      = 'Look up your <a href="https://www.latlong.net" target="_blank" rel="external noopener noreferrer">GEO Coordinates here</a>';

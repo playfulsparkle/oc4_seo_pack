@@ -1,7 +1,6 @@
 <?php
 // Heading
 $_['heading_title']                             = 'Playful Sparkle - SEO Pack';
-$_['heading_fix']                               = 'Oprava běžných chyb';
 $_['heading_getting_started']                   = 'Začínáme';
 $_['heading_setup']                             = 'Nastavení SEO Packu';
 $_['heading_troubleshot']                       = 'Běžné problémy';
@@ -137,7 +136,6 @@ $_['entry_active_store']                        = 'Aktivní obchod';
 $_['button_add']                                = 'Přidat nový';
 $_['button_copy_from_location_address']         = 'Kopírovat z provozní adresy na poštovní adresu';
 $_['button_copy_from_postal_address']           = 'Kopírovat z poštovní adresy na provozní adresu';
-$_['button_fix_event_handler']                  = 'Opravit zpracovatele událostí';
 
 // Help
 $_['help_geo_coordinates']                      = 'Zde můžete zjistit <a href="https://www.latlong.net" target="_blank" rel="external noopener noreferrer">GEO souřadnice</a>';

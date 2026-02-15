@@ -1,7 +1,6 @@
 <?php
 // Heading
 $_['heading_title']                             = 'Playful Sparkle - SEO Pack';
-$_['heading_fix']                               = 'Gyakori hibák javítása';
 $_['heading_getting_started']                   = 'Kezdő lépések';
 $_['heading_setup']                             = 'SEO Pack beállítása';
 $_['heading_troubleshot']                       = 'Gyakori hibakeresési lépések';
@@ -137,7 +136,6 @@ $_['entry_active_store']                        = 'Aktív áruház';
 $_['button_add']                                = 'Új hozzáadása';
 $_['button_copy_from_location_address']         = 'Adatok másolása a telephely címről a postai címre';
 $_['button_copy_from_postal_address']           = 'Adatok másolása a postai címről a telephely címre';
-$_['button_fix_event_handler']                  = 'Eseménykezelő javítása';
 
 // Help
 $_['help_geo_coordinates']                      = 'Itt nézze meg a <a href="https://www.latlong.net" target="_blank" rel="external noopener noreferrer">GEO koordinátákat</a>';
