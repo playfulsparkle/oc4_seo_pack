@@ -520,30 +520,28 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
      */
     public function install(): void
     {
-        if ($this->user->hasPermission('modify', 'extension/module')) {
-            $this->load->model('setting/event');
+        $this->load->model('setting/event');
 
-            $this->model_setting_event->deleteEventByCode('module_ps_seo_pack');
+        $this->model_setting_event->deleteEventByCode('module_ps_seo_pack');
 
-            $separator = version_compare(VERSION, '4.0.2.0', '>=') ? '.' : '|';
+        $separator = version_compare(VERSION, '4.0.2.0', '>=') ? '.' : '|';
 
-            if (version_compare(VERSION, '4.0.1.0', '>=')) {
-                $this->model_setting_event->addEvent([
-                    'code' => 'module_ps_seo_pack',
-                    'description' => '',
-                    'trigger' => 'catalog/view/common/header/before',
-                    'action' => 'extension/ps_seo_pack/module/ps_seo_pack' . $separator . 'eventCatalogViewCommonHeaderBefore',
-                    'status' => '1',
-                    'sort_order' => '0'
-                ]);
-            } else {
-                $this->model_setting_event->addEvent(
-                    'module_ps_seo_pack',
-                    '',
-                    'catalog/view/common/header/before',
-                    'extension/ps_seo_pack/module/ps_seo_pack' . $separator . 'eventCatalogViewCommonHeaderBefore'
-                );
-            }
+        if (version_compare(VERSION, '4.0.1.0', '>=')) {
+            $this->model_setting_event->addEvent([
+                'code' => 'module_ps_seo_pack',
+                'description' => '',
+                'trigger' => 'catalog/view/common/header/before',
+                'action' => 'extension/ps_seo_pack/module/ps_seo_pack' . $separator . 'eventCatalogViewCommonHeaderBefore',
+                'status' => '1',
+                'sort_order' => '0'
+            ]);
+        } else {
+            $this->model_setting_event->addEvent(
+                'module_ps_seo_pack',
+                '',
+                'catalog/view/common/header/before',
+                'extension/ps_seo_pack/module/ps_seo_pack' . $separator . 'eventCatalogViewCommonHeaderBefore'
+            );
         }
     }
 
@@ -559,11 +557,9 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
      */
     public function uninstall(): void
     {
-        if ($this->user->hasPermission('modify', 'extension/module')) {
-            $this->load->model('setting/event');
+        $this->load->model('setting/event');
 
-            $this->model_setting_event->deleteEventByCode('module_ps_seo_pack');
-        }
+        $this->model_setting_event->deleteEventByCode('module_ps_seo_pack');
     }
 
     /**
