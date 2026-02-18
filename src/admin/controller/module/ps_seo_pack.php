@@ -63,9 +63,8 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         $data['config_name'] = $this->config->get('config_name');
         $data['config_owner'] = $this->config->get('config_owner');
         $data['config_address'] = $this->config->get('config_address');
-        $data['config_meta_description'] = $this->config->get('config_meta_description');
+        $data['config_description'] = (array) $this->config->get('config_description');
         $data['config_geocode'] = explode(',', $this->config->get('config_geocode'));
-
 
         $config = $this->model_setting_setting->getSetting('module_ps_seo_pack', $store_id);
 
@@ -100,6 +99,8 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         $data['module_ps_seo_pack_open_graph_stock_status'] = isset($config['module_ps_seo_pack_open_graph_stock_status']) ? (bool) $config['module_ps_seo_pack_open_graph_stock_status'] : false;
         $data['module_ps_seo_pack_open_graph_stock_status_assoc'] = isset($config['module_ps_seo_pack_open_graph_stock_status_assoc']) ? (array) $config['module_ps_seo_pack_open_graph_stock_status_assoc'] : [];
 
+        var_export($data['module_ps_seo_pack_return_policies']);
+        var_export($data['module_ps_seo_pack_shipping_rates']);
 
         $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 
@@ -179,8 +180,8 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         ];
 
         $data['stock_status_options'] = [
-            $this->language->get('entry_stock_status_0'),
-            $this->language->get('entry_stock_status_1'),
+            0 => $this->language->get('entry_stock_status_0'),
+            1 => $this->language->get('entry_stock_status_1'),
         ];
 
         $data['schema_org_options'] = [
@@ -238,8 +239,8 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         ];
 
         $data['item_condition_options'] = [
-            $this->language->get('text_item_condition_always_new'),
-            $this->language->get('text_item_condition_product_field'),
+            0 => $this->language->get('text_item_condition_product_field'),
+            1 => $this->language->get('text_item_condition_always_new'),
         ];
 
         $data['text_contact'] = sprintf($this->language->get('text_contact'), self::EXTENSION_EMAIL, self::EXTENSION_EMAIL, self::EXTENSION_DOC);
@@ -520,6 +521,44 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
      */
     public function install(): void
     {
+        $this->load->model('setting/setting');
+
+        $data = [
+            'module_ps_seo_pack_alternate_store_name' => [],
+            'module_ps_seo_pack_contact_point' => [],
+            'module_ps_seo_pack_dublin_core' => 0,
+            'module_ps_seo_pack_facebook_app_id' => '',
+            'module_ps_seo_pack_geo_coordinates' => [],
+            'module_ps_seo_pack_image' => '',
+            'module_ps_seo_pack_item_condition_assoc' => [],
+            'module_ps_seo_pack_item_condition' => 0, // product field
+            'module_ps_seo_pack_location_address' => [],
+            'module_ps_seo_pack_open_graph_stock_status_assoc' => [],
+            'module_ps_seo_pack_open_graph_stock_status' => 0,
+            'module_ps_seo_pack_open_graph' => 0,
+            'module_ps_seo_pack_opening_hour' => [],
+            'module_ps_seo_pack_postal_address' => [],
+            'module_ps_seo_pack_price_range' => '', // must select
+            'module_ps_seo_pack_return_policies' => [],
+            'module_ps_seo_pack_return_policy' => 0,
+            'module_ps_seo_pack_same_as' => [],
+            'module_ps_seo_pack_sdm_stock_status_assoc' => [],
+            'module_ps_seo_pack_sdm_stock_status' => 0,
+            'module_ps_seo_pack_sdm' => 0,
+            'module_ps_seo_pack_shipping_rate' => 0,
+            'module_ps_seo_pack_shipping_rates' => [],
+            'module_ps_seo_pack_status' => 0,
+            'module_ps_seo_pack_store_description' => [],
+            'module_ps_seo_pack_store_language_code' => $this->config->get('config_language'),
+            'module_ps_seo_pack_store_name' => [], // config_name
+            'module_ps_seo_pack_store_owner' => [], // config_owner
+            'module_ps_seo_pack_twitter_card_type' => 'summary',
+            'module_ps_seo_pack_twitter_handle' => '',
+            'module_ps_seo_pack_twitter' => 0,
+        ];
+
+        $this->model_setting_setting->editSetting('module_ps_seo_pack', $data);
+
         $this->load->model('setting/event');
 
         $this->model_setting_event->deleteEventByCode('module_ps_seo_pack');

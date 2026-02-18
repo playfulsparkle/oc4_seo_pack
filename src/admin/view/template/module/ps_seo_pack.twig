@@ -85,7 +85,7 @@
 									{% for language in languages %}
 									<div class="input-group">
 										<div class="input-group-text"><img src="{{ language.image }}" title="{{ language.name }}"></div>
-										<textarea name="module_ps_seo_pack_store_description[{{ language.language_id }}]" placeholder="{{ entry_store_description }}" id="input-store-owner-{{ language.language_id | default(config_meta_description) }}" id="input-store-description-{{ language.language_id }}" class="form-control" rows="5">{{ module_ps_seo_pack_store_description[language.language_id] }}</textarea>
+										<textarea name="module_ps_seo_pack_store_description[{{ language.language_id }}]" placeholder="{{ entry_store_description }}" id="input-store-owner-{{ language.language_id }}" id="input-store-description-{{ language.language_id }}" class="form-control" rows="5">{{ module_ps_seo_pack_store_description[language.language_id] | default(config_description[language.language_id]['meta_description']) }}</textarea>
 									</div>
 									<div id="error-input-store-description-{{ language.language_id }}" class="invalid-feedback"></div>
 									{% endfor %}
@@ -541,7 +541,7 @@
 								</div>
 							</div>
 
-							<fieldset class="row mb-3" id="shipping-rate-group"{% if module_ps_seo_pack_shipping_rate %} style="display: none;"{% endif %}>
+							<fieldset class="row mb-3" id="shipping-rate-group"{% if not module_ps_seo_pack_shipping_rate %} style="display: none;"{% endif %}>
 								<legend>{{ text_shipping_rate_deffinitions }}</legend>
 
 								<div class="table-responsive">
@@ -618,7 +618,7 @@
 								</div>
 							</div>
 
-							<fieldset class="row mb-3" id="return-policy-group"{% if module_ps_seo_pack_return_policy %} style="display: none;"{% endif %}>
+							<fieldset class="row mb-3" id="return-policy-group"{% if not module_ps_seo_pack_return_policy %} style="display: none;"{% endif %}>
 								<legend>{{ text_return_policy_deffinitions }}</legend>
 
 								<div class="table-responsive">
