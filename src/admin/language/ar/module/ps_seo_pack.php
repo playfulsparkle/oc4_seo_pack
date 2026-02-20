@@ -1,10 +1,6 @@
 <?php
 // Heading
 $_['heading_title']                             = 'Playful Sparkle - حزمة تحسين محركات البحث';
-$_['heading_getting_started']                   = 'ابدأ';
-$_['heading_setup']                             = 'إعداد حزمة تحسين محركات البحث';
-$_['heading_troubleshot']                       = 'استكشاف الأخطاء وإصلاحها الشائعة';
-$_['heading_faq']                               = 'الأسئلة الشائعة';
 $_['heading_contact']                           = 'اتصل بالدعم';
 
 // Text
@@ -42,10 +38,6 @@ $_['text_item_condition_damaged']               = 'تالف';
 $_['text_item_condition_new']                   = 'جديد';
 $_['text_item_condition_refurbished']           = 'مجدد';
 $_['text_item_condition_used']                  = 'مستعمل';
-$_['text_getting_started']                      = '<p><strong>نظرة عامة:</strong> تعمل إضافة Playful Sparkle - SEO Pack لـ OpenCart 4.x على تحسين رؤية متجرك الإلكتروني في محركات البحث من خلال دمج البيانات المنظمة والمقتطفات الغنية وعلامات التعريف. تسهل هذه الإضافة عملية تحسين محركات البحث، مما يسمح لك بتحسين متجرك دون أي مهارات تقنية.</p><p><strong>المتطلبات:</strong> تأكد من أن لديك OpenCart 4.x+ و PHP 7.4+ أو أعلى وقالب متوافق يدعم البيانات المنظمة.</p>';
-$_['text_setup']                                = '<p><strong>إعداد حزمة تحسين محركات البحث:</strong> قم بالوصول إلى إعدادات حزمة تحسين محركات البحث في لوحة إدارة OpenCart الخاصة بك. قم بتكوين خيارات ترميز البيانات المنظمة، وقم بتمكين أو تعطيل بيانات Dublin Core التعريفية، وقم بتعيين خصائص Open Graph، وأضف اسم مستخدم Twitter الخاص بك لتحسين التكامل مع وسائل التواصل الاجتماعي.</p><p>بمجرد الانتهاء من الإعدادات، يمكنك اختبار العلامات الوصفية و LD+JSON التي تم إنشاؤها بواسطة إضافة Playful Sparkle - SEO Pack باستخدام الروابط التالية:</p><ul><li><a href="https://developers.facebook.com/tools/debug/" target="_blank" rel="external noopener noreferrer">Facebook Sharing Debugger</a></li><li><a href="https://cards-dev.x.com/validator" target="_blank" rel="external noopener noreferrer">Twitter Card Validator</a></li><li><a href="https://www.linkedin.com/post-inspector/" target="_blank" rel="external noopener noreferrer">LinkedIn Post Inspector</a></li></ul>';
-$_['text_troubleshot']                          = '<ul><li><strong>البيانات المنظمة لا تظهر:</strong> تحقق مما إذا كان ترميز البيانات المنظمة ممكّنًا في الإعدادات.</li><li><strong>بيانات Dublin Core التعريفية لا تظهر:</strong> تأكد من تمكين بيانات Dublin Core التعريفية في الإعدادات.</li><li><strong>علامات Open Graph لا تظهر:</strong> تأكد من تمكين Open Graph في الإعدادات.</li><li><strong>لم يتم العثور على اسم مستخدم Twitter:</strong> تحقق من إدخال اسم مستخدم Twitter الخاص بك وأن التكامل ممكّن.</li><li><strong>العلامات الوصفية لا يتم تحديثها:</strong> قم بمسح ذاكرة التخزين المؤقت لـ OpenCart وقم بتحديث الصفحة لرؤية أحدث التغييرات.</li><li><strong>لا تظهر بيانات منظمة أو بيانات تعريفية:</strong> إذا لم يظهر ترميز البيانات المنظمة ولا البيانات التعريفية، فانقر فوق الزر الأزرق "Fix Event Handler" لحل المشكلة.</li></ul>';
-$_['text_faq']                                  = '<details><summary>ما هي فوائد استخدام إضافة حزمة تحسين محركات البحث؟</summary>تعمل على تحسين رؤية متجرك الإلكتروني في محركات البحث من خلال تطبيق البيانات المنظمة، مما يؤدي إلى تحسين الترتيب ونسب النقر إلى الظهور.</details><details><summary>ما هو ترميز البيانات المنظمة؟</summary>إنه رمز يضاف إلى صفحات الويب الخاصة بك لمساعدة محركات البحث على فهم المحتوى الخاص بك، مما يؤدي إلى ظهور مقتطفات غنية في نتائج البحث.</details><details><summary>كيف تعمل البيانات التعريفية على تحسين محركات البحث؟</summary>توفر البيانات التعريفية مثل Dublin Core و Open Graph معلومات أساسية لمحركات البحث ووسائل التواصل الاجتماعي، مما يحسن مظهر موقعك وحركة المرور.</details><details><summary>كيف يمكنني استكشاف المشكلات الشائعة وإصلاحها؟</summary>راجع قسم استكشاف الأخطاء وإصلاحها أو تحقق من الموارد عبر الإنترنت للحصول على إرشادات حول حل المشكلات المتعلقة بتحسين محركات البحث.</details>';
 $_['text_contact']                              = '<p>للحصول على مزيد من المساعدة، يرجى التواصل مع فريق الدعم لدينا:</p><ul><li><strong>الاتصال:</strong> <a href="mailto:%s">%s</a></li><li><strong>التوثيق:</strong> <a href="%s" target="_blank" rel="noopener noreferrer">توثيق المستخدم</a></li></ul>';
 
 // Tab
