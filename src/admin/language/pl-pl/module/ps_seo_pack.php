@@ -38,7 +38,7 @@ $_['text_item_condition_damaged']               = 'Uszkodzony';
 $_['text_item_condition_new']                   = 'Nowy';
 $_['text_item_condition_refurbished']           = 'Odnowiony';
 $_['text_item_condition_used']                  = 'Używany';
-$_['text_contact']                              = '<p>W celu uzyskania dalszej pomocy prosimy o kontakt z naszym zespołem wsparcia:</p><ul><li><strong>Kontakt:</strong> <a href="mailto:%s">%s</a></li><li><strong>Dokumentacja:</strong> <a href="%s" target="_blank" rel="noopener noreferrer">Dokumentacja użytkownika</a></li></ul>';
+$_['text_contact']                              = '<p>W celu uzyskania dodatkowej pomocy prosimy o kontakt z zespołem wsparcia:</p><ul><li><strong>Kontakt:</strong> <a href="mailto:%s">%s</a></li><li><strong>Dokumentacja:</strong> <a href="%s" target="_blank" rel="noopener noreferrer">Dokumentacja użytkownika</a></li></ul>';
 
 // Tab
 $_['tab_store']                                 = 'Sklep';

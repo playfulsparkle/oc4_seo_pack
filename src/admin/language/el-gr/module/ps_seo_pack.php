@@ -38,7 +38,7 @@ $_['text_item_condition_damaged']               = 'Χαλασμένο';
 $_['text_item_condition_new']                   = 'Καινούργιο';
 $_['text_item_condition_refurbished']           = 'Ανακατασκευασμένο';
 $_['text_item_condition_used']                  = 'Μεταχειρισμένο';
-$_['text_contact']                              = '<p>Για περαιτέρω βοήθεια, επικοινωνήστε με την ομάδα υποστήριξής μας:</p><ul><li><strong>Επικοινωνία:</strong> <a href="mailto:%s">%s</a></li><li><strong>Τεκμηρίωση:</strong> <a href="%s" target="_blank" rel="noopener noreferrer">Εγχειρίδιο Χρήστη</a></li></ul>';
+$_['text_contact']                              = '<p>Για περαιτέρω βοήθεια, επικοινωνήστε με την ομάδα υποστήριξής μας:</p><ul><li><strong>Επικοινωνία:</strong> <a href="mailto:%s">%s</a></li><li><strong>Τεκμηρίωση:</strong> <a href="%s" target="_blank" rel="noopener noreferrer">Τεκμηρίωση χρήστη</a></li></ul>';
 
 // Tab
 $_['tab_store']                                 = 'Κατάστημα';
