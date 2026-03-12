@@ -55,7 +55,7 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
 
         $data['breadcrumbs'][] = [
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('extension/module/ps_seo_pack', 'user_token=' . $this->session->data['user_token'], true),
+            'href' => $this->url->link('extension/ps_seo_pack/module/ps_seo_pack', 'user_token=' . $this->session->data['user_token'], true),
         ];
 
 
@@ -98,9 +98,6 @@ class PsSeoPack extends \Opencart\System\Engine\Controller
         $data['module_ps_seo_pack_item_condition_assoc'] = isset($config['module_ps_seo_pack_item_condition_assoc']) ? (array) $config['module_ps_seo_pack_item_condition_assoc'] : [];
         $data['module_ps_seo_pack_open_graph_stock_status'] = isset($config['module_ps_seo_pack_open_graph_stock_status']) ? (bool) $config['module_ps_seo_pack_open_graph_stock_status'] : false;
         $data['module_ps_seo_pack_open_graph_stock_status_assoc'] = isset($config['module_ps_seo_pack_open_graph_stock_status_assoc']) ? (array) $config['module_ps_seo_pack_open_graph_stock_status_assoc'] : [];
-
-        var_export($data['module_ps_seo_pack_return_policies']);
-        var_export($data['module_ps_seo_pack_shipping_rates']);
 
         $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 
