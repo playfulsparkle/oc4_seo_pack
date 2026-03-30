@@ -8,21 +8,24 @@
   },
   "keywords": [
     "opencart",
-    "oc",
+    "opencart4",
     "playfulsparkle",
     "seo",
     "structured data",
     "opengraph",
-    "twitter card"
+    "twitter card",
+    "rich snippet",
+    "microdata",
+    "ld+json"
   ],
   "author": "zsoltoroszlany82 <zsolt.oroszlany@playfulsparkle.com>",
   "license": "GPL",
-  "dependencies": {
-    "archiver": "^7.0.1",
-    "fs": "^0.0.1-security"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/playfulsparkle/oc4_seo_pack.git"
+  },
+  "devDependencies": {
+    "archiver": "^7.0.1",
+    "fs": "^0.0.1-security"
   }
 }
