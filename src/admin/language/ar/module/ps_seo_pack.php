@@ -38,7 +38,7 @@ $_['text_item_condition_damaged']               = 'تالف';
 $_['text_item_condition_new']                   = 'جديد';
 $_['text_item_condition_refurbished']           = 'مجدد';
 $_['text_item_condition_used']                  = 'مستعمل';
-$_['text_contact']                              = '<p>للحصول على مزيد من المساعدة، يرجى التواصل مع فريق الدعم لدينا:</p><ul><li><strong>الاتصال:</strong> <a href="mailto:%s">%s</a></li><li><strong>التوثيق:</strong> <a href="%s" target="_blank" rel="noopener noreferrer">توثيق المستخدم</a></li></ul>';
+$_['text_contact']                              = '<p>للمزيد من المساعدة، يرجى التواصل مع فريق الدعم لدينا:</p><ul><li><strong>موقع الدعم:</strong> <a href="%1$s">%1$s</a></li><li><strong>مستودع GitHub:</strong> <a href="%2$s" target="_blank" rel="noopener noreferrer">%2$s</a></li><li><strong>الاتصال بالدعم:</strong> <a href="mailto:%3$s">%3$s</a></li></ul>';
 
 // Tab
 $_['tab_store']                                 = 'المتجر';

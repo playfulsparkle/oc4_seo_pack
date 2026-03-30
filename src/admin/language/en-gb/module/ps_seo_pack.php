@@ -38,7 +38,7 @@ $_['text_item_condition_damaged']               = 'Damaged';
 $_['text_item_condition_new']                   = 'New';
 $_['text_item_condition_refurbished']           = 'Refurbished';
 $_['text_item_condition_used']                  = 'Used';
-$_['text_contact']                              = '<p>For further assistance, please reach out to our support team:</p><ul><li><strong>Contact:</strong> <a href="mailto:%s">%s</a></li><li><strong>Documentation:</strong> <a href="%s" target="_blank" rel="noopener noreferrer">User Documentation</a></li></ul>';
+$_['text_contact']                              = '<p>For further assistance, please reach out to our support team:</p><ul><li><strong>Support Website:</strong> <a href="%1$s">%1$s</a></li><li><strong>GitHub Repository:</strong> <a href="%2$s" target="_blank" rel="noopener noreferrer">%2$s</a></li><li><strong>Contact Support:</strong> <a href="mailto:%3$s">%3$s</a></li></ul>';
 
 // Tab
 $_['tab_store']                                 = 'Store';

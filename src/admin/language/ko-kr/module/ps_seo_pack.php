@@ -38,7 +38,7 @@ $_['text_item_condition_damaged']               = '손상됨';
 $_['text_item_condition_new']                   = '새 상품';
 $_['text_item_condition_refurbished']           = '리퍼비시';
 $_['text_item_condition_used']                  = '중고';
-$_['text_contact']                              = '<p>추가 도움이 필요하시면 지원 팀에 문의해 주세요:</p><ul><li><strong>문의처:</strong> <a href="mailto:%s">%s</a></li><li><strong>문서:</strong> <a href="%s" target="_blank" rel="noopener noreferrer">사용자 문서</a></li></ul>';
+$_['text_contact']                              = '<p>추가적인 도움이 필요하시면 당사의 지원 팀에 문의해 주시기 바랍니다.</p><ul><li><strong>지원 웹사이트:</strong> <a href="%1$s">%1$s</a></li><li><strong>GitHub 저장소:</strong> <a href="%2$s" target="_blank" rel="noopener noreferrer">%2$s</a></li><li><strong>지원 문의:</strong> <a href="mailto:%3$s">%3$s</a></li></ul>';
 
 // Tab
 $_['tab_store']                                 = '상점';

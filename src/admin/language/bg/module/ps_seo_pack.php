@@ -38,7 +38,7 @@ $_['text_item_condition_damaged']               = 'Повредено';
 $_['text_item_condition_new']                   = 'Ново';
 $_['text_item_condition_refurbished']           = 'Обновено';
 $_['text_item_condition_used']                  = 'Употребявано';
-$_['text_contact']                              = '<p>За допълнително съдействие, моля, свържете се с нашия екип по поддръжка:</p><ul><li><strong>Контакт:</strong> <a href="mailto:%s">%s</a></li><li><strong>Документация:</strong> <a href="%s" target="_blank" rel="noopener noreferrer">Потребителска документация</a></li></ul>';
+$_['text_contact']                              = '<p>За допълнително съдействие, моля, свържете се с нашия екип за поддръжка:</p><ul><li><strong>Уебсайт за поддръжка:</strong> <a href="%1$s">%1$s</a></li><li><strong>GitHub хранилище:</strong> <a href="%2$s" target="_blank" rel="noopener noreferrer">%2$s</a></li><li><strong>Контакт с поддръжката:</strong> <a href="mailto:%3$s">%3$s</a></li></ul>';
 
 // Tab
 $_['tab_store']                                 = 'Магазин';

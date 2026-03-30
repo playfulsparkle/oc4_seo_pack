@@ -38,7 +38,7 @@ $_['text_item_condition_damaged']               = 'Poškodené';
 $_['text_item_condition_new']                   = 'Nové';
 $_['text_item_condition_refurbished']           = 'Zrenovované';
 $_['text_item_condition_used']                  = 'Použité';
-$_['text_contact']                              = '<p>Pre ďalšiu pomoc sa, prosím, obráťte na náš tím podpory:</p><ul><li><strong>Kontakt:</strong> <a href="mailto:%s">%s</a></li><li><strong>Dokumentácia:</strong> <a href="%s" target="_blank" rel="noopener noreferrer">Dokumentácia pre používateľov</a></li></ul>';
+$_['text_contact']                              = '<p>Ak potrebujete ďalšiu pomoc, obráťte sa na náš tím podpory:</p><ul><li><strong>Webová stránka podpory:</strong> <a href="%1$s">%1$s</a></li><li><strong>GitHub repozitár:</strong> <a href="%2$s" target="_blank" rel="noopener noreferrer">%2$s</a></li><li><strong>Kontaktovať podporu:</strong> <a href="mailto:%3$s">%3$s</a></li></ul>';
 
 // Tab
 $_['tab_store']                                 = 'Obchod';
